@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+  <title>SEPCO - Sukkur Electric Power Company</title>
+  <style>
+    /* Modern Color Palette */
+    :root {
+      --primary: #0066cc;
+      --primary-dark: #004080;
+      --primary-light: #4da6ff;
+      --secondary: #00ccff;
+      --accent: #ff6b6b;
+      --dark: #002244;
+      --light: #f8f9fa;
+      --gray: #6c757d;
+      --dark-gray: #343a40;
+      --success: #28a745;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --info: #17a2b8;
+    }
+
+    /* Global Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Utility Classes */
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section {
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color:white;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 3px;
+      background: var(--secondary);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .section-title p {
+      color: var(--gray);
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .text-center {
+      text-align: center;
+    }
+
+    /* Header Styles */
+    .sepco-header {
+      background: linear-gradient(135deg, var(--dark), var(--primary-dark));
+      color: white;
+      width: 100%;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      position:relative;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .sepco-header.scrolled {
+      background: rgba(0, 34, 68, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 0;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      height: 100px;
+      width: auto;
+      object-fit: contain;
+      transition: all 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .title-block {
+      text-align: center;
+      flex: 1;
+      min-width: 250px;
+      transition: all 0.3s ease;
+    }
+
+    .title-block h1 {
+      font-size: 1.8rem;
+      margin: 0;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: linear-gradient(to right, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+    }
+
+    .title-block h2 {
+      font-size: 1.5rem;
+      margin: 5px 0 0;
+      font-family: 'Noto Sans', sans-serif;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .navbar {
+      background: rgba(0, 0, 0, 0.2);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 28px;
+      color: white;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .menu-icon:hover {
+      color: var(--secondary);
+    }
+
+    #menu-toggle {
+      display: none;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links li {
+      position: relative;
+      margin: 0 8px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 15px 20px;
+      display: block;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 10px;
+      left: 20px;
+      background-color: var(--secondary);
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--secondary);
+    }
+
+    .nav-links a:hover::before {
+      width: calc(100% - 40px);
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: rgba(0, 47, 95, 0.95);
+      min-width: 280px;
+      border-radius: 8px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      backdrop-filter: blur(10px);
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu li a {
+      padding: 12px 25px;
+      color: white;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-menu li a i {
+      margin-right: 10px;
+      font-size: 14px;
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: rgba(0, 64, 128, 0.7);
+      color: var(--secondary);
+      padding-left: 30px;
+    }
+
+    .nav-links li.dropdown > a i {
+      font-size: 12px;
+      margin-left: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown:hover > a i {
+      transform: rotate(180deg);
+    }
+
+    .lang-select {
+      margin: 0 8px;
+      position: relative;
+    }
+
+    .lang-select select {
+      background: rgba(0, 0, 0, 0.2);
+      color: white;
+      font-weight: 500;
+      font-size: 14px;
+      padding: 10px 35px 10px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      appearance: none;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+    }
+
+    .lang-select select:hover {
+      border-color: var(--secondary);
+    }
+
+    .lang-select::after {
+      content: '\f078';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: white;
+      font-size: 10px;
+    }
+
+    .lang-select select option {
+      background: var(--dark);
+      color: white;
+    }
+
+    /* Quick Links Floating Menu */
+    .quick-links-menu {
+      position: fixed;
+      right: 30px;
+      bottom: 30px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .quick-link {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 5px 15px rgba(0, 102, 204, 0.4);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quick-link:hover {
+      transform: translateY(-5px) scale(1.1);
+      background: var(--primary-dark);
+    }
+
+    .quick-link::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .quick-link:hover::after {
+      transform: translateY(0);
+    }
+
+    .quick-link-tooltip {
+      position: absolute;
+      right: 60px;
+      background: var(--dark);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-size: 14px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .quick-link:hover .quick-link-tooltip {
+      opacity: 1;
+      right: 70px;
+    }
+
+/* organogram */
+.organogram-wrapper {
+  background: var(--background, #f9f9f9);
+  padding: 60px 16px;
+}
+
+.organogram-container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.organogram-title {
+  font-size: 2rem;
+  text-align: center;
+  color:#00469b;
+  margin-bottom: 32px;
+}
+
+.organogram-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.organogram-scroll {
+  overflow-x: auto;
+  background: #ffffff;
+}
+
+.organogram-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Optional empty state */
+.organogram-empty {
+  text-align: center;
+  padding: 40px 0;
+  color: #666;
+  font-size: 1rem;
+}
+
+
+    /* Footer Styles */
+    .sepco-footer {
+      background: linear-gradient(135deg, var(--dark), var(--primary-dark));
+      color: white;
+      padding: 80px 0 30px;
+      position: relative;
+    }
+
+    .sepco-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/dark-stripes.png');
+      opacity: 0.05;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .footer-section h4 {
+      margin-bottom: 25px;
+      font-size: 1.3rem;
+      color: var(--secondary);
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-section h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--secondary);
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links ul li a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      padding: 5px 0;
+    }
+
+    .footer-links ul li a i {
+      font-size: 12px;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links ul li a:hover {
+      color: white;
+      padding-left: 10px;
+    }
+
+    .footer-links ul li a:hover i {
+      opacity: 1;
+    }
+
+    .footer-contact p {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 15px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .footer-contact p i {
+      color: var(--secondary);
+      margin-top: 3px;
+    }
+
+    .footer-map iframe {
+      width: 100%;
+      height: 250px;
+      border-radius: 10px;
+      border: none;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .footer-map iframe:hover {
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding: 40px 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .footer-social a:hover {
+      background: var(--secondary);
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 204, 255, 0.3);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 25px;
+      margin-top: 50px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 5px 20px rgba(0, 102, 204, 0.4);
+      z-index: 999;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--primary-dark);
+      transform: translateY(-5px);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @media (max-width: 992px) {
+      .header-top {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+      
+      .title-block h1 {
+        font-size: 1.5rem;
+      }
+      
+      .title-block h2 {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-icon {
+        display: block;
+      }
+      
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: var(--dark);
+        width: 100%;
+        padding: 20px 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+      
+      .nav-links li {
+        margin: 0;
+      }
+      
+      .nav-links a {
+        padding: 15px 30px;
+      }
+      
+      .dropdown-menu {
+        position: static;
+        display: none;
+        background-color: rgba(0, 0, 0, 0.2);
+        box-shadow: none;
+        border-radius: 0;
+        width: 100%;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+      }
+      
+      .dropdown:hover .dropdown-menu {
+        display: block;
+      }
+      
+      #menu-toggle:checked + .menu-icon + .nav-links {
+        display: flex;
+      }
+      .nav-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        opacity: 1;
+      }
+        
+      .footer-social {
+        gap: 20px;
+      }
+      
+      .footer-social a {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .logo {
+        height: 70px;
+      }
+
+      .footer-section h4 {
+        font-size: 1.2rem;
+      }
+      
+      .back-to-top {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="sepco-header">
+    <div class="container">
+      <div class="header-top">
+        <img src="sepco_logo.png" alt="SEPCO Logo" class="logo" />
+        <div class="title-block">
+          <h1>Sukkur Electric Power Company</h1>
+          <h1>سکر الیکٹرک پاور کمپنی</h1>
+        </div>
+        <img src="mop.png" alt="Gov Logo" class="logo" />
+      </div>
+
+      <nav class="navbar">
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" class="menu-icon"><i class="fas fa-bars"></i></label>
+        <ul class="nav-links">
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-sitemap"></i> Organization <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="About.html"><i class="fas fa-info-circle"></i> About SEPCO</a></li>
+              <li><a href="Directiors.html"><i class="fas fa-users"></i> Board of Directors</a></li>
+              <li><a href="ceo.html"><i class="fas fa-user-tie"></i> CEO SEPCO</a></li>
+              <li><a  href="senior.html"><i class="fas fa-user-shield"></i> Senior Management</a></li>
+              <li><a  href="Area.html"><i class="fas fa-map-marked-alt"></i> Area of Responsibility</a></li>
+              <li><a  href="statistics.html"><i class="fas fa-chart-bar"></i> Key Statistics</a></li>
+              <li><a  href="maps.html"><i class="fas fa-map"></i> Maps</a></li>
+              <li><a  href="organogram.html"><i class="fas fa-project-diagram"></i> Organogram</a></li>
+              <li><a  href="customers.html"><i class="fas fa-users"></i> Customers</a></li>
+              <li><a  href="what.html"><i class="fas fa-tasks"></i> What We Do</a></li>
+              <!-- <li><a  href="http://www.mowp.gov.pk/"><i class="fas fa-landmark"></i> The Ministry</a></li> -->
+              <li><a  href="vision.html"><i class="fas fa-eye"></i> Vision Mission And Values</a></li>
+              <!-- <li><a  href="https://sepco.com.pk/image_gallery"><i class="fas fa-images"></i> Image Gallery</a></li> -->
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-concierge-bell"></i> Services <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="schedule.html"><i class="fas fa-bolt"></i> Load Management Schedule</a></li>
+              <!-- <li><a href="javascript:void(0);"><i class="fas fa-file-invoice-dollar"></i> Tariff-Wise Billing/Collection</a></li> -->
+              <li><a href="report.html"><i class="fas fa-chart-line"></i> Daily, Monthly And Quarterly Reports</a></li>
+              <li><a href="https://nepra.org.pk/tariff/Distribution%20SEPCO.php"><i class="fas fa-money-bill-wave"></i> Tariff Guide</a></li>
+              <li><a href="complaint.html"><i class="fas fa-headset"></i> Complaint Management Cell</a></li>
+              <!-- <li><a href="javascript:void(0);"><i class="fas fa-calculator"></i> Bill Estimator</a></li> -->
+              <li><a href="https://bill.pitc.com.pk"><i class="fas fa-copy"></i> Duplicate Bill</a></li>
+              <li><a href="http://www.pitc.com.pk/index.php/new-connection-estimator"><i class="fas fa-calculator"></i> New Connection Cost Calculator</a></li>
+              <li><a href="http://www.enc.com.pk/"><i class="fas fa-plug"></i> New Connection Application</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-download"></i> Downloads <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+              <!-- <li><a href="https://sepco.com.pk/load_shedding_schedule"><i class="fas fa-calendar-alt"></i> Load Shedding Schedule</a></li>
+              <li><a href="https://nepra.org.pk/tariff/Distribution%20SEPCO.php"><i class="fas fa-file-alt"></i> Tariff Guide</a></li> -->
+              <li><a href="orders.html"><i class="fas fa-file-signature"></i> Orders &amp; Notifications</a></li>
+              <li><a href="other.html"><i class="fas fa-file-archive"></i> Others</a></li>
+              <li><a href="seniority.html"><i class="fas fa-list-ol"></i> Seniority Lists</a></li>
+              <li><a href="usaid.html"><i class="fas fa-book"></i> Pocket Book USAID For Power Distribution System</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-newspaper"></i> News <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="news.html"><i class="fas fa-newspaper"></i> News</a></li>
+              <li><a href="press.html"><i class="fas fa-bullhorn"></i> Press Releases</a></li>
+              <li><a href="sdgs.html"><i class="fas fa-globe"></i> Global SDGS Program</a></li>
+              <li><a href="defaulters.html"><i class="fas fa-user-times"></i> Top 500 Defaulters</a></li>
+              <li><a href="data.html"><i class="fas fa-chart-pie"></i> Data And Statistic</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-plus-circle"></i> Additional <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="ami.html"><i class="fas fa-tachometer-alt"></i> AMI</a></li>
+              <li><a href="mirad.html"><i class="fas fa-search"></i> MIRAD</a></li>
+              <li><a href="erp.html"><i class="fas fa-book"></i> ERP (User Manuals)</a></li>
+              <li><a href="https://nepra.org.pk/licensing/Net%20Metering%20SEPCO.php"><i class="fas fa-solar-panel"></i> NET Metering</a></li>
+              <!-- <li><a href=""><i class="fas fa-file-certificate"></i> Tax Deduction Certificate</a></li> -->
+              <li><a href="cnic.html"><i class="fas fa-id-card"></i> Consumer CNIC Registration</a></li>
+              <li><a href="mobile.html"><i class="fas fa-mobile-alt"></i> Consumer Mobile Number Registration</a></li>
+            </ul>
+          </li>
+
+          <li><a href="tenders.html"><i class="fas fa-gavel"></i> Tenders</a></li>
+          <li><a href="careers.html"><i class="fas fa-briefcase"></i> Careers</a></li>
+
+          <!-- <li class="lang-select">
+            <select>
+              <option>Select Language</option>
+              <option>English</option>
+              <option>اردو</option>
+            </select>
+          </li> -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Quick Links Floating Menu -->
+  <div class="quick-links-menu">
+    <a href="https://bill.pitc.com.pk" class="quick-link" title="Pay Bill">
+      <i class="fas fa-file-invoice-dollar"></i>
+      <span class="quick-link-tooltip">Pay Your Bill Online</span>
+    </a>
+    <a href="http://www.enc.com.pk/" class="quick-link" title="New Connection">
+      <i class="fas fa-plug"></i>
+      <span class="quick-link-tooltip">Apply for New Connection</span>
+    </a>
+    <a href="complaint.html" class="quick-link" title="Complaints">
+      <i class="fas fa-headset"></i>
+      <span class="quick-link-tooltip">Register Complaint</span>
+    </a>
+    <a href="schedule.html" class="quick-link" title="Load Shedding">
+      <i class="fas fa-bolt"></i>
+      <span class="quick-link-tooltip">Load Shedding Schedule</span>
+    </a>
+  </div>
+
+<section class="organogram-wrapper">
+  <div class="organogram-container">
+    <h2 class="organogram-title">Organogram</h2>
+
+    <!-- If image is present -->
+    <div class="organogram-card">
+      <div class="organogram-scroll">
+        <img
+          src="o.jpg"
+          alt="Organogram"
+          class="organogram-image"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <!-- If no image is available, uncomment this -->
+    <!--
+    <div class="organogram-empty">
+      <p>No organogram image provided</p>
+    </div>
+    -->
+  </div>
+</section>
+
+
+
+
+
+  <!-- Footer -->
+  <footer class="sepco-footer">
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-section footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="About.html"><i class="fas fa-chevron-right"></i> About SEPCO</a></li>
+            <li><a href="ceo.html"><i class="fas fa-chevron-right"></i> CEO SEPCO</a></li>
+            <li><a href="Directiors.html"><i class="fas fa-chevron-right"></i> Board of Directors</a></li>
+            <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="sitemap.html"><i class="fas fa-chevron-right"></i> Sitemap</a></li>
+            <li><a href="http://webmail.sepco.com.pk/"><i class="fas fa-chevron-right"></i> Webmail</a></li>
+            <li><a href="https://ibs.pitc.com.pk/dashboard/user/auth/sign-in"><i class="fas fa-chevron-right"></i> MIS Website</a></li>
+            <li><a href="https://ibs.pitc.com.pk/dashboard/user/auth/sign-in"><i class="fas fa-chevron-right"></i> Dashboard</a></li>
+            <li><a href="http://old.sepco.com.pk/"><i class="fas fa-chevron-right"></i> Old Website</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section footer-contact">
+          <h4>Contact Us</h4>
+        <p><i class="fas fa-map-marker-alt"></i> SEPCO Headquarters, Old Sukkur, Sukkur, Pakistan</p>
+          <p><i class="fas fa-phone-alt"></i> UAN: 071-9310795-6</p>
+          <p><i class="fas fa-envelope"></i> info@sepco.com.pk</p>
+          <p><i class="fas fa-clock"></i> Mon-Fri: 9:30 AM - 4:30 PM</p>
+          
+          <div class="footer-map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.508161372192!2d68.88456437370807!3d27.701592425748483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3935d575f18f563d%3A0x9facd77063461d95!2sSEPCO%2C%20Regional%20Headquarters!5e0!3m2!1sen!2s!4v1749630789734!5m2!1sen!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://www.facebook.com/SukkurElectricPowerCompany.SEPCO.WAPDA/"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/sepcoofficial"><i class="fab fa-twitter"></i></a>
+        <a href="https://pk.linkedin.com/company/sukkur-electric-power-company-limited"><i class="fab fa-linkedin-in"></i></a>
+        <!-- <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a> -->
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 <strong>SEPCO - Sukkur Electric Power Company</strong> | All Rights Reserved </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <div class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+<script>
+       // Header Scroll Effect
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('.sepco-header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Back to Top Button
+    const backToTopBtn = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add('active');
+      } else {
+        backToTopBtn.classList.remove('active');
+      }
+    });
+    
+    backToTopBtn.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+</script>
+
+</body>
+</html>

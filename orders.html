@@ -1,0 +1,2142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+  <title>SEPCO - Sukkur Electric Power Company</title>
+  <style>
+    /* Modern Color Palette */
+    :root {
+      --primary: #0066cc;
+      --primary-dark: #004080;
+      --primary-light: #4da6ff;
+      --secondary: #00ccff;
+      --accent: #ff6b6b;
+      --dark: #002244;
+      --light: #f8f9fa;
+      --gray: #6c757d;
+      --dark-gray: #343a40;
+      --success: #28a745;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --info: #17a2b8;
+    }
+
+    /* Global Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Utility Classes */
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section {
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color:white;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 3px;
+      background: var(--secondary);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .section-title p {
+      color: var(--gray);
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .text-center {
+      text-align: center;
+    }
+
+    /* Header Styles */
+    .sepco-header {
+      background: linear-gradient(135deg, var(--dark), var(--primary-dark));
+      color: white;
+      width: 100%;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      position:relative;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .sepco-header.scrolled {
+      background: rgba(0, 34, 68, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 0;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      height: 100px;
+      width: auto;
+      object-fit: contain;
+      transition: all 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .title-block {
+      text-align: center;
+      flex: 1;
+      min-width: 250px;
+      transition: all 0.3s ease;
+    }
+
+    .title-block h1 {
+      font-size: 1.8rem;
+      margin: 0;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: linear-gradient(to right, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+    }
+
+    .title-block h2 {
+      font-size: 1.5rem;
+      margin: 5px 0 0;
+      font-family: 'Noto Sans', sans-serif;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .navbar {
+      background: rgba(0, 0, 0, 0.2);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 28px;
+      color: white;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .menu-icon:hover {
+      color: var(--secondary);
+    }
+
+    #menu-toggle {
+      display: none;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links li {
+      position: relative;
+      margin: 0 8px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 15px 20px;
+      display: block;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 10px;
+      left: 20px;
+      background-color: var(--secondary);
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--secondary);
+    }
+
+    .nav-links a:hover::before {
+      width: calc(100% - 40px);
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: rgba(0, 47, 95, 0.95);
+      min-width: 280px;
+      border-radius: 8px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      backdrop-filter: blur(10px);
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu li a {
+      padding: 12px 25px;
+      color: white;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-menu li a i {
+      margin-right: 10px;
+      font-size: 14px;
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: rgba(0, 64, 128, 0.7);
+      color: var(--secondary);
+      padding-left: 30px;
+    }
+
+    .nav-links li.dropdown > a i {
+      font-size: 12px;
+      margin-left: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown:hover > a i {
+      transform: rotate(180deg);
+    }
+
+    .lang-select {
+      margin: 0 8px;
+      position: relative;
+    }
+
+    .lang-select select {
+      background: rgba(0, 0, 0, 0.2);
+      color: white;
+      font-weight: 500;
+      font-size: 14px;
+      padding: 10px 35px 10px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      appearance: none;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+    }
+
+    .lang-select select:hover {
+      border-color: var(--secondary);
+    }
+
+    .lang-select::after {
+      content: '\f078';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: white;
+      font-size: 10px;
+    }
+
+    .lang-select select option {
+      background: var(--dark);
+      color: white;
+    }
+
+    /* Quick Links Floating Menu */
+    .quick-links-menu {
+      position: fixed;
+      right: 30px;
+      bottom: 30px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .quick-link {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 5px 15px rgba(0, 102, 204, 0.4);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quick-link:hover {
+      transform: translateY(-5px) scale(1.1);
+      background: var(--primary-dark);
+    }
+
+    .quick-link::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .quick-link:hover::after {
+      transform: translateY(0);
+    }
+
+    .quick-link-tooltip {
+      position: absolute;
+      right: 60px;
+      background: var(--dark);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-size: 14px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .quick-link:hover .quick-link-tooltip {
+      opacity: 1;
+      right: 70px;
+    }
+
+    /* Updated Orders Section Styles */
+    .orders-container {
+      background: linear-gradient(135deg, var(--dark), var(--primary-dark));
+      color: #e2e8f0;
+      font-family: 'Poppins', sans-serif;
+      padding: 60px 0;
+    }
+    
+    .orders-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .orders-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      gap: 20px;
+    }
+    
+    .orders-title-block h1 {
+      font-size: 2.2rem;
+      color: white;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    
+    .orders-subtitle {
+      color: var(--secondary);
+      font-size: 1rem;
+    }
+    
+    .orders-search-block {
+      position: relative;
+      min-width: 300px;
+    }
+    
+    .orders-search-block input {
+      width: 100%;
+      padding: 12px 20px;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.2);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      padding-right: 45px;
+      transition: all 0.3s ease;
+    }
+    
+    .orders-search-block input:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 2px rgba(0, 204, 255, 0.2);
+    }
+    
+    .orders-search-block::after {
+      content: '\f002';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .orders-filters {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+      padding: 8px 20px;
+      border-radius: 50px;
+      background: rgba(0, 0, 0, 0.2);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--secondary);
+      color: var(--dark);
+      border-color: var(--secondary);
+    }
+    
+    .orders-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .stat-card {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .stat-label {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 8px;
+    }
+    
+    .stat-value {
+      font-size: 28px;
+      font-weight: 600;
+      color: white;
+    }
+    
+    .stat-card.promotions .stat-value { color: var(--success); }
+    .stat-card.results .stat-value { color: var(--warning); }
+    .stat-card.tenders .stat-value { color: var(--accent); }
+    .stat-card.total .stat-value { color: var(--secondary); }
+    
+    .orders-table-container {
+      overflow-x: auto;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .orders-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .orders-table thead {
+      background: rgba(0, 64, 128, 0.5);
+    }
+    
+    .orders-table th {
+      padding: 15px 20px;
+      text-align: left;
+      color: white;
+      font-weight: 500;
+      border-bottom: 2px solid var(--secondary);
+    }
+    
+    .orders-table td {
+      padding: 15px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .orders-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .orders-table tbody tr:hover {
+      background: rgba(0, 64, 128, 0.3);
+    }
+    
+    .doc-title {
+      font-weight: 500;
+      color: white;
+      margin-bottom: 5px;
+    }
+    
+    .doc-meta {
+      display: flex;
+      gap: 15px;
+      font-size: 13px;
+    }
+    
+    .doc-category {
+      background: rgba(0, 204, 255, 0.2);
+      color: var(--secondary);
+      padding: 3px 10px;
+      border-radius: 50px;
+      font-size: 12px;
+    }
+    
+    .doc-type {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .doc-date {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .doc-date span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .doc-date i {
+      color: var(--secondary);
+      font-size: 14px;
+    }
+    
+    .doc-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+    
+    .doc-btn {
+      background: rgba(0, 204, 255, 0.1);
+      color: var(--secondary);
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .doc-btn:hover {
+      background: var(--secondary);
+      color: var(--dark);
+      transform: scale(1.1);
+    }
+    
+    .doc-btn.view {
+      background: rgba(40, 167, 69, 0.1);
+      color: var(--success);
+    }
+    
+    .doc-btn.view:hover {
+      background: var(--success);
+      color: white;
+    }
+    
+    .doc-btn.download {
+      background: rgba(220, 53, 69, 0.1);
+      color: var(--danger);
+    }
+    
+    .doc-btn.download:hover {
+      background: var(--danger);
+      color: white;
+    }
+    
+    /* Pagination Styles */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 30px;
+    }
+    
+    .pagination-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.2);
+      color: white;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .pagination-btn:hover:not(:disabled) {
+      background: var(--secondary);
+      color: var(--dark);
+    }
+    
+    .pagination-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .pagination-btn.active {
+      background: var(--secondary);
+      color: var(--dark);
+      font-weight: bold;
+    }
+    
+    .pagination-info {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      margin: 0 15px;
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .orders-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .orders-search-block {
+        width: 100%;
+      }
+      
+      .orders-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .orders-table th, 
+      .orders-table td {
+        padding: 12px 15px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .orders-stats {
+        grid-template-columns: 1fr;
+      }
+      
+      .doc-actions {
+        flex-direction: column;
+        gap: 5px;
+      }
+      
+      .pagination {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* Footer Styles */
+    .sepco-footer {
+      background: linear-gradient(135deg, var(--dark), var(--primary-dark));
+      color: white;
+      padding: 80px 0 30px;
+      position: relative;
+    }
+
+    .sepco-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/dark-stripes.png');
+      opacity: 0.05;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .footer-section h4 {
+      margin-bottom: 25px;
+      font-size: 1.3rem;
+      color: var(--secondary);
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-section h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--secondary);
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links ul li a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      padding: 5px 0;
+    }
+
+    .footer-links ul li a i {
+      font-size: 12px;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links ul li a:hover {
+      color: white;
+      padding-left: 10px;
+    }
+
+    .footer-links ul li a:hover i {
+      opacity: 1;
+    }
+
+    .footer-contact p {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 15px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .footer-contact p i {
+      color: var(--secondary);
+      margin-top: 3px;
+    }
+
+    .footer-map iframe {
+      width: 100%;
+      height: 250px;
+      border-radius: 10px;
+      border: none;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .footer-map iframe:hover {
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding: 40px 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .footer-social a:hover {
+      background: var(--secondary);
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 204, 255, 0.3);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 25px;
+      margin-top: 50px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 5px 20px rgba(0, 102, 204, 0.4);
+      z-index: 999;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--primary-dark);
+      transform: translateY(-5px);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @media (max-width: 992px) {
+      .header-top {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+      
+      .title-block h1 {
+        font-size: 1.5rem;
+      }
+      
+      .title-block h2 {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-icon {
+        display: block;
+      }
+      
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: var(--dark);
+        width: 100%;
+        padding: 20px 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+      
+      .nav-links li {
+        margin: 0;
+      }
+      
+      .nav-links a {
+        padding: 15px 30px;
+      }
+      
+      .dropdown-menu {
+        position: static;
+        display: none;
+        background-color: rgba(0, 0, 0, 0.2);
+        box-shadow: none;
+        border-radius: 0;
+        width: 100%;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+      }
+      
+      .dropdown:hover .dropdown-menu {
+        display: block;
+      }
+      
+      #menu-toggle:checked + .menu-icon + .nav-links {
+        display: flex;
+      }
+      .nav-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        opacity: 1;
+      }
+        
+      .footer-social {
+        gap: 20px;
+      }
+      
+      .footer-social a {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .logo {
+        height: 70px;
+      }
+
+      .footer-section h4 {
+        font-size: 1.2rem;
+      }
+      
+      .back-to-top {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="sepco-header">
+    <div class="container">
+      <div class="header-top">
+        <img src="sepco_logo.png" alt="SEPCO Logo" class="logo" />
+        <div class="title-block">
+          <h1>Sukkur Electric Power Company</h1>
+          <h1>سکر الیکٹرک پاور کمپنی</h1>
+        </div>
+        <img src="mop.png" alt="Gov Logo" class="logo" />
+      </div>
+
+      <nav class="navbar">
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" class="menu-icon"><i class="fas fa-bars"></i></label>
+        <ul class="nav-links">
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-sitemap"></i> Organization <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="About.html"><i class="fas fa-info-circle"></i> About SEPCO</a></li>
+              <li><a href="Directiors.html"><i class="fas fa-users"></i> Board of Directors</a></li>
+              <li><a href="ceo.html"><i class="fas fa-user-tie"></i> CEO SEPCO</a></li>
+              <li><a  href="senior.html"><i class="fas fa-user-shield"></i> Senior Management</a></li>
+              <li><a  href="Area.html"><i class="fas fa-map-marked-alt"></i> Area of Responsibility</a></li>
+              <li><a  href="statistics.html"><i class="fas fa-chart-bar"></i> Key Statistics</a></li>
+              <li><a  href="maps.html"><i class="fas fa-map"></i> Maps</a></li>
+              <li><a  href="organogram.html"><i class="fas fa-project-diagram"></i> Organogram</a></li>
+              <li><a  href="customers.html"><i class="fas fa-users"></i> Customers</a></li>
+              <li><a  href="what.html"><i class="fas fa-tasks"></i> What We Do</a></li>
+              <li><a  href="vision.html"><i class="fas fa-eye"></i> Vision Mission And Values</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-concierge-bell"></i> Services <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="schedule.html"><i class="fas fa-bolt"></i> Load Management Schedule</a></li>
+              <!-- <li><a href="javascript:void(0);"><i class="fas fa-file-invoice-dollar"></i> Tariff-Wise Billing/Collection</a></li> -->
+              <li><a href="report.html"><i class="fas fa-chart-line"></i> Daily, Monthly And Quarterly Reports</a></li>
+              <li><a href="https://nepra.org.pk/tariff/Distribution%20SEPCO.php"><i class="fas fa-money-bill-wave"></i> Tariff Guide</a></li>
+              <li><a href="complaint.html"><i class="fas fa-headset"></i> Complaint Management Cell</a></li>
+              <!-- <li><a href="javascript:void(0);"><i class="fas fa-calculator"></i> Bill Estimator</a></li> -->
+              <li><a href="https://bill.pitc.com.pk"><i class="fas fa-copy"></i> Duplicate Bill</a></li>
+              <li><a href="http://www.pitc.com.pk/index.php/new-connection-estimator"><i class="fas fa-calculator"></i> New Connection Cost Calculator</a></li>
+              <li><a href="http://www.enc.com.pk/"><i class="fas fa-plug"></i> New Connection Application</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-download"></i> Downloads <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+              <!-- <li><a href="https://sepco.com.pk/load_shedding_schedule"><i class="fas fa-calendar-alt"></i> Load Shedding Schedule</a></li> -->
+              <!-- <li><a href="https://nepra.org.pk/tariff/Distribution%20SEPCO.php"><i class="fas fa-file-alt"></i> Tariff Guide</a></li> -->
+              <li><a href="orders.html"><i class="fas fa-file-signature"></i> Orders & Notifications</a></li>
+              <li><a href="other.html"><i class="fas fa-file-archive"></i> Others</a></li>
+              <li><a href="seniority.html"><i class="fas fa-list-ol"></i> Seniority Lists</a></li>
+              <li><a href="usaid.html"><i class="fas fa-book"></i> Pocket Book USAID For Power Distribution System</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-newspaper"></i> News <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="news.html"><i class="fas fa-newspaper"></i> News</a></li>
+              <li><a href="press.html"><i class="fas fa-bullhorn"></i> Press Releases</a></li>
+              <li><a href="sdgs.html"><i class="fas fa-globe"></i> Global SDGS Program</a></li>
+              <li><a href="defaulters.html"><i class="fas fa-user-times"></i> Top 500 Defaulters</a></li>
+              <li><a href="data.html"><i class="fas fa-chart-pie"></i> Data And Statistic</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-plus-circle"></i> Additional <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="ami.html"><i class="fas fa-tachometer-alt"></i> AMI</a></li>
+              <li><a href="mirad.html"><i class="fas fa-search"></i> MIRAD</a></li>
+              <li><a href="erp.html"><i class="fas fa-book"></i> ERP (User Manuals)</a></li>
+              <li><a href="https://nepra.org.pk/licensing/Net%20Metering%20SEPCO.php"><i class="fas fa-solar-panel"></i> NET Metering</a></li>
+              <li><a href=""><i class="fas fa-file-certificate"></i> Tax Deduction Certificate</a></li>
+              <li><a href="cnic.html"><i class="fas fa-id-card"></i> Consumer CNIC Registration</a></li>
+              <li><a href="mobile.html"><i class="fas fa-mobile-alt"></i> Consumer Mobile Number Registration</a></li>
+            </ul>
+          </li>
+
+          <li><a href="tenders.html"><i class="fas fa-gavel"></i> Tenders</a></li>
+          <li><a href="careers.html"><i class="fas fa-briefcase"></i> Careers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Quick Links Floating Menu -->
+  <div class="quick-links-menu">
+    <a href="https://bill.pitc.com.pk" class="quick-link" title="Pay Bill">
+      <i class="fas fa-file-invoice-dollar"></i>
+      <span class="quick-link-tooltip">Pay Your Bill Online</span>
+    </a>
+    <a href="http://www.enc.com.pk/" class="quick-link" title="New Connection">
+      <i class="fas fa-plug"></i>
+      <span class="quick-link-tooltip">Apply for New Connection</span>
+    </a>
+    <a href="complaint.html" class="quick-link" title="Complaints">
+      <i class="fas fa-headset"></i>
+      <span class="quick-link-tooltip">Register Complaint</span>
+    </a>
+    <a href="schedule.html" class="quick-link" title="Load Shedding">
+      <i class="fas fa-bolt"></i>
+      <span class="quick-link-tooltip">Load Shedding Schedule</span>
+    </a>
+  </div>
+
+  <!-- Orders Notifications Section -->
+  <section class="orders-container">
+    <div class="orders-wrapper">
+      <div class="orders-header">
+        <div class="orders-title-block">
+          <h1 class="orders-title">Orders & Notifications</h1>
+          <p class="orders-subtitle">Official documents, announcements, and circulars from SEPCO</p>
+        </div>
+        <div class="orders-search-block">
+          <input type="text" id="searchInput" placeholder="Search documents..." />
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="orders-filters">
+        <button class="filter-btn active" data-filter="all">All Documents</button>
+        <button class="filter-btn" data-filter="promotion">Promotions</button>
+        <button class="filter-btn" data-filter="result">Results</button>
+        <button class="filter-btn" data-filter="tender">Tenders</button>
+        <button class="filter-btn" data-filter="circular">Circulars</button>
+      </div>
+
+      <!-- Stats Section -->
+      <div class="orders-stats">
+        <div class="stat-card total">
+          <span class="stat-label">Total Documents</span>
+          <h3 class="stat-value">54</h3>
+        </div>
+        <div class="stat-card promotions">
+          <span class="stat-label">Promotions</span>
+          <h3 class="stat-value">34</h3>
+        </div>
+        <div class="stat-card results">
+          <span class="stat-label">Results</span>
+          <h3 class="stat-value">5</h3>
+        </div>
+        <div class="stat-card tenders">
+          <span class="stat-label">Tenders</span>
+          <h3 class="stat-value">15</h3>
+        </div>
+      </div>
+
+      <!-- Table Section -->
+      <div class="orders-table-container">
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th style="width: 60%;">Document</th>
+              <th style="width: 25%;">Date & Time</th>
+              <th style="width: 15%;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="documentTableBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button class="pagination-btn" id="prevPage" disabled>
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <span class="pagination-info" id="pageInfo">Page 1 of 5</span>
+        <button class="pagination-btn" id="nextPage">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="sepco-footer">
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-section footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="About.html"><i class="fas fa-chevron-right"></i> About SEPCO</a></li>
+            <li><a href="ceo.html"><i class="fas fa-chevron-right"></i> CEO SEPCO</a></li>
+            <li><a href="Directiors.html"><i class="fas fa-chevron-right"></i> Board of Directors</a></li>
+            <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="sitemap.html"><i class="fas fa-chevron-right"></i> Sitemap</a></li>
+            <li><a href="http://webmail.sepco.com.pk/"><i class="fas fa-chevron-right"></i> Webmail</a></li>
+            <li><a href="https://ibs.pitc.com.pk/dashboard/user/auth/sign-in"><i class="fas fa-chevron-right"></i> MIS Website</a></li>
+            <li><a href="https://ibs.pitc.com.pk/dashboard/user/auth/sign-in"><i class="fas fa-chevron-right"></i> Dashboard</a></li>
+            <li><a href="http://old.sepco.com.pk/"><i class="fas fa-chevron-right"></i> Old Website</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section footer-contact">
+          <h4>Contact Us</h4>
+          <p><i class="fas fa-map-marker-alt"></i> SEPCO Headquarters, Old Sukkur, Sukkur, Pakistan</p>
+          <p><i class="fas fa-phone-alt"></i> UAN: 071-9310795-6</p>
+          <p><i class="fas fa-envelope"></i> info@sepco.com.pk</p>
+          <p><i class="fas fa-clock"></i> Mon-Fri: 9:30 AM - 4:30 PM</p>
+          
+          <div class="footer-map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.508161372192!2d68.88456437370807!3d27.701592425748483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3935d575f18f563d%3A0x9facd77063461d95!2sSEPCO%2C%20Regional%20Headquarters!5e0!3m2!1sen!2s!4v1749630789734!5m2!1sen!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://www.facebook.com/SukkurElectricPowerCompany.SEPCO.WAPDA/"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/sepcoofficial"><i class="fab fa-twitter"></i></a>
+        <a href="https://pk.linkedin.com/company/sukkur-electric-power-company-limited"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 <strong>SEPCO - Sukkur Electric Power Company</strong> | All Rights Reserved </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <div class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script>
+    // Header Scroll Effect
+    window.addEventListener('scroll', function () {
+      const header = document.querySelector('.sepco-header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Back to Top Button
+    const backToTopBtn = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add('active');
+      } else {
+        backToTopBtn.classList.remove('active');
+      }
+    });
+
+    backToTopBtn.addEventListener('click', function () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+// Enhanced Orders & Notifications Script
+document.addEventListener('DOMContentLoaded', () => {
+  const tableBody = document.getElementById('documentTableBody');
+  const searchInput = document.getElementById('searchInput');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const prevPageBtn = document.getElementById('prevPage');
+  const nextPageBtn = document.getElementById('nextPage');
+  const pageInfo = document.getElementById('pageInfo');
+
+  // Sample data with all 54 documents
+  const allDocuments = [
+    { 
+      id: 1,
+      title: "Junior Clerks TSU BPS-09 to BPS-11", 
+      category: "Promotion", 
+      type: "PDF", 
+      date: "07-06-2023", 
+      time: "01:02 AM", 
+      fileName: "SEPCO_1686081725_Junior Clerks TSU BPS-09 to BPS-11.pdf",
+      fileSize: "1.2 MB",
+      department: "Administration",
+      link: "https://sepco.com.pk/documents/SEPCO_1686081725_Junior Clerks TSU BPS-09 to BPS-11.pdf"
+    },
+    { 
+      id: 2,
+      title: "Promotion Stenographer Grade-II to APS", 
+      category: "Promotion", 
+      type: "PDF", 
+      date: "07-06-2023", 
+      time: "01:02 AM", 
+      fileName: "SEPCO_1686081760_Promotion Stenographer Grade-II to APS.pdf",
+      fileSize: "1.5 MB",
+      department: "Human Resources",
+      link: "https://sepco.com.pk/documents/SEPCO_1686081760_Promotion Stenographer Grade-II to APS.pdf"
+    },
+    { 
+      id: 3,
+      title: "Promotion of Electric Helper BPS-07 to Meter Mechanic BPS-09", 
+      category: "Promotion", 
+      type: "JPEG", 
+      date: "01-03-2024", 
+      time: "02:47 PM", 
+      fileName: "SEPCO_1709286470_Promotion of Electric Helper (BPS-07) to Meter Mechanic (BPS-09).jpeg",
+      fileSize: "2.1 MB",
+      department: "Technical",
+      link: "https://sepco.com.pk/documents/SEPCO_1709286470_Promotion of Electric Helper (BPS-07) to Meter Mechanic (BPS-09).jpeg"
+    },
+    { 
+      id: 4,
+      title: "Promotion of Electric Helper BPS-07 to Fitter-II BPS-09", 
+      category: "Promotion", 
+      type: "JPEG", 
+      date: "01-03-2024", 
+      time: "02:49 PM", 
+      fileName: "SEPCO_1709286549_Prpmotion of Electric Helper(BPS-07) to Fitter-II (BPS-09).jpeg",
+      fileSize: "2.0 MB",
+      department: "Technical",
+      link: "https://sepco.com.pk/documents/SEPCO_1709286549_Prpmotion of Electric Helper(BPS-07) to Fitter-II (BPS-09).jpeg"
+    },
+    { 
+      id: 5,
+      title: "Promotion of Asstt: Draftsman (BPS-13) to Div: Head Draftsman (BPS-14)", 
+      category: "Promotion", 
+      type: "PDF", 
+      date: "06-03-2024", 
+      time: "03:26 PM", 
+      fileName: "SEPCO_1709720805_Promotion of Asstt Draftman (BPS-13) to Div Head Draftman (BPS-14).pdf",
+      fileSize: "1.8 MB",
+      department: "Engineering",
+      link: "https://sepco.com.pk/documents/SEPCO_1709720805_Promotion of Asstt Draftman (BPS-13) to Div Head Draftman (BPS-14).pdf"
+    },
+    { 
+      id: 6,
+      title: "Grievance Redressal Committee of SEPCO", 
+      category: "Circular", 
+      type: "PDF", 
+      date: "27-03-2024", 
+      time: "11:34 AM", 
+      fileName: "SEPCO_1711521253_GRC LETER & FORMAT .pdf",
+      fileSize: "1.1 MB",
+      department: "Administration",
+      link: "https://sepco.com.pk/documents/SEPCO_1711521253_GRC LETER & FORMAT .pdf"
+    },
+    { 
+      id: 7,
+      title: "promotion of sub-station operator Grade-II to Sub-station Operator Grade-II (BPS-14 to BPS-15)", 
+      category: "Promotion", 
+      type: "PDF", 
+      date: "15-04-2024", 
+      time: "01:58 PM", 
+      fileName: "SEPCO_1713171507_Promtion of sub-station operator grade-II to sub-station operator grade-I (bps-14 to bps-15).pdf",
+      fileSize: "2.2 MB",
+      department: "Technical",
+      link: "https://sepco.com.pk/documents/SEPCO_1713171507_Promtion of sub-station operator grade-II to sub-station operator grade-I (bps-14 to bps-15).pdf"
+    },
+    { 
+      id: 8,
+      title: "PROMTION OF FITTER BPS-11 TO ASSISTANT FOREMAN BPS-14", 
+      category: "Promotion", 
+      type: "PDF", 
+      date: "15-04-2024", 
+      time: "01:59 PM", 
+      fileName: "SEPCO_1713171567_Promotion of fitter bps-11 To Assistant foreman bps-14.pdf",
+      fileSize: "1.8 MB",
+      department: "Technical",
+      link: "https://sepco.com.pk/documents/SEPCO_1713171567_Promotion of fitter bps-11 To Assistant foreman bps-14.pdf"
+    },
+    { 
+      id: 9,
+      title: "TSU OF SENIOR CLERKS BPS-11 TO BPS-13", 
+      category: "Promotion", 
+      type: "PDF", 
+      date: "25-04-2024", 
+      time: "12:32 PM", 
+      fileName: "SEPCO_1714030325_TSU OF SENIOR CLERKS BPS-11 TO BPS-13.pdf",
+      fileSize: "1.6 MB",
+      department: "Administration",
+      link: "https://sepco.com.pk/documents/SEPCO_1714030325_TSU OF SENIOR CLERKS BPS-11 TO BPS-13.pdf"
+    },
+    { 
+      id: 10,
+      title: "PROMOTION OF ASSISTANT/HC TO OFFICE SUPERINTENDENT BPS-16", 
+      category: "Promotion", 
+      type: "PDF", 
+      date: "25-04-2024", 
+      time: "12:33 PM", 
+      fileName: "SEPCO_1714030430_Promotion of office superintendent BPS_16.pdf",
+      fileSize: "1.7 MB",
+      department: "Administration",
+      link: "https://sepco.com.pk/documents/SEPCO_1714030430_Promotion of office superintendent BPS_16.pdf"
+    },
+    { 
+      id: 11,
+      title: "Promotion JC Commercial (Graduate) To Commercial Assistant (BPS-09 To BPS-15)", 
+      category: "Promotion", 
+      type: "PDF", 
+      date: "04-05-2024", 
+      time: "12:25 PM", 
+      fileName: "SEPCO_1714807505_Promotion of JC Commercial(Gfaduate) to Commercial Assistant (BPS-09 to BPS-15).pdf",
+      fileSize: "1.9 MB",
+      department: "Administration",
+      link: "https://sepco.com.pk/documents/SEPCO_1714807505_Promotion of JC Commercial(Gfaduate) to Commercial Assistant (BPS-09 to BPS-15).pdf"
+    },
+    { 
+      id: 12,
+      title: "TENDER No 1185/23 SCRAPPED (M.M)", 
+      category: "Tender", 
+      type: "JPEG", 
+      date: "01-06-2024", 
+      time: "08:17 PM", 
+      fileName: "SEPCO_1717255040_TENDER No 1185-23 SCRAPPED.jpeg",
+      fileSize: "2.3 MB",
+      department: "Procurement",
+      link: "https://sepco.com.pk/documents/SEPCO_1717255040_TENDER No 1185-23 SCRAPPED.jpeg"
+    },
+    { 
+      id: 13,
+      title: "Result Notification Meter Reader to MS-II", 
+      category: "Result", 
+      type: "PDF", 
+      date: "06-06-2024", 
+      time: "03:52 PM", 
+      fileName: "SEPCO_1717671122_Result Notification Meter Reader to MS-II.pdf",
+      fileSize: "1.5 MB",
+      department: "Examinations",
+      link: "https://sepco.com.pk/documents/SEPCO_1717671122_Result Notification Meter Reader to MS-II.pdf"
+    },
+    { 
+      id: 14,
+      title: "Result Notification Junior Clerk to Senior Clerk", 
+      category: "Result", 
+      type: "PDF", 
+      date: "06-06-2024", 
+      time: "03:53 PM", 
+      fileName: "SEPCO_1717671191_Result Notification Junior Clerks to Senior Clerks.pdf",
+      fileSize: "1.6 MB",
+      department: "Examinations",
+      link: "https://sepco.com.pk/documents/SEPCO_1717671191_Result Notification Junior Clerks to Senior Clerks.pdf"
+    },
+    { 
+      id: 15,
+      title: "Promotion of upper Technical sub-ordinate staff B-Tech (Honors) To junior Engineer/SDO (BPS-17)", 
+      category: "Promotion", 
+      type: "JPEG", 
+      date: "22-07-2024", 
+      time: "02:50 PM", 
+      fileName: "SEPCO_1721641812_Promotion of upper Technical sub-ordinate staff B-Tech (Honours) to LE-SDO (BPS-17).jpeg",
+      fileSize: "2.1 MB",
+      department: "Technical",
+      link: "https://sepco.com.pk/documents/SEPCO_1721641812_Promotion of upper Technical sub-ordinate staff B-Tech (Honours) to LE-SDO (BPS-17).jpeg"
+    },
+    { 
+      id: 16,
+      title: "Promotion of upper Technical Sub-ordinate staff (Diploma Holder) To Junior Engineer/SDO (BPS-17)", 
+      category: "Promotion", 
+      type: "JPEG", 
+      date: "22-07-2024", 
+      time: "02:52 PM", 
+      fileName: "SEPCO_1721641941_Promotion of upper Technical sub-ordinate staff (Diploma Holder) To JE-SDO (BPS-17).jpeg",
+      fileSize: "2.0 MB",
+      department: "Technical",
+      link: "https://sepco.com.pk/documents/SEPCO_1721641941_Promotion of upper Technical sub-ordinate staff (Diploma Holder) To JE-SDO (BPS-17).jpeg"
+    },
+    { 
+      id: 17,
+      title: "PROMOTION TRAINING LM-1 TO LS-II (T-500)", 
+      category: "Promotion", 
+      type: "PDF", 
+      date: "26-07-2024", 
+      time: "04:06 PM", 
+      fileName: "SEPCO_1721991993_CamScanner_07-26-2024_14.57-1[1].pdf",
+      fileSize: "1.9 MB",
+      department: "Training",
+      link: "https://sepco.com.pk/documents/SEPCO_1721991993_CamScanner_07-26-2024_14.57-1[1].pdf"
+    },
+    { 
+      id: 18,
+      title: "PROMOTION FRON SUB STATION ATTENDENT TO SUB-STATION OPERATOR", 
+      category: "Promotion", 
+      type: "PDF", 
+      date: "26-07-2024", 
+      time: "04:07 PM", 
+      fileName: "SEPCO_1721992041_CamScanner_07-26-2024_14.57-2[1].pdf",
+      fileSize: "1.8 MB",
+      department: "Technical",
+      link: "https://sepco.com.pk/documents/SEPCO_1721992041_CamScanner_07-26-2024_14.57-2[1].pdf"
+    },
+    { 
+      id: 19,
+      title: "PROMOTION FROM LINEMAN GRADE-I (MATICULATION) TO LINE SUPERITENDENT", 
+      category: "Promotion", 
+      type: "PDF", 
+      date: "26-07-2024", 
+      time: "04:08 PM", 
+      fileName: "SEPCO_1721992128_CamScanner_07-26-2024_14.57-3[1].pdf",
+      fileSize: "2.0 MB",
+      department: "Technical",
+      link: "https://sepco.com.pk/documents/SEPCO_1721992128_CamScanner_07-26-2024_14.57-3[1].pdf"
+    },
+    { 
+      id: 20,
+      title: "PROMOTION FROM LINE SUPRITENDENT GRADE-II TO LINE SUPRITENDENT", 
+      category: "Promotion", 
+      type: "PDF", 
+      date: "26-07-2024", 
+      time: "04:09 PM", 
+      fileName: "SEPCO_1721992184_CamScanner_07-26-2024_14.57-4[1].pdf",
+      fileSize: "1.9 MB",
+      department: "Technical",
+      link: "https://sepco.com.pk/documents/SEPCO_1721992184_CamScanner_07-26-2024_14.57-4[1].pdf"
+    },
+    { 
+      id: 21,
+      title: "PROMOTION FROM FITTER-I (BPS-11) TO ASSISTANT FOREMAN GSO SIDE", 
+      category: "Promotion", 
+      type: "PDF", 
+      date: "26-07-2024", 
+      time: "04:10 PM", 
+      fileName: "SEPCO_1721992258_CamScanner_07-26-2024_14.57-5[1].pdf",
+      fileSize: "2.1 MB",
+      department: "Technical",
+      link: "https://sepco.com.pk/documents/SEPCO_1721992258_CamScanner_07-26-2024_14.57-5[1].pdf"
+    },
+    { 
+      id: 22,
+      title: "PROMOTION FROM LINEMAN GRADE-I (MATRICULATE) TO LINE SUPERITENDENT", 
+      category: "Promotion", 
+      type: "PDF", 
+      date: "26-07-2024", 
+      time: "04:12 PM", 
+      fileName: "SEPCO_1721992325_CamScanner_07-26-2024_14.57-6[1].pdf",
+      fileSize: "2.0 MB",
+      department: "Technical",
+      link: "https://sepco.com.pk/documents/SEPCO_1721992325_CamScanner_07-26-2024_14.57-6[1].pdf"
+    },
+    { 
+      id: 23,
+      title: "PROMOTION FROM LINEMAN GRADE-I (NON-MATRICULATE/ILLITRATE) TO LINEMAN SUPERITENDENT )", 
+      category: "Promotion", 
+      type: "PDF", 
+      date: "26-07-2024", 
+      time: "04:13 PM", 
+      fileName: "SEPCO_1721992390_CamScanner_07-26-2024_14.57-7[1].pdf",
+      fileSize: "1.9 MB",
+      department: "Technical",
+      link: "https://sepco.com.pk/documents/SEPCO_1721992390_CamScanner_07-26-2024_14.57-7[1].pdf"
+    },
+    { 
+      id: 24,
+      title: "APPOINTED EMPLOYEES CHILDREN DECEASED QUOTA", 
+      category: "Recruitment", 
+      type: "PDF", 
+      date: "26-07-2024", 
+      time: "04:14 PM", 
+      fileName: "SEPCO_1721992476_CamScanner_07-26-2024_14.57-8[1].pdf",
+      fileSize: "1.8 MB",
+      department: "Human Resources",
+      link: "https://sepco.com.pk/documents/SEPCO_1721992476_CamScanner_07-26-2024_14.57-8[1].pdf"
+    },
+    { 
+      id: 25,
+      title: "APPOINTED EMPLOYEES CHILDREN DECEASED QUOTA", 
+      category: "Recruitment", 
+      type: "JPEG", 
+      date: "30-07-2024", 
+      time: "03:47 PM", 
+      fileName: "SEPCO_1722336436_WhatsApp Image 2024-07-30 at 3.34.29 PM.jpeg",
+      fileSize: "2.1 MB",
+      department: "Human Resources",
+      link: "https://sepco.com.pk/documents/SEPCO_1722336436_WhatsApp Image 2024-07-30 at 3.34.29 PM.jpeg"
+    },
+    { 
+      id: 26,
+      title: "REVISED SENIORITY LIST OF LINEMAN GRADE-I", 
+      category: "Seniority List", 
+      type: "JPEG", 
+      date: "30-07-2024", 
+      time: "03:48 PM", 
+      fileName: "SEPCO_1722336498_WhatsApp Image 2024-07-30 at 3.34.30 PM.jpeg",
+      fileSize: "2.0 MB",
+      department: "Human Resources",
+      link: "https://sepco.com.pk/documents/SEPCO_1722336498_WhatsApp Image 2024-07-30 at 3.34.30 PM.jpeg"
+    },
+    { 
+      id: 27,
+      title: "RESULT NOTIFICATION OF FITTER", 
+      category: "Result", 
+      type: "PDF", 
+      date: "08-10-2024", 
+      time: "12:59 PM", 
+      fileName: "SEPCO_1728374343_RESULT NOTIFICATION FITTER-II TO FITTER-I (GSO).pdf",
+      fileSize: "1.7 MB",
+      department: "Examinations",
+      link: "https://sepco.com.pk/documents/SEPCO_1728374343_RESULT NOTIFICATION FITTER-II TO FITTER-I (GSO).pdf"
+    },
+    { 
+      id: 28,
+      title: "Application for suggestion", 
+      category: "Circular", 
+      type: "PDF", 
+      date: "29-10-2024", 
+      time: "10:26 AM", 
+      fileName: "SEPCO_1730179563_Application for Suggestion.pdf",
+      fileSize: "1.2 MB",
+      department: "Administration",
+      link: "https://sepco.com.pk/documents/SEPCO_1730179563_Application for Suggestion.pdf"
+    },
+    { 
+      id: 29,
+      title: "PROMOTION FROM TRACER BPS-09 TO ASSISTANT DRAFTSMAN BPS-13", 
+      category: "Promotion", 
+      type: "JPEG", 
+      date: "30-10-2024", 
+      time: "03:08 PM", 
+      fileName: "SEPCO_1730282915_PROMOTION FROM TRACER (BPS-09) TO ASSISTANT DRAFTSMAN (BPS-13).jpeg",
+      fileSize: "2.1 MB",
+      department: "Engineering",
+      link: "https://sepco.com.pk/documents/SEPCO_1730282915_PROMOTION FROM TRACER (BPS-09) TO ASSISTANT DRAFTSMAN (BPS-13).jpeg"
+    },
+    { 
+      id: 30,
+      title: "NOTIFICATION TRAINING BILL DISTRIBUTOR TO METER READER", 
+      category: "Training", 
+      type: "PDF", 
+      date: "05-12-2024", 
+      time: "02:57 PM", 
+      fileName: "SEPCO_1733392640_NOTIFICATION PROMOTION TRAINING BILL-DISTRIBUTOR TO METER READER.pdf",
+      fileSize: "1.8 MB",
+      department: "Training",
+      link: "https://sepco.com.pk/documents/SEPCO_1733392640_NOTIFICATION PROMOTION TRAINING BILL-DISTRIBUTOR TO METER READER.pdf"
+    },
+    { 
+      id: 31,
+      title: "RESULT NOTIFICATION OF ALM-II TO LM-II (T-200)", 
+      category: "Result", 
+      type: "JPEG", 
+      date: "16-12-2024", 
+      time: "11:06 AM", 
+      fileName: "SEPCO_1734329185_RESULT NOTIFICATION ALM-II TO LM-II (T-200).jpeg",
+      fileSize: "2.0 MB",
+      department: "Examinations",
+      link: "https://sepco.com.pk/documents/SEPCO_1734329185_RESULT NOTIFICATION ALM-II TO LM-II (T-200).jpeg"
+    },
+    { 
+      id: 32,
+      title: "RESULT NOTIFICATION LM-II TO LM-I (07-WEEK)", 
+      category: "Result", 
+      type: "JPEG", 
+      date: "28-02-2025", 
+      time: "04:06 PM", 
+      fileName: "SEPCO_1740740782_RESULT NOTIFICATION LM-II TO LM-I (07-WEEK).jpeg",
+      fileSize: "2.1 MB",
+      department: "Examinations",
+      link: "https://sepco.com.pk/documents/SEPCO_1740740782_RESULT NOTIFICATION LM-II TO LM-I (07-WEEK).jpeg"
+    },
+    { 
+      id: 33,
+      title: "NOTIFICATION PROMOTION TRAINING LM-I TO LS-II", 
+      category: "Training", 
+      type: "PDF", 
+      date: "27-03-2025", 
+      time: "10:36 AM", 
+      fileName: "SEPCO_1743053795_NOTIFICATION PROMOTION TRAINING LM-I TO LS-II.pdf",
+      fileSize: "1.9 MB",
+      department: "Training",
+      link: "https://sepco.com.pk/documents/SEPCO_1743053795_NOTIFICATION PROMOTION TRAINING LM-I TO LS-II.pdf"
+    },
+    { 
+      id: 34,
+      title: "PROMOTION CE (BPS-20) TO GM (OP) BASHIR AHMAD SHAIKH", 
+      category: "Promotion", 
+      type: "JPEG", 
+      date: "10-04-2025", 
+      time: "03:57 PM", 
+      fileName: "SEPCO_1744282648_PROMOTION CHIEF ENGINEER BPS-20 TO GENERAL MANAGER (OP) MR BASHIR AHMAD SHAIKH.jpeg",
+      fileSize: "2.2 MB",
+      department: "Management",
+      link: "https://sepco.com.pk/documents/SEPCO_1744282648_PROMOTION CHIEF ENGINEER BPS-20 TO GENERAL MANAGER (OP) MR BASHIR AHMAD SHAIKH.jpeg"
+    },
+    { 
+      id: 35,
+      title: "PROMOTION SE TO CHIEF ENGINEER (BPS-20) MR MIR AZHAR ALI TALPUR", 
+      category: "Promotion", 
+      type: "JPEG", 
+      date: "10-04-2025", 
+      time: "03:58 PM", 
+      fileName: "SEPCO_1744282728_PROMOTION SE TO CHIEF ENGINEER (BPS-20) (MR MIR AZHAR ALI TALPUR).jpeg",
+      fileSize: "2.1 MB",
+      department: "Management",
+      link: "https://sepco.com.pk/documents/SEPCO_1744282728_PROMOTION SE TO CHIEF ENGINEER (BPS-20) (MR MIR AZHAR ALI TALPUR).jpeg"
+    },
+    { 
+      id: 36,
+      title: "PROMOTION SE TO CHIEF ENGINEER (BPS-20) MR MUSHTAQUE AHMAD ABBASI", 
+      category: "Promotion", 
+      type: "JPEG", 
+      date: "10-04-2025", 
+      time: "04:00 PM", 
+      fileName: "SEPCO_1744282805_PROMOTION SE TO CHIEF ENGINEER(BPS-20) (MR MUSHTAQ AHMED ABBASI).jpeg",
+      fileSize: "2.0 MB",
+      department: "Management",
+      link: "https://sepco.com.pk/documents/SEPCO_1744282805_PROMOTION SE TO CHIEF ENGINEER(BPS-20) (MR MUSHTAQ AHMED ABBASI).jpeg"
+    },
+    { 
+      id: 37,
+      title: "PROMOTION SE TO CHIEF ENGINEER (BPS-20) MR AIJAZ ALI CHANNA", 
+      category: "Promotion", 
+      type: "JPEG", 
+      date: "10-04-2025", 
+      time: "04:01 PM", 
+      fileName: "SEPCO_1744282876_PROMOTION SE TO CHEIF ENG (BPS-20) (MR AIJAZ AHMED CHANNA).jpeg",
+      fileSize: "2.1 MB",
+      department: "Management",
+      link: "https://sepco.com.pk/documents/SEPCO_1744282876_PROMOTION SE TO CHEIF ENG (BPS-20) (MR AIJAZ AHMED CHANNA).jpeg"
+    },
+    { 
+      id: 38,
+      title: "PROMOTION FROM SENIOR CLERK / UDC TO ASSISTANT (BPS-11 TO BPS-15)", 
+      category: "Promotion", 
+      type: "JPEG", 
+      date: "22-04-2025", 
+      time: "11:48 AM", 
+      fileName: "SEPCO_1745304519_OFFICE ORDER.jpeg",
+      fileSize: "2.0 MB",
+      department: "Administration",
+      link: "https://sepco.com.pk/documents/SEPCO_1745304519_OFFICE ORDER.jpeg"
+    },
+    { 
+      id: 39,
+      title: "PROMOTION OF UPPER TECHNICAL SUB-ORDINATE STAFF (LS-I) TO JUNIOR ENGINEER / SDO (BPS-17)", 
+      category: "Promotion", 
+      type: "JPEG", 
+      date: "22-04-2025", 
+      time: "11:50 AM", 
+      fileName: "SEPCO_1745304605_WhatsApp Image 2025-04-22 at 11.03.29 AM.jpeg",
+      fileSize: "2.1 MB",
+      department: "Technical",
+      link: "https://sepco.com.pk/documents/SEPCO_1745304605_WhatsApp Image 2025-04-22 at 11.03.29 AM.jpeg"
+    },
+    { 
+      id: 40,
+      title: "SCRAP TENDER # 339/2024", 
+      category: "Tender", 
+      type: "JPEG", 
+      date: "29-04-2025", 
+      time: "10:51 AM", 
+      fileName: "SEPCO_1745905896_order.jpeg",
+      fileSize: "2.2 MB",
+      department: "Procurement",
+      link: "https://sepco.com.pk/documents/SEPCO_1745905896_order.jpeg"
+    },
+    // Additional documents to reach 54
+    { 
+      id: 41,
+      title: "Annual Performance Report 2024", 
+      category: "Report", 
+      type: "PDF", 
+      date: "15-01-2025", 
+      time: "10:00 AM", 
+      fileName: "SEPCO_Annual_Performance_Report_2024.pdf",
+      fileSize: "3.5 MB",
+      department: "Management",
+      link: "https://sepco.com.pk/documents/SEPCO_Annual_Performance_Report_2024.pdf"
+    },
+    { 
+      id: 42,
+      title: "Quarterly Financial Statement Q1 2025", 
+      category: "Financial", 
+      type: "PDF", 
+      date: "05-04-2025", 
+      time: "11:30 AM", 
+      fileName: "SEPCO_Q1_Financial_Statement_2025.pdf",
+      fileSize: "2.8 MB",
+      department: "Finance",
+      link: "https://sepco.com.pk/documents/SEPCO_Q1_Financial_Statement_2025.pdf"
+    },
+    { 
+      id: 43,
+      title: "Employee Training Schedule 2025", 
+      category: "Training", 
+      type: "PDF", 
+      date: "10-01-2025", 
+      time: "09:15 AM", 
+      fileName: "SEPCO_Training_Schedule_2025.pdf",
+      fileSize: "1.2 MB",
+      department: "Human Resources",
+      link: "https://sepco.com.pk/documents/SEPCO_Training_Schedule_2025.pdf"
+    },
+    { 
+      id: 44,
+      title: "New Substation Construction Tender", 
+      category: "Tender", 
+      type: "PDF", 
+      date: "20-03-2025", 
+      time: "02:30 PM", 
+      fileName: "SEPCO_New_Substation_Tender.pdf",
+      fileSize: "4.2 MB",
+      department: "Procurement",
+      link: "https://sepco.com.pk/documents/SEPCO_New_Substation_Tender.pdf"
+    },
+    { 
+      id: 45,
+      title: "Safety Guidelines Update", 
+      category: "Circular", 
+      type: "PDF", 
+      date: "05-02-2025", 
+      time: "10:45 AM", 
+      fileName: "SEPCO_Safety_Guidelines_2025.pdf",
+      fileSize: "1.5 MB",
+      department: "Operations",
+      link: "https://sepco.com.pk/documents/SEPCO_Safety_Guidelines_2025.pdf"
+    },
+    { 
+      id: 46,
+      title: "Network Maintenance Schedule", 
+      category: "Maintenance", 
+      type: "PDF", 
+      date: "12-03-2025", 
+      time: "11:00 AM", 
+      fileName: "SEPCO_Maintenance_Schedule_2025.pdf",
+      fileSize: "1.8 MB",
+      department: "Technical",
+      link: "https://sepco.com.pk/documents/SEPCO_Maintenance_Schedule_2025.pdf"
+    },
+    { 
+      id: 47,
+      title: "Customer Service Policy Update", 
+      category: "Policy", 
+      type: "PDF", 
+      date: "08-04-2025", 
+      time: "03:20 PM", 
+      fileName: "SEPCO_Customer_Service_Policy.pdf",
+      fileSize: "2.1 MB",
+      department: "Customer Service",
+      link: "https://sepco.com.pk/documents/SEPCO_Customer_Service_Policy.pdf"
+    },
+    { 
+      id: 48,
+      title: "IT Infrastructure Upgrade Plan", 
+      category: "IT", 
+      type: "PDF", 
+      date: "22-02-2025", 
+      time: "04:15 PM", 
+      fileName: "SEPCO_IT_Upgrade_Plan.pdf",
+      fileSize: "3.0 MB",
+      department: "IT",
+      link: "https://sepco.com.pk/documents/SEPCO_IT_Upgrade_Plan.pdf"
+    },
+    { 
+      id: 49,
+      title: "Energy Conservation Guidelines", 
+      category: "Policy", 
+      type: "PDF", 
+      date: "15-03-2025", 
+      time: "10:30 AM", 
+      fileName: "SEPCO_Energy_Conservation_Guidelines.pdf",
+      fileSize: "1.7 MB",
+      department: "Operations",
+      link: "https://sepco.com.pk/documents/SEPCO_Energy_Conservation_Guidelines.pdf"
+    },
+    { 
+      id: 50,
+      title: "Employee Benefits Update", 
+      category: "HR", 
+      type: "PDF", 
+      date: "01-05-2025", 
+      time: "11:00 AM", 
+      fileName: "SEPCO_Employee_Benefits_2025.pdf",
+      fileSize: "2.3 MB",
+      department: "Human Resources",
+      link: "https://sepco.com.pk/documents/SEPCO_Employee_Benefits_2025.pdf"
+    },
+    { 
+      id: 51,
+      title: "Load Management Plan Summer 2025", 
+      category: "Operations", 
+      type: "PDF", 
+      date: "10-05-2025", 
+      time: "02:00 PM", 
+      fileName: "SEPCO_Load_Management_Summer_2025.pdf",
+      fileSize: "2.5 MB",
+      department: "Operations",
+      link: "https://sepco.com.pk/documents/SEPCO_Load_Management_Summer_2025.pdf"
+    },
+    { 
+      id: 52,
+      title: "New Meter Installation Guidelines", 
+      category: "Technical", 
+      type: "PDF", 
+      date: "18-04-2025", 
+      time: "10:15 AM", 
+      fileName: "SEPCO_Meter_Installation_Guidelines.pdf",
+      fileSize: "1.9 MB",
+      department: "Technical",
+      link: "https://sepco.com.pk/documents/SEPCO_Meter_Installation_Guidelines.pdf"
+    },
+    { 
+      id: 53,
+      title: "Cybersecurity Policy Update", 
+      category: "IT", 
+      type: "PDF", 
+      date: "25-03-2025", 
+      time: "03:45 PM", 
+      fileName: "SEPCO_Cybersecurity_Policy.pdf",
+      fileSize: "2.8 MB",
+      department: "IT",
+      link: "https://sepco.com.pk/documents/SEPCO_Cybersecurity_Policy.pdf"
+    },
+    { 
+      id: 54,
+      title: "Annual General Meeting Notice", 
+      category: "Notice", 
+      type: "PDF", 
+      date: "05-06-2025", 
+      time: "11:30 AM", 
+      fileName: "SEPCO_AGM_Notice_2025.pdf",
+      fileSize: "1.2 MB",
+      department: "Management",
+      link: "https://sepco.com.pk/documents/SEPCO_AGM_Notice_2025.pdf"
+    }
+  ];
+
+  // Pagination variables
+  let currentPage = 1;
+  const itemsPerPage = 10;
+  let filteredDocuments = [...allDocuments];
+  let currentFilter = "all";
+
+  // Initialize the table
+  function initTable() {
+    updateTable();
+    updatePagination();
+  }
+
+  // Update the table with current page and filter
+  function updateTable() {
+    if (!tableBody) return;
+    
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedDocuments = filteredDocuments.slice(startIndex, endIndex);
+    
+    tableBody.innerHTML = '';
+    
+    if (paginatedDocuments.length === 0) {
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="3" style="text-align: center; padding: 30px; color: rgba(255,255,255,0.5);">
+            <i class="fas fa-file-alt" style="font-size: 40px; margin-bottom: 15px; display: block;"></i>
+            No documents found matching your criteria
+          </td>
+        </tr>
+      `;
+      return;
+    }
+    
+    paginatedDocuments.forEach(doc => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>
+          <div class="doc-title">${doc.title}</div>
+          <div class="doc-meta">
+            <span class="doc-category">${doc.category}</span>
+            <span class="doc-type">${doc.type} • ${doc.fileSize}</span>
+            <span class="doc-department">${doc.department}</span>
+          </div>
+        </td>
+        <td>
+          <div class="doc-date">
+            <span><i class="fas fa-calendar-alt"></i> ${doc.date}</span>
+            <span><i class="fas fa-clock"></i> ${doc.time}</span>
+          </div>
+        </td>
+        <td>
+          <div class="doc-actions">
+            <button class="doc-btn view" onclick="viewDocument('${doc.link}', '${doc.title}')" title="View">
+              <i class="fas fa-eye"></i>
+            </button>
+            <button class="doc-btn download" onclick="downloadDocument('${doc.fileName}', '${doc.title}')" title="Download">
+              <i class="fas fa-download"></i>
+            </button>
+          </div>
+        </td>
+      `;
+      tableBody.appendChild(row);
+    });
+  }
+
+  // Update pagination controls
+  function updatePagination() {
+    const totalPages = Math.ceil(filteredDocuments.length / itemsPerPage);
+    
+    prevPageBtn.disabled = currentPage === 1;
+    nextPageBtn.disabled = currentPage === totalPages;
+    
+    pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+    
+    // Update active filter button
+    filterBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.filter === currentFilter);
+    });
+  }
+
+  // Filter documents by category
+  function filterDocuments(category) {
+    currentFilter = category;
+    currentPage = 1;
+    
+    if (category === 'all') {
+      filteredDocuments = [...allDocuments];
+    } else {
+      filteredDocuments = allDocuments.filter(doc => 
+        doc.category.toLowerCase().includes(category.toLowerCase())
+      );
+    }
+    
+    updateTable();
+    updatePagination();
+  }
+
+  // Search documents
+  function searchDocuments(query) {
+    currentPage = 1;
+    
+    if (query.trim() === '') {
+      filterDocuments(currentFilter);
+      return;
+    }
+    
+    const searchTerm = query.toLowerCase();
+    filteredDocuments = allDocuments.filter(doc => 
+      doc.title.toLowerCase().includes(searchTerm) ||
+      doc.department.toLowerCase().includes(searchTerm) ||
+      doc.category.toLowerCase().includes(searchTerm)
+    );
+    
+    updateTable();
+    updatePagination();
+  }
+
+  // Event listeners
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchDocuments(e.target.value);
+    });
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterDocuments(btn.dataset.filter);
+    });
+  });
+
+  prevPageBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      updateTable();
+      updatePagination();
+    }
+  });
+
+  nextPageBtn.addEventListener('click', () => {
+    const totalPages = Math.ceil(filteredDocuments.length / itemsPerPage);
+    if (currentPage < totalPages) {
+      currentPage++;
+      updateTable();
+      updatePagination();
+    }
+  });
+
+  // Initialize the table
+  initTable();
+});
+
+// Document actions
+function viewDocument(url, title) {
+  window.open(url, '_blank');
+  // Optional: Track document views
+  console.log(`Viewed document: ${title}`);
+}
+
+function downloadDocument(fileName, title) {
+  // Replace with your actual file path logic
+  const link = document.createElement('a');
+  link.href = `/documents/${fileName}`;
+  link.download = fileName;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  
+  // Optional: Track downloads
+  console.log(`Downloaded document: ${title}`);
+}
+</script>
+</body>
+</html>

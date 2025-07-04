@@ -1,0 +1,7296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+  <title>SEPCO - Sukkur Electric Power Company</title>
+  <style>
+    /* Modern Color Palette */
+    :root {
+      --primary: #0066cc;
+      --primary-dark: #004080;
+      --primary-light: #4da6ff;
+      --secondary: #00ccff;
+      --accent: #ff6b6b;
+      --dark: #002244;
+      --light: #f8f9fa;
+      --gray: #6c757d;
+      --dark-gray: #343a40;
+      --success: #28a745;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --info: #17a2b8;
+    }
+
+    /* Global Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Utility Classes */
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section {
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color:white;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 3px;
+      background: var(--secondary);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .section-title p {
+      color: var(--gray);
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .text-center {
+      text-align: center;
+    }
+
+    /* Header Styles */
+    .sepco-header {
+      background: linear-gradient(135deg, var(--dark), var(--primary-dark));
+      color: white;
+      width: 100%;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      position:relative;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .sepco-header.scrolled {
+      background: rgba(0, 34, 68, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 0;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      height: 100px;
+      width: auto;
+      object-fit: contain;
+      transition: all 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .title-block {
+      text-align: center;
+      flex: 1;
+      min-width: 250px;
+      transition: all 0.3s ease;
+    }
+
+    .title-block h1 {
+      font-size: 1.8rem;
+      margin: 0;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: linear-gradient(to right, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+    }
+
+    .title-block h2 {
+      font-size: 1.5rem;
+      margin: 5px 0 0;
+      font-family: 'Noto Sans', sans-serif;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .navbar {
+      background: rgba(0, 0, 0, 0.2);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 28px;
+      color: white;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .menu-icon:hover {
+      color: var(--secondary);
+    }
+
+    #menu-toggle {
+      display: none;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links li {
+      position: relative;
+      margin: 0 8px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 15px 20px;
+      display: block;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 10px;
+      left: 20px;
+      background-color: var(--secondary);
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--secondary);
+    }
+
+    .nav-links a:hover::before {
+      width: calc(100% - 40px);
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: rgba(0, 47, 95, 0.95);
+      min-width: 280px;
+      border-radius: 8px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      backdrop-filter: blur(10px);
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu li a {
+      padding: 12px 25px;
+      color: white;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-menu li a i {
+      margin-right: 10px;
+      font-size: 14px;
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: rgba(0, 64, 128, 0.7);
+      color: var(--secondary);
+      padding-left: 30px;
+    }
+
+    .nav-links li.dropdown > a i {
+      font-size: 12px;
+      margin-left: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown:hover > a i {
+      transform: rotate(180deg);
+    }
+
+    
+    
+    /* Quick Links Floating Menu */
+    .quick-links-menu {
+      position: fixed;
+      right: 30px;
+      bottom: 30px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .quick-link {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 5px 15px rgba(0, 102, 204, 0.4);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quick-link:hover {
+      transform: translateY(-5px) scale(1.1);
+      background: var(--primary-dark);
+    }
+
+    .quick-link::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .quick-link:hover::after {
+      transform: translateY(0);
+    }
+
+    .quick-link-tooltip {
+      position: absolute;
+      right: 60px;
+      background: var(--dark);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-size: 14px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .quick-link:hover .quick-link-tooltip {
+      opacity: 1;
+      right: 70px;
+    }
+
+/* Jurisdiction Section */
+:root {
+  --border: #ccc;
+  --muted: #aaaaaa;
+  --govt-color: #0066cc;
+  --pvt-color: #8e44ad;
+  --high-age-color: #ff3b3b;
+}
+
+.defaulters-container {
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.defaulters-card {
+  background: #002244;
+  max-width: 100%;
+  margin: auto;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  overflow-x: auto;
+}
+
+.defaulters-header .title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.header-icon {
+  margin-right: 8px;
+  color: #28a745;
+  font-size: 24px;
+}
+
+.defaulters-title {
+  margin: 0;
+  color: white;
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.defaulters-subtitle {
+  margin: 8px 0 16px;
+  color: white;
+  font-size: 16px;
+}
+
+.filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.filter-item {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+
+.filter-item input {
+  width: 100%;
+  padding: 10px 32px 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.filters-row select {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  min-width: 150px;
+  font-size: 14px;
+}
+
+/* Table Styling */
+.defaulters-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+}
+
+.defaulters-table th,
+.defaulters-table td {
+  padding: 10px;
+  border: 1px solid var(--border);
+  text-align: left;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.defaulters-table th {
+  color: #00ccff;
+}
+
+.defaulters-table td {
+  color: #ffffff;
+}
+
+.high-aged {
+  color: var(--high-age-color);
+}
+
+.tag {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 13px;
+}
+
+.tag-status-active { background: green; }
+.tag-status-disconnected { background: red; }
+.tag-status-suspended { background: orange; }
+
+.tag-govt { background: var(--govt-color); }
+.tag-private { background: var(--pvt-color); }
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: var(--muted);
+}
+
+.table-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  margin-top: 20px;
+  padding: 10px 0;
+}
+
+.page-info {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.pagination-btn {
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: #f0f0f0;
+}
+
+.pagination-btn.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-ellipsis {
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+}
+
+.items-per-page {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.items-per-page select {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .defaulters-title {
+    font-size: 24px;
+  }
+
+  .filters-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .filters-row select,
+  .filter-item input {
+    width: 100%;
+  }
+
+  .table-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pagination {
+    justify-content: flex-start;
+  }
+
+  .items-per-page {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 480px) {
+  .defaulters-title {
+    font-size: 20px;
+  }
+
+  .filters-row select,
+  .filter-item input {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .pagination-btn {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+}
+
+    /* Footer Styles */
+    .sepco-footer {
+      background: linear-gradient(135deg, var(--dark), var(--primary-dark));
+      color: white;
+      padding: 80px 0 30px;
+      position: relative;
+    }
+
+    .sepco-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/dark-stripes.png');
+      opacity: 0.05;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .footer-section h4 {
+      margin-bottom: 25px;
+      font-size: 1.3rem;
+      color: var(--secondary);
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-section h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--secondary);
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links ul li a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      padding: 5px 0;
+    }
+
+    .footer-links ul li a i {
+      font-size: 12px;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links ul li a:hover {
+      color: white;
+      padding-left: 10px;
+    }
+
+    .footer-links ul li a:hover i {
+      opacity: 1;
+    }
+
+    .footer-contact p {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 15px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .footer-contact p i {
+      color: var(--secondary);
+      margin-top: 3px;
+    }
+
+    .footer-map iframe {
+      width: 100%;
+      height: 250px;
+      border-radius: 10px;
+      border: none;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .footer-map iframe:hover {
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding: 40px 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .footer-social a:hover {
+      background: var(--secondary);
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 204, 255, 0.3);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 25px;
+      margin-top: 50px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 5px 20px rgba(0, 102, 204, 0.4);
+      z-index: 999;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--primary-dark);
+      transform: translateY(-5px);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @media (max-width: 992px) {
+      .header-top {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+      
+      .title-block h1 {
+        font-size: 1.5rem;
+      }
+      
+      .title-block h2 {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-icon {
+        display: block;
+      }
+      
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: var(--dark);
+        width: 100%;
+        padding: 20px 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+      
+      .nav-links li {
+        margin: 0;
+      }
+      
+      .nav-links a {
+        padding: 15px 30px;
+      }
+      
+      .dropdown-menu {
+        position: static;
+        display: none;
+        background-color: rgba(0, 0, 0, 0.2);
+        box-shadow: none;
+        border-radius: 0;
+        width: 100%;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+      }
+      
+      .dropdown:hover .dropdown-menu {
+        display: block;
+      }
+      
+      #menu-toggle:checked + .menu-icon + .nav-links {
+        display: flex;
+      }
+      .nav-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        opacity: 1;
+      }
+        
+      .footer-social {
+        gap: 20px;
+      }
+      
+      .footer-social a {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .logo {
+        height: 70px;
+      }
+
+      .footer-section h4 {
+        font-size: 1.2rem;
+      }
+      
+      .back-to-top {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="sepco-header">
+    <div class="container">
+      <div class="header-top">
+        <img src="sepco_logo.png" alt="SEPCO Logo" class="logo" />
+        <div class="title-block">
+          <h1>Sukkur Electric Power Company</h1>
+          <h1>سکر الیکٹرک پاور کمپنی</h1>
+        </div>
+        <img src="mop.png" alt="Gov Logo" class="logo" />
+      </div>
+
+      <nav class="navbar">
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" class="menu-icon"><i class="fas fa-bars"></i></label>
+        <ul class="nav-links">
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-sitemap"></i> Organization <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="About.html"><i class="fas fa-info-circle"></i> About SEPCO</a></li>
+              <li><a href="Directiors.html"><i class="fas fa-users"></i> Board of Directors</a></li>
+              <li><a href="ceo.html"><i class="fas fa-user-tie"></i> CEO SEPCO</a></li>
+              <li><a  href="senior.html"><i class="fas fa-user-shield"></i> Senior Management</a></li>
+              <li><a  href="Area.html"><i class="fas fa-map-marked-alt"></i> Area of Responsibility</a></li>
+              <li><a  href="statistics.html"><i class="fas fa-chart-bar"></i> Key Statistics</a></li>
+              <li><a  href="maps.html"><i class="fas fa-map"></i> Maps</a></li>
+              <li><a  href="organogram.html"><i class="fas fa-project-diagram"></i> Organogram</a></li>
+              <li><a  href="customers.html"><i class="fas fa-users"></i> Customers</a></li>
+              <li><a  href="what.html"><i class="fas fa-tasks"></i> What We Do</a></li>
+              <!-- <li><a  href="http://www.mowp.gov.pk/"><i class="fas fa-landmark"></i> The Ministry</a></li> -->
+              <li><a  href="vision.html"><i class="fas fa-eye"></i> Vision Mission And Values</a></li>
+              <!-- <li><a  href="https://sepco.com.pk/image_gallery"><i class="fas fa-images"></i> Image Gallery</a></li> -->
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-concierge-bell"></i> Services <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="schedule.html"><i class="fas fa-bolt"></i> Load Management Schedule</a></li>
+              <!-- <li><a href="javascript:void(0);"><i class="fas fa-file-invoice-dollar"></i> Tariff-Wise Billing/Collection</a></li> -->
+              <li><a href="report.html"><i class="fas fa-chart-line"></i> Daily, Monthly And Quarterly Reports</a></li>
+              <li><a href="https://nepra.org.pk/tariff/Distribution%20SEPCO.php"><i class="fas fa-money-bill-wave"></i> Tariff Guide</a></li>
+              <li><a href="complaint.html"><i class="fas fa-headset"></i> Complaint Management Cell</a></li>
+              <!-- <li><a href="javascript:void(0);"><i class="fas fa-calculator"></i> Bill Estimator</a></li> -->
+              <li><a href="https://bill.pitc.com.pk"><i class="fas fa-copy"></i> Duplicate Bill</a></li>
+              <li><a href="http://www.pitc.com.pk/index.php/new-connection-estimator"><i class="fas fa-calculator"></i> New Connection Cost Calculator</a></li>
+              <li><a href="http://www.enc.com.pk/"><i class="fas fa-plug"></i> New Connection Application</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-download"></i> Downloads <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+              <!-- <li><a href="https://sepco.com.pk/load_shedding_schedule"><i class="fas fa-calendar-alt"></i> Load Shedding Schedule</a></li> -->
+              <!-- <li><a href="https://nepra.org.pk/tariff/Distribution%20SEPCO.php"><i class="fas fa-file-alt"></i> Tariff Guide</a></li> -->
+              <li><a href="orders.html"><i class="fas fa-file-signature"></i> Orders &amp; Notifications</a></li>
+              <li><a href="other.html"><i class="fas fa-file-archive"></i> Others</a></li>
+              <li><a href="seniority.html"><i class="fas fa-list-ol"></i> Seniority Lists</a></li>
+              <li><a href="usaid.html"><i class="fas fa-book"></i> Pocket Book USAID For Power Distribution System</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-newspaper"></i> News <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="news.html"><i class="fas fa-newspaper"></i> News</a></li>
+              <li><a href="press.html"><i class="fas fa-bullhorn"></i> Press Releases</a></li>
+              <li><a href="sdgs.html"><i class="fas fa-globe"></i> Global SDGS Program</a></li>
+              <li><a href="defaulters.html"><i class="fas fa-user-times"></i> Top 500 Defaulters</a></li>
+              <li><a href="data.html"><i class="fas fa-chart-pie"></i> Data And Statistic</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-plus-circle"></i> Additional <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="ami.html"><i class="fas fa-tachometer-alt"></i> AMI</a></li>
+              <li><a href="mirad.html"><i class="fas fa-search"></i> MIRAD</a></li>
+              <li><a href="erp.html"><i class="fas fa-book"></i> ERP (User Manuals)</a></li>
+              <li><a href="https://nepra.org.pk/licensing/Net%20Metering%20SEPCO.php"><i class="fas fa-solar-panel"></i> NET Metering</a></li>
+              <!-- <li><a href=""><i class="fas fa-file-certificate"></i> Tax Deduction Certificate</a></li> -->
+              <li><a href="cnic.html"><i class="fas fa-id-card"></i> Consumer CNIC Registration</a></li>
+              <li><a href="mobile.html"><i class="fas fa-mobile-alt"></i> Consumer Mobile Number Registration</a></li>
+            </ul>
+          </li>
+
+          <li><a href="tenders.html"><i class="fas fa-gavel"></i> Tenders</a></li>
+          <li><a href="careers.html"><i class="fas fa-briefcase"></i> Careers</a></li>
+
+         <!-- <li class="lang-select">
+            <select>
+              <option>Select Language</option>
+              <option>English</option>
+              <option>اردو</option>
+            </select>
+          </li> -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Quick Links Floating Menu -->
+  <div class="quick-links-menu">
+    <a href="https://bill.pitc.com.pk" class="quick-link" title="Pay Bill">
+      <i class="fas fa-file-invoice-dollar"></i>
+      <span class="quick-link-tooltip">Pay Your Bill Online</span>
+    </a>
+    <a href="http://www.enc.com.pk/" class="quick-link" title="New Connection">
+      <i class="fas fa-plug"></i>
+      <span class="quick-link-tooltip">Apply for New Connection</span>
+    </a>
+    <a href="complaint.html" class="quick-link" title="Complaints">
+      <i class="fas fa-headset"></i>
+      <span class="quick-link-tooltip">Register Complaint</span>
+    </a>
+    <a href="schedule.html" class="quick-link" title="Load Shedding">
+      <i class="fas fa-bolt"></i>
+      <span class="quick-link-tooltip">Load Shedding Schedule</span>
+    </a>
+  </div>
+
+  <section class="defaulters-container">
+  <div class="defaulters-card">
+    <header class="defaulters-header">
+      <div class="title-row">
+        <i class="fas fa-exclamation-circle header-icon"></i>
+        <h2 class="defaulters-title">Defaulters</h2>
+      </div>
+      <p class="defaulters-subtitle">Payment defaults and overdue accounts</p>
+    </header>
+
+    <div class="filters-row">
+      <div class="filter-item">
+        <input type="text" id="searchInput" placeholder="Search defaulters..." />
+        <i class="fas fa-search search-icon"></i>
+      </div>
+      <select id="fieldSelect">
+        <option value="all">All Fields</option>
+        <option value="refNo">Reference No</option>
+        <option value="nameAddress">Name & Address</option>
+        <option value="status">Status</option>
+        <option value="gvtPvt">Govt/Pvt</option>
+      </select>
+    </div>
+
+    <div id="tableWrapper">
+      <table class="defaulters-table">
+        <thead>
+          <tr>
+            <th>Ref No</th>
+            <th>Name & Address</th>
+            <th>Arrear Amount</th>
+            <th>Age (Days)</th>
+            <th>Status</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <div id="emptyState" class="empty-state hidden">
+      <!-- <p>No defaulters found.</p> -->
+    </div>
+  </div>
+
+  <div class="table-footer">
+  <div id="pageInfo" class="page-info"></div>
+  <div id="paginationContainer" class="pagination"></div>
+  <div class="items-per-page">
+    <label for="itemsPerPageSelect">Items per page:</label>
+    <select id="itemsPerPageSelect">
+      <option value="10">10</option>
+      <option value="20" selected>20</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+    </select>
+  </div>
+</div>
+</section>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+
+
+
+
+  <!-- Footer -->
+  <footer class="sepco-footer">
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-section footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="About.html"><i class="fas fa-chevron-right"></i> About SEPCO</a></li>
+            <li><a href="ceo.html"><i class="fas fa-chevron-right"></i> CEO SEPCO</a></li>
+            <li><a href="Directiors.html"><i class="fas fa-chevron-right"></i> Board of Directors</a></li>
+            <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="sitemap.html"><i class="fas fa-chevron-right"></i> Sitemap</a></li>
+            <li><a href="http://webmail.sepco.com.pk/"><i class="fas fa-chevron-right"></i> Webmail</a></li>
+            <li><a href="https://ibs.pitc.com.pk/dashboard/user/auth/sign-in"><i class="fas fa-chevron-right"></i> MIS Website</a></li>
+            <li><a href="https://ibs.pitc.com.pk/dashboard/user/auth/sign-in"><i class="fas fa-chevron-right"></i> Dashboard</a></li>
+            <li><a href="http://old.sepco.com.pk/"><i class="fas fa-chevron-right"></i> Old Website</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section footer-contact">
+          <h4>Contact Us</h4>
+         <p><i class="fas fa-map-marker-alt"></i> SEPCO Headquarters, Old Sukkur, Sukkur, Pakistan</p>
+          <p><i class="fas fa-phone-alt"></i> UAN: 071-9310795-6</p>
+          <p><i class="fas fa-envelope"></i> info@sepco.com.pk</p>
+          <p><i class="fas fa-clock"></i> Mon-Fri: 9:30 AM - 4:30 PM</p>
+          
+          <div class="footer-map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.508161372192!2d68.88456437370807!3d27.701592425748483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3935d575f18f563d%3A0x9facd77063461d95!2sSEPCO%2C%20Regional%20Headquarters!5e0!3m2!1sen!2s!4v1749630789734!5m2!1sen!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://www.facebook.com/SukkurElectricPowerCompany.SEPCO.WAPDA/"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/sepcoofficial"><i class="fab fa-twitter"></i></a>
+        <a href="https://pk.linkedin.com/company/sukkur-electric-power-company-limited"><i class="fab fa-linkedin-in"></i></a>
+        <!-- <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a> -->
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 <strong>SEPCO - Sukkur Electric Power Company</strong> | All Rights Reserved </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <div class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+<script>
+// Header Scroll Effect
+window.addEventListener('scroll', function() {
+  const header = document.querySelector('.sepco-header');
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
+// Back to Top Button
+const backToTopBtn = document.querySelector('.back-to-top');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 300) {
+    backToTopBtn.classList.add('active');
+  } else {
+    backToTopBtn.classList.remove('active');
+  }
+});
+
+backToTopBtn.addEventListener('click', function() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+// Defaulters Table
+const defaultersTable = (function() {
+  const sampleData = [
+    // ... (your existing sample data array remains the same)
+     {
+    key: "1",
+    sdivCd: "38533",
+    refNo: "30385330023440",
+    trf: "29",
+    nameAddress:
+      "BULK 1 CHIEF ENGINEER         G.T.P.S                       KASHMORE                      ",
+    arrear: "1719955402",
+    age: "91",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "2",
+    sdivCd: "38533",
+    refNo: "30385330023441",
+    trf: "29",
+    nameAddress:
+      "CHIEF ENGINEER                G.T.P.S                       KASHMORE                      ",
+    arrear: "1314541900",
+    age: "74",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "3",
+    sdivCd: "38533",
+    refNo: "30385330023450",
+    trf: "29",
+    nameAddress:
+      "CHIEF ENGINEER THERMAL POWER SA COLONY                      GUDDU",
+    arrear: "960424194",
+    age: "42",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "4",
+    sdivCd: "38513",
+    refNo: "30385130014717",
+    trf: "50",
+    nameAddress:
+      "M/S MILITARY AGRICULTURE LAND (TUBE WELL)                   AT VILLAGE SHAIKH IBRAHIM     LAKHI                         ",
+    arrear: "878353235",
+    age: "78",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "5",
+    sdivCd: "38513",
+    refNo: "30385130014716",
+    trf: "50",
+    nameAddress:
+      "MILITRY AGRICULTURE LAND      AT VILLAGE JUNG MAHAR LAKHI   LAKHI                         ",
+    arrear: "877856309",
+    age: "76",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "6",
+    sdivCd: "38264",
+    refNo: "30382640085442",
+    trf: "25",
+    nameAddress:
+      "M/S XEN KEEN DIVISION II      PAK P.W.D KARACHI             AT LARKANA                    ",
+    arrear: "546468894",
+    age: "241",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "7",
+    sdivCd: "38264",
+    refNo: "30382640085443",
+    trf: "25",
+    nameAddress:
+      "M/S XEN KEEN DIVISION II      PAK P.W.D KARACHI             AT LARKANA                    ",
+    arrear: "531041228",
+    age: "241",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "8",
+    sdivCd: "38533",
+    refNo: "28385330023411",
+    trf: "26",
+    nameAddress:
+      "MECHANICAL ENGINEER           MECHANICAL DIVISION           KASHMORE                      ",
+    arrear: "495332223",
+    age: "142",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "9",
+    sdivCd: "38431",
+    refNo: "30384310310400",
+    trf: "29",
+    nameAddress: "DIVSISIONAL SUPERINTENDENT P.R",
+    arrear: "490962414",
+    age: "74",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "10",
+    sdivCd: "38522",
+    refNo: "30385220023310",
+    trf: "37",
+    nameAddress:
+      "S.D.O-E.M                     AIR MAINTENANCE PAF BASE      JACOBABAD                     ",
+    arrear: "391080800",
+    age: "2",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "11",
+    sdivCd: "38114",
+    refNo: "30381141121802",
+    trf: "26",
+    nameAddress:
+      "MIS D.S.R.O ADMIN WING        SINDH SHAHBAZ RANGERS         HOSPITAL SHIKARPUR SUKKUR     ",
+    arrear: "251943111",
+    age: "27",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "12",
+    sdivCd: "38532",
+    refNo: "28385320024090",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  GHOUSE PUR                    KANDH KOT                     ",
+    arrear: "241686482",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "13",
+    sdivCd: "38532",
+    refNo: "28385320024100",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  KARAMPUR                      KANDHKOT                      ",
+    arrear: "234145684",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "14",
+    sdivCd: "38532",
+    refNo: "28385320024080",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  GHOSEPUR                      KANDHKOT                      ",
+    arrear: "220330566",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "15",
+    sdivCd: "38432",
+    refNo: "30384320885100",
+    trf: "09",
+    nameAddress:
+      "EXECUTIVE ENGINEER CIVIL DIVI:HESCO SUKKUR                  THERMAL COLONY OLD SUKKUR     WAPDA THARMAL COLONY OLD SUKKUR",
+    arrear: "192832667",
+    age: "89",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "16",
+    sdivCd: "38533",
+    refNo: "03385330108561",
+    trf: "66",
+    nameAddress:
+      "PAKISTAN RANGERS              NEAR DERA MORE                KASHMORE                      ",
+    arrear: "192449586",
+    age: "231",
+    status: "DISCONNECTED",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "17",
+    sdivCd: "38531",
+    refNo: "28385310024200",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  NEAR ANAJ MANDI               KANDHKOT                      ",
+    arrear: "192066597",
+    age: "70",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "18",
+    sdivCd: "38531",
+    refNo: "28385310024260",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  NEAR M.C.D OFFICE             KANDHKOT                      ",
+    arrear: "185355484",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "19",
+    sdivCd: "38523",
+    refNo: "30385230037521",
+    trf: "66",
+    nameAddress:
+      "INDUS RIVER SYSTEM AUTHORITY  (IRSA)                        THUL                          THUL                          ",
+    arrear: "181562554",
+    age: "206",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "20",
+    sdivCd: "38531",
+    refNo: "28385310025802",
+    trf: "72",
+    nameAddress:
+      "DISTRICT OFFICER ROAD         INDUS HIGH WAY                KANDH KOT                     K.KOT                         ",
+    arrear: "169871882",
+    age: "61",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "21",
+    sdivCd: "38531",
+    refNo: "28385310003146",
+    trf: "72",
+    nameAddress:
+      "T.M.A STREET LIGHT KANDHKOT   NEAR DERGAH JUMAN SHAH TO NEW BUS STAND KANDH KOT           ",
+    arrear: "161498341",
+    age: "61",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "22",
+    sdivCd: "38216",
+    refNo: "28382160014540",
+    trf: "72",
+    nameAddress: "CM TOWN COMMITTEE STREETLIGHT WARRAH NASIR ABAD             ",
+    arrear: "154097415.5",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "23",
+    sdivCd: "38114",
+    refNo: "27381141242100",
+    trf: "66",
+    nameAddress:
+      "F.W.O 492 ENG GROUP           H/Q ADC WORKSHOP              A.D.C WORK SHOP               SHIKAR PUR ROAD SUKKUR        ",
+    arrear: "152910767",
+    age: "237",
+    status: "DISCONNECTED",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "24",
+    sdivCd: "38533",
+    refNo: "28385330102262",
+    trf: "72",
+    nameAddress:
+      "DIST: OFFICER ROADS           TELE PHONE EXCHANGE           KASHMORE                      ",
+    arrear: "150327290.8",
+    age: "78",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "25",
+    sdivCd: "38216",
+    refNo: "28382160014550",
+    trf: "72",
+    nameAddress:
+      "CM TOWN COMMITTEE             STREET LIGHT                  WARRAH NASIR ABAD             ",
+    arrear: "148836678",
+    age: "241",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "26",
+    sdivCd: "38263",
+    refNo: "30382630029760",
+    trf: "66",
+    nameAddress: "SHABISTAN HOTAL               M OHEN JO DARO                ",
+    arrear: "148581699",
+    age: "96",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "27",
+    sdivCd: "38212",
+    refNo: "28382120014430",
+    trf: "72",
+    nameAddress:
+      "CM COMMITTEE                  STREET LIGHT                  SHAHDADKOT                    ",
+    arrear: "148418464",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "28",
+    sdivCd: "38533",
+    refNo: "28385330099931",
+    trf: "72",
+    nameAddress:
+      "DIST: OFFICER ROAD            MURAD WAH                     KASHMORE                      ",
+    arrear: "146657319.9",
+    age: "135",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "29",
+    sdivCd: "38222",
+    refNo: "28382220057152",
+    trf: "72",
+    nameAddress:
+      "XEN MUNCIPAL                  CORPORATION                   STREET LIGHT                  LARKANA                       ",
+    arrear: "146382058",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "30",
+    sdivCd: "38431",
+    refNo: "30384310376800",
+    trf: "66",
+    nameAddress:
+      "SHAHBAZ RANGERS               SHARAF ABAD                   ROHRI                         ",
+    arrear: "142143617",
+    age: "44",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "31",
+    sdivCd: "38523",
+    refNo: "30385230032841",
+    trf: "66",
+    nameAddress:
+      "INDUS RIVER SYSTEM AUTHORITY  (IRSA) TELEMETRY              THUL                          GHARHI HASSAN THUL            ",
+    arrear: "141906241",
+    age: "211",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "32",
+    sdivCd: "38263",
+    refNo: "30382630029810",
+    trf: "66",
+    nameAddress: "LABORATORY                    MOHEN JO DARO                 ",
+    arrear: "138815382",
+    age: "114",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "33",
+    sdivCd: "38533",
+    refNo: "28385330086551",
+    trf: "72",
+    nameAddress:
+      "T.M.A STREET LIGHT @ HIRA     PUBLIC SCHOOL                 @ KASHMORE                    ",
+    arrear: "135711055.5",
+    age: "61",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "34",
+    sdivCd: "38227",
+    refNo: "28382270076397",
+    trf: "73",
+    nameAddress:
+      "M/S T.M.O LARKANAAT NEAR AMEEN MENGAL HOUSELARKANA TO RATODERO ROAD",
+    arrear: "134869966.1",
+    age: "26",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "35",
+    sdivCd: "38523",
+    refNo: "30385230000320",
+    trf: "66",
+    nameAddress:
+      "SDM OFFICE                    THUL                          THUL                          ",
+    arrear: "133454666",
+    age: "154",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "36",
+    sdivCd: "38533",
+    refNo: "28385330094418",
+    trf: "72",
+    nameAddress:
+      "DIST: OFFICER ROAD            OLD SHAHI                     KASHMORE                      ",
+    arrear: "133449324",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "37",
+    sdivCd: "38263",
+    refNo: "30382630029740",
+    trf: "66",
+    nameAddress: "GARDEN LIGHT                  MOHEN JO DARO                 ",
+    arrear: "133380062",
+    age: "96",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "38",
+    sdivCd: "38533",
+    refNo: "28385330081335",
+    trf: "66",
+    nameAddress:
+      "NAZIM U.C GUDDUE              STREET LIGHT                  GUDDUE KASHMORE               KASHMORE                      ",
+    arrear: "132578851",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "39",
+    sdivCd: "38114",
+    refNo: "30381141121800",
+    trf: "66",
+    nameAddress:
+      "M/S COMMAN DANT SHAH BAZ RANGEHEAD QUARTER NEAR             AGRICULTURE WORK SHOP         SHIKAR PUR ROAD SUKKUR        ",
+    arrear: "132293139",
+    age: "23",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "40",
+    sdivCd: "38533",
+    refNo: "28385330102237",
+    trf: "72",
+    nameAddress:
+      "T.M.A STREET LIGHT NEAR       MAIN BAZAR                    KASHMORE                      ",
+    arrear: "131445634.4",
+    age: "61",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "41",
+    sdivCd: "38533",
+    refNo: "28385330103336",
+    trf: "72",
+    nameAddress:
+      "T.M.A STREET LIGHT MURAD WAHANUPTO GEEHAL PUR ROAD          KASHMORE                      ",
+    arrear: "130579652.4",
+    age: "73",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "42",
+    sdivCd: "38533",
+    refNo: "28385330102263",
+    trf: "72",
+    nameAddress:
+      "DIST: OFFICE ROAD             SOOMRA MUHALLA                KASHMORE                      ",
+    arrear: "129506705.9",
+    age: "135",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "43",
+    sdivCd: "38431",
+    refNo: "30384310002800",
+    trf: "49",
+    nameAddress:
+      "XEN GSC COLONY                POST OFFICE ROHRI             PDGSC NEAR NEW YARD ROHRI     ",
+    arrear: "129110587",
+    age: "97",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "44",
+    sdivCd: "38434",
+    refNo: "30384341474100",
+    trf: "29",
+    nameAddress: "GARRISON ENGINEER ARMY        PANO AKIL                     ",
+    arrear: "128893353",
+    age: "1",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "45",
+    sdivCd: "38222",
+    refNo: "28382220057602",
+    trf: "72",
+    nameAddress:
+      "XEN MUNCIPAL                  CORPORATION                   STREET LIGHT                  RATODERO TO NEWDERO LARKANA   ",
+    arrear: "128617940",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "46",
+    sdivCd: "38227",
+    refNo: "28382270076396",
+    trf: "72",
+    nameAddress: "M/S T.M.O LARKANAAT NEAR MIROKHAN CHOWK LARKANALARKANA",
+    arrear: "128414193.7",
+    age: "26",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "47",
+    sdivCd: "38533",
+    refNo: "28385330024320",
+    trf: "07",
+    nameAddress: "BCHAIRMAIN TOWN COMMETTE STREEKASHMORE                      ",
+    arrear: "127221937.8",
+    age: "72",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "48",
+    sdivCd: "38214",
+    refNo: "28382140014820",
+    trf: "72",
+    nameAddress:
+      "C U COUNCIL                   STREET LIGHT                  DRIGH VILLAGE KAMBER          ",
+    arrear: "126964775.7",
+    age: "42",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "49",
+    sdivCd: "38227",
+    refNo: "28382270036880",
+    trf: "72",
+    nameAddress:
+      "M/S T.M.O LARKANAAT KAMBER BUS STAND NEARAL-RIAZ COACH SERVICE LARKANALARKANA",
+    arrear: "125371929.5",
+    age: "27",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "50",
+    sdivCd: "38263",
+    refNo: "30382630029750",
+    trf: "66",
+    nameAddress: "MUSIM LIGHT                   MOHEM JO DARO                 ",
+    arrear: "125291191",
+    age: "96",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "51",
+    sdivCd: "38512",
+    refNo: "28385120020550",
+    trf: "72",
+    nameAddress:
+      "MUNICIPAL COMMITTEE           PLAZA CINNEMA                 SHIKARPUR                     ",
+    arrear: "124513623.2",
+    age: "61",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "52",
+    sdivCd: "38263",
+    refNo: "30382630029800",
+    trf: "66",
+    nameAddress: "LABORTRY   HOUSE              MOHEN JO DARO                 ",
+    arrear: "123571606",
+    age: "151",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "53",
+    sdivCd: "38222",
+    refNo: "28382220017440",
+    trf: "72",
+    nameAddress:
+      "C.M.   MUNCIPAL CORPORATION   STREET LIGHT                  FISH MARKE                    ",
+    arrear: "122610317",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "54",
+    sdivCd: "38222",
+    refNo: "28382220017430",
+    trf: "72",
+    nameAddress:
+      "C.M.   MUNICIPAL CORPORATION  STREET LIGHT JALLUS           LA                            ",
+    arrear: "120575173",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "55",
+    sdivCd: "38533",
+    refNo: "28385330102310",
+    trf: "66",
+    nameAddress:
+      "POLICE COLONY                 KASHMORE                      KANDH KOT                     ",
+    arrear: "120492414",
+    age: "244",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "56",
+    sdivCd: "38214",
+    refNo: "28382140014810",
+    trf: "72",
+    nameAddress:
+      "C.U COUNCIL                   STREET LIGHT                  NOOR MOHAMMAD VILL. KAMBER    ",
+    arrear: "119789498.7",
+    age: "42",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "57",
+    sdivCd: "38115",
+    refNo: "30381151061400",
+    trf: "28",
+    nameAddress:
+      "DIVISIONAL SUPERINTENDENT     PAKISTAN RAILWAY              SUKKUR                        ",
+    arrear: "118498034",
+    age: "18",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "58",
+    sdivCd: "38533",
+    refNo: "28385330024310",
+    trf: "72",
+    nameAddress: "STREET LIGHT                  KASHMORE MUHALLAH KASHMORE    ",
+    arrear: "118433611.8",
+    age: "142",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "59",
+    sdivCd: "38512",
+    refNo: "28385120009151",
+    trf: "66",
+    nameAddress:
+      "CIVIL HOSPITAL RBUT           SHIKAR PUR                    SHIKAR PUR                    ",
+    arrear: "117138949",
+    age: "108",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "60",
+    sdivCd: "38222",
+    refNo: "28382220017071",
+    trf: "72",
+    nameAddress:
+      "C.M.M. CORPORATON             STREET LIGHT GANJAPUR         LARKANA                       ",
+    arrear: "114211303",
+    age: "79",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "61",
+    sdivCd: "38521",
+    refNo: "28385210023520",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  MUNCIPAL COMMETTEE            JACOBABAD                     ",
+    arrear: "114150728.8",
+    age: "71",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "62",
+    sdivCd: "38521",
+    refNo: "28385210023510",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  MUNUCPAL COMMETTEE            JACOBABAD                     ",
+    arrear: "113422782.3",
+    age: "64",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "63",
+    sdivCd: "38512",
+    refNo: "28385120020530",
+    trf: "72",
+    nameAddress:
+      "MUNICIPAL COMMITTEE           LAKHI GATE                    SHIKARPUR                     ",
+    arrear: "112257044.7",
+    age: "61",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "64",
+    sdivCd: "38522",
+    refNo: "28385220023680",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  MUNCIPAL COMMETTE             JACOBABAD                     ",
+    arrear: "111766556.8",
+    age: "81",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "65",
+    sdivCd: "38522",
+    refNo: "28385220023700",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  NEAR SOOMRA VILLGE            JACOBABAD                     ",
+    arrear: "111405668.3",
+    age: "80",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "66",
+    sdivCd: "38221",
+    refNo: "28382210017030",
+    trf: "66",
+    nameAddress:
+      "XEN PUBLIC HEALTH             DISPOSAL WORKS                 LARKANA                      ",
+    arrear: "109805844",
+    age: "105",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "67",
+    sdivCd: "38214",
+    refNo: "28382140014800",
+    trf: "72",
+    nameAddress:
+      "CM COMMITTEE                  STREET LIGHT                  KAMBER                        ",
+    arrear: "109347141",
+    age: "80",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "68",
+    sdivCd: "38522",
+    refNo: "28385220023690",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  SOOMRA MUHALLAH               JACOBABAD                     ",
+    arrear: "109051941.8",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "69",
+    sdivCd: "38521",
+    refNo: "28385210023530",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  MUNCIPAL COMMETTE             JACOBABAD                     ",
+    arrear: "109016542.8",
+    age: "66",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "70",
+    sdivCd: "38533",
+    refNo: "28385330024300",
+    trf: "72",
+    nameAddress:
+      "CHAIRMAIN                     TOWN COMMETTE STREET          KASHMORE                      ",
+    arrear: "107689286.4",
+    age: "149",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "71",
+    sdivCd: "38333",
+    refNo: "28383330000090",
+    trf: "73",
+    nameAddress:
+      "CHAIRMAN                      TOWN COMMITTEE STREET LIGHT M.MEHRABPUR                     ",
+    arrear: "107607364.6",
+    age: "39",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "72",
+    sdivCd: "38521",
+    refNo: "28385210023550",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  MUNCIPAL COMMETTEE            JACOBABAD                     ",
+    arrear: "106746639.3",
+    age: "61",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "73",
+    sdivCd: "38512",
+    refNo: "28385120009140",
+    trf: "72",
+    nameAddress:
+      "CHIEF MUNICIPAL OFFICER       GULSHAN E BULDIA              SHIKARPUR                     ",
+    arrear: "106444296.9",
+    age: "128",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "74",
+    sdivCd: "38512",
+    refNo: "28385120020540",
+    trf: "72",
+    nameAddress:
+      "MUNICIPAL COMMITTEE           MASAND PUR                    SHIKARPUR                     ",
+    arrear: "105516955.5",
+    age: "61",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "75",
+    sdivCd: "38512",
+    refNo: "28385120020490",
+    trf: "26",
+    nameAddress:
+      "POLICE HEAD QUARTER           NEW FOUJDARI                  SHIKARPUR                     ",
+    arrear: "105092046.3",
+    age: "100",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "76",
+    sdivCd: "38512",
+    refNo: "28385120069128",
+    trf: "72",
+    nameAddress:
+      "MUNICIPAL COMMITTEE           WATER PUMP                    SHIKARPUR                     ",
+    arrear: "104801761.1",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "77",
+    sdivCd: "38226",
+    refNo: "28382260014040",
+    trf: "25",
+    nameAddress:
+      "MEDICAL SUPDT HOSPITAL        LARKANA                       3023EDED LARKANA              ",
+    arrear: "104298845",
+    age: "99",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "78",
+    sdivCd: "38222",
+    refNo: "28382220057601",
+    trf: "72",
+    nameAddress:
+      "M/S XEN MUNICIPAL CORPORATION STREET LIGHT                  LARKANA                       LARKANA                       ",
+    arrear: "103471334",
+    age: "146",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "79",
+    sdivCd: "38512",
+    refNo: "28385120003882",
+    trf: "72",
+    nameAddress:
+      "XEN HIGH WAY DIVISION         OVER HEAD BRIDGE              RAILWAY CROSSING              SHIKARPUR                     ",
+    arrear: "103013366.1",
+    age: "34",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "80",
+    sdivCd: "38322",
+    refNo: "28383220000040",
+    trf: "73",
+    nameAddress:
+      "STREET LIGHT                  BUGHIA MOHALLAH               KN.SHAH                       ",
+    arrear: "100471824.3",
+    age: "50",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "81",
+    sdivCd: "38262",
+    refNo: "28382620001700",
+    trf: "72",
+    nameAddress:
+      "CHAIRMAN MUNCIPUL COMMATEE    RATODERO                      N-O NOUDERO ROAD CHUNGI       RATODERO                      ",
+    arrear: "100250868",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "82",
+    sdivCd: "38521",
+    refNo: "28385210016089",
+    trf: "25",
+    nameAddress:
+      "M/S E.D.O HEALTH              C.C. UNIT CIVIL HOSPITAL      JACOBABAD                     ",
+    arrear: "100122332",
+    age: "216",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "83",
+    sdivCd: "38522",
+    refNo: "28385220023670",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  MUNICPAL COMMETTEE            JACOBABAD                     ",
+    arrear: "99699523.79",
+    age: "71",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "84",
+    sdivCd: "38512",
+    refNo: "28385120023930",
+    trf: "72",
+    nameAddress:
+      "MUNCIPAL COMMITTEE NAKO       NE FOUJDARI                   SHIKARPUR                     ",
+    arrear: "99387014.49",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "85",
+    sdivCd: "38222",
+    refNo: "28382220057151",
+    trf: "72",
+    nameAddress:
+      "M/X XEN MUNICIPAL CORPORATION STREET LIGHT                  LARKANA                       LARKANA                       ",
+    arrear: "98466477",
+    age: "146",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "86",
+    sdivCd: "38512",
+    refNo: "28385120060260",
+    trf: "72",
+    nameAddress: "OLDMUNICIPAL COMMITTE OFFICE  SHIKARPUR                     ",
+    arrear: "97710593.99",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "87",
+    sdivCd: "38222",
+    refNo: "28382220018300",
+    trf: "72",
+    nameAddress: "STREET LIGHT                  JELLUS LARKANA                ",
+    arrear: "97362067",
+    age: "213",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "88",
+    sdivCd: "38512",
+    refNo: "28385120020520",
+    trf: "72",
+    nameAddress:
+      "MUNICIPAL COMMITTEE           OLD POWER HOUSE               SHIKARPUR                     ",
+    arrear: "96685091.22",
+    age: "61",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "89",
+    sdivCd: "38222",
+    refNo: "28382220049211",
+    trf: "12",
+    nameAddress:
+      "ASISTANT ENGINEER PUBLIC HEALTPIRSHER ROAD                  LARKANA                       ",
+    arrear: "93853696",
+    age: "181",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "90",
+    sdivCd: "38512",
+    refNo: "28385120020500",
+    trf: "26",
+    nameAddress:
+      "POLICE HEAD QUARTER           NEW FOUJDARI                  SHIKARPUR                     ",
+    arrear: "93411178.66",
+    age: "100",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "91",
+    sdivCd: "38262",
+    refNo: "28382620063010",
+    trf: "72",
+    nameAddress:
+      "CHAIRMAN TOWN COMMITTWW MADEJITOWN COMETTE STREET MADEJI    RATO DERO                     ",
+    arrear: "90977061",
+    age: "35",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "92",
+    sdivCd: "38531",
+    refNo: "30385310032454",
+    trf: "66",
+    nameAddress:
+      "QUARTER # 04                  HESCO SUB DIVISION            WAPDA COLONY                  KANDH KOT                     ",
+    arrear: "90322827",
+    age: "84",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "93",
+    sdivCd: "38222",
+    refNo: "28382220036660",
+    trf: "66",
+    nameAddress: "SDO PUBLIC HEALTH WATER SUPPLYPHELHRI VILLAGE               ",
+    arrear: "87780570",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "94",
+    sdivCd: "38512",
+    refNo: "28385120030071",
+    trf: "66",
+    nameAddress:
+      "PUBLIC HEALTH ENGINEERING     JUMANI HALL                   SHIKARPUR                     ",
+    arrear: "87582144",
+    age: "99",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "95",
+    sdivCd: "38132",
+    refNo: "28381320076501",
+    trf: "28",
+    nameAddress:
+      "CIVIL HOSPITAL KHAIRPUR M.S.  CIVIL SURGEON CIVIL HOSPITAL  KHAIRPUR                      ",
+    arrear: "86771439",
+    age: "97",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "96",
+    sdivCd: "38531",
+    refNo: "30385310023453",
+    trf: "66",
+    nameAddress:
+      "QUARTER NO = 08               WAPDA COLONY HESCO            WAPDA COLONY                  KANDH KOT                     ",
+    arrear: "86012844",
+    age: "99",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "97",
+    sdivCd: "38531",
+    refNo: "30385310023455",
+    trf: "66",
+    nameAddress:
+      "QUARTER # 05                  HESCO SUB: DIVISION WAPDA     WAQPDA COLONY                 KANDH KOT                     ",
+    arrear: "85832411",
+    age: "91",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "98",
+    sdivCd: "38531",
+    refNo: "30385310023457",
+    trf: "66",
+    nameAddress:
+      "QUARTER # 07                  SUB DIVISION HESCO            WAPDA COLONY                  KANDH KOT                     ",
+    arrear: "85760364",
+    age: "86",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "99",
+    sdivCd: "38227",
+    refNo: "28382270014380",
+    trf: "72",
+    nameAddress:
+      "CM COMMETEE                   STREET LIGHT                  SHAIKH ZAID COLONY LARKANA    ",
+    arrear: "85700797.73",
+    age: "61",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "100",
+    sdivCd: "38531",
+    refNo: "30385310023456",
+    trf: "66",
+    nameAddress:
+      "QUARTER # 06                  HESCO SUB DIVISION WAPDA      WAPDA COLONY                  KANDH KOT                     ",
+    arrear: "85503474",
+    age: "91",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "101",
+    sdivCd: "38532",
+    refNo: "28385320070911",
+    trf: "66",
+    nameAddress:
+      "MAIN PUMPING STATION SCARP    KANDH KOT                     KANDH KOT                     ",
+    arrear: "85484996",
+    age: "102",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "102",
+    sdivCd: "38262",
+    refNo: "28382620017710",
+    trf: "72",
+    nameAddress:
+      "CHAIRMAN MUINICIPALTY         STREET LIGHT                  RATODERO                      ",
+    arrear: "84958488",
+    age: "75",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "103",
+    sdivCd: "38264",
+    refNo: "28382640082770",
+    trf: "72",
+    nameAddress:
+      "CHAIRMAN                      MUNICIPAL COMMITTEE           NAUDERO                       LARKANA                       ",
+    arrear: "84844512",
+    age: "26",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "104",
+    sdivCd: "38264",
+    refNo: "28382640017460",
+    trf: "72",
+    nameAddress:
+      "C.M.   MUNICIPALATY           STREET LIGHT                  NAUDERO                       ",
+    arrear: "84686928",
+    age: "32",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "105",
+    sdivCd: "38264",
+    refNo: "28382640070160",
+    trf: "72",
+    nameAddress:
+      "CHAIRMAN MUNICIPAL COMMETY    PIR JO GOTH                   LARKANA                       ",
+    arrear: "84095605",
+    age: "25",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "106",
+    sdivCd: "38533",
+    refNo: "28385330060470",
+    trf: "66",
+    nameAddress:
+      "SHO POLICE STATION BUXA PUR   VILLAGE BUXA PUR              KANDHKOT                      ",
+    arrear: "83034094",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "107",
+    sdivCd: "38212",
+    refNo: "28382120025411",
+    trf: "12",
+    nameAddress:
+      "CHAIRMAN                      MUNICIPAL  COMMITTEE          SHAHDADKOT                    ",
+    arrear: "82994709",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "108",
+    sdivCd: "38227",
+    refNo: "28382270014370",
+    trf: "72",
+    nameAddress:
+      "CM COMMITTEE                  STREET LIGHT                  SHAIKH-Z-COLONY LARKANA       ",
+    arrear: "82877284",
+    age: "61",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "109",
+    sdivCd: "38226",
+    refNo: "28382260014330",
+    trf: "72",
+    nameAddress:
+      "CU COUNCIL                    STREET LIGHT                  RASHID WAGAN                  ",
+    arrear: "82802573.53",
+    age: "60",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "110",
+    sdivCd: "38115",
+    refNo: "28381150726202",
+    trf: "29",
+    nameAddress:
+      "SURGICAL HOSPITAL             MEDICAL COLLEGE SUKKUR        N.I.C.V.D                     SUKKUR                        ",
+    arrear: "80814018",
+    age: "7",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "111",
+    sdivCd: "38333",
+    refNo: "28383330000100",
+    trf: "73",
+    nameAddress:
+      "CHAIRMAN                      TOWN COMMITTEE STREET LIGHT M.MEHRABPUR                     ",
+    arrear: "80006732.55",
+    age: "73",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "112",
+    sdivCd: "38431",
+    refNo: "28384310605700",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  DISST.BUGLOW AND CITY         ROHRI                         ",
+    arrear: "79567129",
+    age: "70",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "113",
+    sdivCd: "38533",
+    refNo: "28385330084673",
+    trf: "19",
+    nameAddress:
+      "S.H.O.                         POLICE STATION                GUDU                         ",
+    arrear: "79137090",
+    age: "106",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "114",
+    sdivCd: "38264",
+    refNo: "28382640017450",
+    trf: "72",
+    nameAddress:
+      "C.M.   MUNICIPALTY            STREET LIGHT PIR-JO-GOTH      NAUDEO                        ",
+    arrear: "78958259",
+    age: "31",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "115",
+    sdivCd: "38113",
+    refNo: "28381130715800",
+    trf: "26",
+    nameAddress:
+      "XEN BARRAGE SUKKUR            CHIEF ENGINEER IRRIGATION     SUKKUR BARRIAGE               ",
+    arrear: "78158525",
+    age: "142",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "116",
+    sdivCd: "38533",
+    refNo: "30385330024601",
+    trf: "26",
+    nameAddress:
+      "GARRISION ENGINEER CONST-V MESPANO AAKIL ASD AREA SUI ROAD  KASHMOOR KANDH KOT            ",
+    arrear: "78125475",
+    age: "1",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "117",
+    sdivCd: "38226",
+    refNo: "28382260070991",
+    trf: "12",
+    nameAddress:
+      "PRINCIPAL                     GOVT TECHINICAL TRAINING SCHOOLARKANA                       LARKANA                       ",
+    arrear: "77935382",
+    age: "143",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "118",
+    sdivCd: "38431",
+    refNo: "28384310702600",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  HAJNA SHAH                    CITY ROHRI                    ",
+    arrear: "77861253.7",
+    age: "71",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "119",
+    sdivCd: "38262",
+    refNo: "28382620017720",
+    trf: "72",
+    nameAddress:
+      "CHAIRMAN UNION COUNCIL        STREET LIGHT                   DAKHAN                       ",
+    arrear: "77121765",
+    age: "32",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "120",
+    sdivCd: "38321",
+    refNo: "28383210038797",
+    trf: "73",
+    nameAddress:
+      "STREET LIGHT                  CHIEF OFFICER DISTRICT COUNCILDADU  MEHAR                   ",
+    arrear: "77032408",
+    age: "33",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "121",
+    sdivCd: "38431",
+    refNo: "28384310098200",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT AGHA QADER DAD KHMARKETS                       SUKKUR                        ",
+    arrear: "76418719.1",
+    age: "70",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "122",
+    sdivCd: "38431",
+    refNo: "28384310593700",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  BUNDER ROAD AND CITY          ROHRI                         ",
+    arrear: "76207681.55",
+    age: "70",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "123",
+    sdivCd: "38521",
+    refNo: "28385210007320",
+    trf: "66",
+    nameAddress: "NAKA MUNISPALTY               JANI DERO NAKA JCD            ",
+    arrear: "76207463",
+    age: "238",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "124",
+    sdivCd: "38227",
+    refNo: "28382270036875",
+    trf: "72",
+    nameAddress: "M/S T.M.O LARKANAAT NEAR ZAM ZAM HOUSE LARKANA",
+    arrear: "76136936.46",
+    age: "28",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "125",
+    sdivCd: "38514",
+    refNo: "28385140020310",
+    trf: "72",
+    nameAddress:
+      "TOWN COMMITTEE                KHANPUR                       KHANPUR                       ",
+    arrear: "75955809",
+    age: "44",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "126",
+    sdivCd: "38422",
+    refNo: "28384220339700",
+    trf: "72",
+    nameAddress: "STREET LIGHT TOWN COMMITTEE DA",
+    arrear: "75789438",
+    age: "37",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "127",
+    sdivCd: "38226",
+    refNo: "28382260014030",
+    trf: "26",
+    nameAddress:
+      "CHANDKA MEDICAL COLLEGE       LARKANA                       DOCTARS COLLONY               ",
+    arrear: "75711944",
+    age: "98",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "128",
+    sdivCd: "38262",
+    refNo: "28382620057350",
+    trf: "72",
+    nameAddress:
+      "CHAIRMAN TOWN COMMITTEE MADEJIMADEJI TOWN                   RATO DERO                     ",
+    arrear: "75688772",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "129",
+    sdivCd: "38264",
+    refNo: "28382640071940",
+    trf: "72",
+    nameAddress:
+      "C.M.CORPORATION               N-DERO                        LARKANA                       ",
+    arrear: "75368664",
+    age: "26",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "130",
+    sdivCd: "38321",
+    refNo: "28383210000061",
+    trf: "73",
+    nameAddress:
+      "STREET LIGHT                  SHAHI BAZAR RADHAN NO          MAHER                        ",
+    arrear: "75217521.3",
+    age: "35",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "131",
+    sdivCd: "38513",
+    refNo: "28385130020980",
+    trf: "72",
+    nameAddress:
+      "TOWN COMMITTEE                LAKHI                         LAKHI                         ",
+    arrear: "74684948",
+    age: "34",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "132",
+    sdivCd: "38431",
+    refNo: "28384310746900",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  MEMON MUHALLA                 CITY ROHRI                    ",
+    arrear: "74640369.65",
+    age: "70",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "133",
+    sdivCd: "38521",
+    refNo: "28385210003760",
+    trf: "66",
+    nameAddress: "NAKA DISTRICT COUNCIL         SHIKARPUR ROAD JACOBABAD      ",
+    arrear: "74314577",
+    age: "243",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "134",
+    sdivCd: "38226",
+    refNo: "28382260014290",
+    trf: "72",
+    nameAddress:
+      "CMCOMMETEE STREET LIGHT       NEAR CIVIL HOSPITAL           LARKANA                       ",
+    arrear: "74286748.06",
+    age: "61",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "135",
+    sdivCd: "38431",
+    refNo: "28384310124700",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  UNION COUNCIL BABERLOI        ROHRI                         ",
+    arrear: "74269285.55",
+    age: "70",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "136",
+    sdivCd: "38513",
+    refNo: "28385130021010",
+    trf: "72",
+    nameAddress:
+      "TOWN COMMITTEE                CHAK                          CHAK                          ",
+    arrear: "74043987",
+    age: "34",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "137",
+    sdivCd: "38264",
+    refNo: "28382640084065",
+    trf: "72",
+    nameAddress:
+      "TALKA MUNCIPAL ADMIN          TAXI BUS STAND NEAR BY PASS RDLARKANA                       NAUDERO                       ",
+    arrear: "73952877",
+    age: "72",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "138",
+    sdivCd: "38431",
+    refNo: "28384311003200",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  NEAR HOSPITAL                 CITY ROHRI                    ",
+    arrear: "73729778.65",
+    age: "63",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "139",
+    sdivCd: "38513",
+    refNo: "28385130020990",
+    trf: "72",
+    nameAddress:
+      "TOWN COMMITTEE                BAGARJI                       BAGARJI                       ",
+    arrear: "73574266",
+    age: "34",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "140",
+    sdivCd: "38431",
+    refNo: "28384311009700",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  NEAR GOVT.GIRLS SCHOOL        CITY ROHRI                    ",
+    arrear: "73463104.1",
+    age: "63",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "141",
+    sdivCd: "38533",
+    refNo: "28385330084723",
+    trf: "66",
+    nameAddress:
+      "ASSISTANT ENGINEER PUBLIC     HEALTH ENGINEERING            SUB-DIVISION KASHMORE WATER   SUPPLY ALI MOH:KHOSO KASHMORE ",
+    arrear: "72904687",
+    age: "75",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "142",
+    sdivCd: "38434",
+    refNo: "30384341474000",
+    trf: "29",
+    nameAddress: "GARRISON ENGINEER ARMY        PANO AKIL                     ",
+    arrear: "72680065",
+    age: "1",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "143",
+    sdivCd: "38533",
+    refNo: "28385330087030",
+    trf: "72",
+    nameAddress:
+      "CHAIRMAN T\\C                  KASHMORE                      K.KOT                         ",
+    arrear: "72551639",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "144",
+    sdivCd: "38226",
+    refNo: "28382260031000",
+    trf: "66",
+    nameAddress: "D.S.P OFFICE                   132 POLICE QURT              ",
+    arrear: "72356139",
+    age: "233",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "145",
+    sdivCd: "38412",
+    refNo: "28384120784600",
+    trf: "25",
+    nameAddress: "EXECUTIVE ENGINEER            SCARP IRRIGATION COLONY GHOTKI",
+    arrear: "72187437",
+    age: "102",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "146",
+    sdivCd: "38227",
+    refNo: "28382270014360",
+    trf: "72",
+    nameAddress:
+      "CM COMMITTEE                  STREET LIGHT                  SHAIKH ZAID COLONY LARKANA    ",
+    arrear: "71691919.22",
+    age: "61",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "147",
+    sdivCd: "38512",
+    refNo: "28385120018011",
+    trf: "66",
+    nameAddress:
+      "ASST ENGINEER                 PUBLIC HEALTH                 SUB DIVISION SHP              NEAN HGIH SCHOOL NO.2         ",
+    arrear: "70915192",
+    age: "117",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "148",
+    sdivCd: "38226",
+    refNo: "28382260014300",
+    trf: "72",
+    nameAddress:
+      "CMCOMMETEE STREET LIGHT       NEAR PRIMARY SCHOOL           LAHORI                        ",
+    arrear: "70869632.32",
+    age: "61",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "149",
+    sdivCd: "38333",
+    refNo: "28383330058482",
+    trf: "73",
+    nameAddress:
+      "STREET LIGHT                  TALUKA MUNICPUL ADDMINTION    M.PUT                         ",
+    arrear: "70761928",
+    age: "88",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "150",
+    sdivCd: "38226",
+    refNo: "28382260014270",
+    trf: "72",
+    nameAddress:
+      "CMCOMMETEE STREET LIGHT       NEAR SP OFFICE                LARKANA                       ",
+    arrear: "70744552.73",
+    age: "61",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "151",
+    sdivCd: "38312",
+    refNo: "30383120000080",
+    trf: "25",
+    nameAddress:
+      "PD RBOD WAPDA NEW COLONY      LARKANA ROAD                  DADU                          ",
+    arrear: "70685251",
+    age: "1",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "152",
+    sdivCd: "38431",
+    refNo: "28384310542700",
+    trf: "72",
+    nameAddress:
+      "ADMISTRATOR UNION COUNCIL     ALI WAHAN                     CEMENT FACTORY ROAD ROHRI     ",
+    arrear: "70641302.1",
+    age: "70",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "153",
+    sdivCd: "38262",
+    refNo: "28382620039242",
+    trf: "72",
+    nameAddress:
+      "M/S TAULKA MUNICIPAL          ADMINISTRATOR RATO DERO TAXI  STAND AND VAN STAND BY PASS   ",
+    arrear: "70533300",
+    age: "83",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "154",
+    sdivCd: "38226",
+    refNo: "28382260018170",
+    trf: "26",
+    nameAddress: "POLICE HEAD QURTER            RAZA ROAD LARKANA             ",
+    arrear: "70533049",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "155",
+    sdivCd: "38221",
+    refNo: "28382210073381",
+    trf: "12",
+    nameAddress:
+      "M/S XEN PUBLIC HEALTH         ENGINEER DIVISION LARKANA     SUHAIL COLONY                 LARKANA                       ",
+    arrear: "70227096",
+    age: "114",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "156",
+    sdivCd: "38512",
+    refNo: "28385120061281",
+    trf: "12",
+    nameAddress:
+      "LIFTING PUMPING STATION       NEAR DARGAH ALIF SHAH         CIRCULAR ROAD                 SHIKAR PUR                    ",
+    arrear: "70124218",
+    age: "82",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "157",
+    sdivCd: "38514",
+    refNo: "28385140020300",
+    trf: "72",
+    nameAddress:
+      "TOWN COMMITTEE                KHANPUR                       KHANPUR                       ",
+    arrear: "70065080",
+    age: "44",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "158",
+    sdivCd: "38227",
+    refNo: "28382270078810",
+    trf: "12",
+    nameAddress: "WATER PUMP                    SHAIKH ZAID COLLONY           ",
+    arrear: "69275151.4",
+    age: "79",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "159",
+    sdivCd: "38512",
+    refNo: "30385120067768",
+    trf: "66",
+    nameAddress:
+      "F.W.O 788 SECTOR              MICROVAVE                     SHIKARPUR                     ",
+    arrear: "69054059",
+    age: "303",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "160",
+    sdivCd: "38226",
+    refNo: "28382260014280",
+    trf: "72",
+    nameAddress:
+      "CMCOMMETEE STREET LIGHT       NEAR DC OFFICE                LARKANA                       ",
+    arrear: "68901810.59",
+    age: "61",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "161",
+    sdivCd: "38431",
+    refNo: "28384310290100",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  TOWN COMM.ALI WAHAN           ROHRI                         ",
+    arrear: "68731880.55",
+    age: "70",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "162",
+    sdivCd: "38412",
+    refNo: "28384120633200",
+    trf: "72",
+    nameAddress: "STREET LIGHT M COMMITTEE GHOTK",
+    arrear: "68718479.92",
+    age: "75",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "163",
+    sdivCd: "38321",
+    refNo: "28383210000050",
+    trf: "73",
+    nameAddress:
+      "STREET LIGHT                  NO SDOE WAPDA OFFICE           MAHAR                        ",
+    arrear: "68604534.3",
+    age: "41",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "164",
+    sdivCd: "38227",
+    refNo: "28382270035628",
+    trf: "72",
+    nameAddress:
+      "M/S T.M.O LARKANA             AT RICE CANAL (NIP) SITE NEAR DUA PUBLIC SCHOOL LARKANA     ",
+    arrear: "68506001.47",
+    age: "84",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "165",
+    sdivCd: "38512",
+    refNo: "28385120020481",
+    trf: "26",
+    nameAddress:
+      "MEDICAL SUPERINTENDENT RBUT   CIVIL HOSPITAL                STATION ROAD                  SHIKAR PUR                    ",
+    arrear: "68504325",
+    age: "100",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "166",
+    sdivCd: "38261",
+    refNo: "28382610014510",
+    trf: "72",
+    nameAddress:
+      "CM TOWN COMMITTEE             STREET LIGHT                  NASIR ABAD                    ",
+    arrear: "68304725",
+    age: "80",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "167",
+    sdivCd: "38321",
+    refNo: "28383210000040",
+    trf: "73",
+    nameAddress:
+      "STREET LIGHT                  NAREJA MUHALLA                 THARRI MOHABAT               ",
+    arrear: "68201991.3",
+    age: "42",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "168",
+    sdivCd: "38412",
+    refNo: "28384120086800",
+    trf: "72",
+    nameAddress: "STREET LIGHT M COMMITTEE GHOTK",
+    arrear: "67806876.82",
+    age: "81",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "169",
+    sdivCd: "38432",
+    refNo: "28384320290500",
+    trf: "66",
+    nameAddress:
+      "EXCEUTIVE ENGINEER PUBLIC HEALWATER SUPPLY                  SUKKUR                        ",
+    arrear: "67407877",
+    age: "107",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "170",
+    sdivCd: "38212",
+    refNo: "28382120014400",
+    trf: "66",
+    nameAddress:
+      "EXECUTIVE ENGINEER-PHE        DIVISION                      SHAHDADKOT",
+    arrear: "67264426",
+    age: "242",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "171",
+    sdivCd: "38533",
+    refNo: "28385330100550",
+    trf: "66",
+    nameAddress:
+      "SHO                           KASHMORE                      K.KOT                         ",
+    arrear: "66788411",
+    age: "236",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "172",
+    sdivCd: "38513",
+    refNo: "28385130021000",
+    trf: "72",
+    nameAddress:
+      "TOWN COMMITTEE                BAGARJI                       BAGARJI                       ",
+    arrear: "66630645",
+    age: "34",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "173",
+    sdivCd: "38533",
+    refNo: "28385330064445",
+    trf: "07",
+    nameAddress:
+      "P.H.E                         VILL. SOOMER GOJIN            KASHMORE KASHMORE             ",
+    arrear: "66364433",
+    age: "93",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "174",
+    sdivCd: "38524",
+    refNo: "28385240056260",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  TOWN COMMETTEE CHAIRMAN       GARHI KHAJRO                  ",
+    arrear: "66280079",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "175",
+    sdivCd: "38533",
+    refNo: "28385330088855",
+    trf: "72",
+    nameAddress:
+      "TAULKA OFICER (INF: SERV)     TAULKA MUNICIPAL ADMINISTRATORKASHMORE                      DRAINAGE SCHEME MAZARI MUHALLA",
+    arrear: "66051642",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "176",
+    sdivCd: "38533",
+    refNo: "28385330085113",
+    trf: "72",
+    nameAddress:
+      "TALUKA NAZIM TULKA MUNICIPAL  ADMINISTATION                 KASHNORE WATER SUPPLY DERA MORCHOWK KASHMORE                ",
+    arrear: "65932448",
+    age: "177",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "177",
+    sdivCd: "38412",
+    refNo: "28384120608100",
+    trf: "72",
+    nameAddress: "STREET LIGHT M COMMITTEE GHOTK",
+    arrear: "65470036.98",
+    age: "75",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "178",
+    sdivCd: "38261",
+    refNo: "28382610014500",
+    trf: "72",
+    nameAddress:
+      "CM TOWN COMMITTE              STREET LIGHT                  NASIR ABAD                    ",
+    arrear: "65231005",
+    age: "80",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "179",
+    sdivCd: "38264",
+    refNo: "28382640071950",
+    trf: "72",
+    nameAddress:
+      "C.M.CORPORATION               N-DERO                        LARKANA                       ",
+    arrear: "65043168",
+    age: "68",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "180",
+    sdivCd: "38512",
+    refNo: "28385120030610",
+    trf: "09",
+    nameAddress: "LOW LEVEL DRAINGE             MUNICIPAL COMMITTEE           ",
+    arrear: "64809897",
+    age: "130",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "181",
+    sdivCd: "38312",
+    refNo: "28383120000060",
+    trf: "25",
+    nameAddress:
+      "EXECUTIVE ENGINEER PROVINCIAL REVENUE STAFF COLONY          D.C OFFICE DADU               ",
+    arrear: "63872009",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "182",
+    sdivCd: "38226",
+    refNo: "28382260014260",
+    trf: "73",
+    nameAddress:
+      "CM COMMETEE                   STREET LIGHT                  NEAR OLD POWER HOUSE LARKAN   ",
+    arrear: "63851158.24",
+    age: "58",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "183",
+    sdivCd: "38512",
+    refNo: "28385120060840",
+    trf: "12",
+    nameAddress: "DRAINAGE PUBLIC HEALTH        ",
+    arrear: "63589412",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "184",
+    sdivCd: "38512",
+    refNo: "28385120024503",
+    trf: "12",
+    nameAddress:
+      "EXECUTIVE ENGINEER PUBLIC     HEALTH ENGINEER DIVISION      DISPOSAL NEAR NEW FOUJDARI    ROAD SHIKIARPUR               ",
+    arrear: "63205455",
+    age: "82",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "185",
+    sdivCd: "38332",
+    refNo: "28383320000070",
+    trf: "73",
+    nameAddress:
+      "CHAIRMAN                      TOWN COMMITTEE STREET LIGHT B.KANDIARO                      ",
+    arrear: "63200709.53",
+    age: "37",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "186",
+    sdivCd: "38412",
+    refNo: "28384120380000",
+    trf: "66",
+    nameAddress: "POLICE QUARTERS               STATION ROAD GHOTKI           ",
+    arrear: "63107560",
+    age: "210",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "187",
+    sdivCd: "38533",
+    refNo: "28385330010399",
+    trf: "72",
+    nameAddress:
+      "WATER SUPPLY SCHEME           TMA KASHMORE                  B.S FEEDER 45 ROAD            KASHMORE                      ",
+    arrear: "62812839",
+    age: "74",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "188",
+    sdivCd: "38431",
+    refNo: "28384310616000",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  TAKAR MUHALLA AND CITY        ROHRI                         ",
+    arrear: "62732373.55",
+    age: "70",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "189",
+    sdivCd: "38513",
+    refNo: "28385130009131",
+    trf: "72",
+    nameAddress:
+      "DEVELOPMENT OFFICER           LOCAL GOVT  BUS STAND         TALUKA LAKHI                  LAKHI GHULAM SHAH             ",
+    arrear: "62690485",
+    age: "30",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "190",
+    sdivCd: "38412",
+    refNo: "28384120379900",
+    trf: "72",
+    nameAddress: "STREET LIGHT M COMMITTEE GHOTK",
+    arrear: "62628406.93",
+    age: "79",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "191",
+    sdivCd: "38412",
+    refNo: "28384120841700",
+    trf: "72",
+    nameAddress: "STREET LIGHT M COMMITTEE GHOTK",
+    arrear: "62606710.01",
+    age: "81",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "192",
+    sdivCd: "38221",
+    refNo: "30382210068670",
+    trf: "66",
+    nameAddress:
+      "PAKISTAN NATIONAL             NEAR SINNAH BAGH              LAKANA                        ",
+    arrear: "62189970",
+    age: "71",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "193",
+    sdivCd: "38533",
+    refNo: "28385330104629",
+    trf: "66",
+    nameAddress:
+      "M/S ASSISTANT ENGINEER PUBLIC HEALTH WATER SUPPLY SCHEME    VILLAGE RAZA MUHAMMAD KHAN    KHOSO KASHMORE                ",
+    arrear: "62048801",
+    age: "149",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "194",
+    sdivCd: "38263",
+    refNo: "28382630020881",
+    trf: "12",
+    nameAddress:
+      "M/S ASSISTANT DIRECTOR        FISHERIES CARP                FISH HITCHERY LARKANA         AT. DOKRI                     ",
+    arrear: "62043728",
+    age: "104",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "195",
+    sdivCd: "38226",
+    refNo: "28382260014310",
+    trf: "72",
+    nameAddress:
+      "CMCOMMETEE STREET LIGHT       NEAR LAHORI ROAD              LARKANA                       ",
+    arrear: "61869230.11",
+    age: "61",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "196",
+    sdivCd: "38261",
+    refNo: "28382610014520",
+    trf: "72",
+    nameAddress:
+      "CM TOWN COMMITTEE             STREET LIGHT                  NNASIR ABAD                   ",
+    arrear: "61740803.5",
+    age: "80",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "197",
+    sdivCd: "38522",
+    refNo: "28385220023580",
+    trf: "66",
+    nameAddress:
+      "OCTROI OFFICE M.C JACOBABAD   CLOTH MARKET                  JACOBABAD                     ",
+    arrear: "61142186",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "198",
+    sdivCd: "38135",
+    refNo: "28381351214000",
+    trf: "50",
+    nameAddress: "GOVT: NEWABAD CHANNEL          NARA                         ",
+    arrear: "60722157",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "199",
+    sdivCd: "38533",
+    refNo: "28385330085976",
+    trf: "26",
+    nameAddress:
+      "M/S DISTRICT OFFICER          BUILDING                      KASHMORE                      ",
+    arrear: "60694435",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "200",
+    sdivCd: "38226",
+    refNo: "28382260014055",
+    trf: "26",
+    nameAddress:
+      "MEDICAL SUPERINTENDENT CMC    HOSPITAL LARKANA              LARKANA                       ",
+    arrear: "60370136",
+    age: "101",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "201",
+    sdivCd: "38227",
+    refNo: "28382270090351",
+    trf: "45",
+    nameAddress:
+      "XEN DRAINAGE DIV: LARKANA     VILLAGE ALLAH BUX DHAMRAH     TALUKA DHAMARAH               ",
+    arrear: "60259397",
+    age: "68",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "202",
+    sdivCd: "38531",
+    refNo: "30385310023459",
+    trf: "66",
+    nameAddress:
+      "S.D.O HESCO (E)OPER           SUB-DIVISION KANDH KOT        S.D.O HESCO (E)OPER SUB-DIVIS:KANDH.KOT                     ",
+    arrear: "60198073",
+    age: "91",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "203",
+    sdivCd: "38531",
+    refNo: "28385310032420",
+    trf: "12",
+    nameAddress: "CHAIRMAN MUNICIPAL COMMITTEE  ",
+    arrear: "60189953",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "204",
+    sdivCd: "38261",
+    refNo: "28382610014480",
+    trf: "72",
+    nameAddress: "CM TOWN COMMETEE STREET LIGHT BADAH NASIR ABAD              ",
+    arrear: "60154020.5",
+    age: "80",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "205",
+    sdivCd: "38227",
+    refNo: "28382270014060",
+    trf: "26",
+    nameAddress:
+      "SUPDT POLICE                    LARKANA                     LARKANA POLICE HEAD QUARTAER  ",
+    arrear: "59994898",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "206",
+    sdivCd: "38512",
+    refNo: "28385120066565",
+    trf: "09",
+    nameAddress:
+      "ASSISTANT ENGINEER            PUBLIC HEALTY                 BEGARI WAH                    SHIKARPUR                     ",
+    arrear: "59819398",
+    age: "32",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "207",
+    sdivCd: "38214",
+    refNo: "28382140014610",
+    trf: "66",
+    nameAddress:
+      "XEN                           SCARP IRRIGATION              ZERO PUMPING STATION.         ",
+    arrear: "59751014",
+    age: "11",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "208",
+    sdivCd: "38264",
+    refNo: "28382640071960",
+    trf: "72",
+    nameAddress:
+      "CHIEF OFFICER C.M.C           N-DERO                        LARKANA                       ",
+    arrear: "59580333",
+    age: "26",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "209",
+    sdivCd: "38531",
+    refNo: "28385310003074",
+    trf: "66",
+    nameAddress:
+      "S.H.O POLICE STATION A.SECTIONKANDH KOT                     KANDH KOT                     ",
+    arrear: "59431472",
+    age: "205",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "210",
+    sdivCd: "38512",
+    refNo: "28385120007011",
+    trf: "07",
+    nameAddress:
+      "URBAN DRAINAGE                SCHEME                        SANJRANI MOHALLA              SHP                           ",
+    arrear: "58960985.19",
+    age: "135",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "211",
+    sdivCd: "38334",
+    refNo: "28383340000070",
+    trf: "73",
+    nameAddress:
+      "CHAIRMAN                      TOWN COMMITTEE STREET LIGHT   THARU SHAH                    ",
+    arrear: "58542856.02",
+    age: "44",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "212",
+    sdivCd: "38334",
+    refNo: "28383340000050",
+    trf: "73",
+    nameAddress:
+      "STREET LIGHT T.M.O KANDIARO   U.C DERBELO                   U.C DERBELO                   ",
+    arrear: "58506832.02",
+    age: "44",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "213",
+    sdivCd: "38227",
+    refNo: "28382270090352",
+    trf: "45",
+    nameAddress:
+      "XEN DRAINAGE DIV: LARKANA     AT MANZOOR DHAMARAH VILLAGE   TALUKA LARKANA                ",
+    arrear: "57564104",
+    age: "68",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "214",
+    sdivCd: "38412",
+    refNo: "28384120841600",
+    trf: "72",
+    nameAddress: "STREET LIGHT M COMMITTEE GHOTK",
+    arrear: "57537846",
+    age: "75",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "215",
+    sdivCd: "38512",
+    refNo: "28385120000411",
+    trf: "09",
+    nameAddress:
+      "URBAN DRAINAGE                SCHEME                        SAJRANI MOHALLA               SHP                           ",
+    arrear: "57464458",
+    age: "131",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "216",
+    sdivCd: "38521",
+    refNo: "28385210023540",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  MUNCIPAL COMMETTE             JACOBABAD                     ",
+    arrear: "57347091.34",
+    age: "66",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "217",
+    sdivCd: "38135",
+    refNo: "28381351206801",
+    trf: "50",
+    nameAddress:
+      "EXECUTIVE ENGINEER IRRIGATION THAR DIVISION 293.S  RIGHTSIDEMATHEHARRY MINOR TALUKA NARAKHOPERATION S.DIV HESCO LUQMAN  ",
+    arrear: "57266308",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "218",
+    sdivCd: "38511",
+    refNo: "28385110020200",
+    trf: "72",
+    nameAddress:
+      "MUNICIPAL COMMITTEE           GHUNJA MAHALLA                SHIKARPUR                     ",
+    arrear: "57150306.71",
+    age: "71",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "219",
+    sdivCd: "38334",
+    refNo: "28383340000060",
+    trf: "73",
+    nameAddress:
+      "CHAIRMAN                      UNION COUNCIL STREET LIGHT PALT.SHAH                        ",
+    arrear: "56909692.02",
+    age: "37",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "220",
+    sdivCd: "38226",
+    refNo: "28382260014320",
+    trf: "72",
+    nameAddress:
+      "CM COMMITTEE                  STREET LIGHT                  NEW HOUSING COLONY LARKANA    ",
+    arrear: "56895717.18",
+    age: "60",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "221",
+    sdivCd: "38226",
+    refNo: "28382260017270",
+    trf: "72",
+    nameAddress:
+      "C.M.M. CORPORATION            STREET LIGHT CATTLE COLLONY   LAR                           ",
+    arrear: "56869321.71",
+    age: "65",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "222",
+    sdivCd: "38261",
+    refNo: "28382610014440",
+    trf: "72",
+    nameAddress:
+      "CM TOWN COMMETEE              STREET LIGHT                  BADAH NASEER ABAD             ",
+    arrear: "56747079.5",
+    age: "80",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "223",
+    sdivCd: "38431",
+    refNo: "28384310030200",
+    trf: "66",
+    nameAddress:
+      "XEN PUBLIC HEALTH             UNDER MUINICIPAL COMMITTEE    ROHRI                         ",
+    arrear: "56706629",
+    age: "125",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "224",
+    sdivCd: "38516",
+    refNo: "28385160093410",
+    trf: "09",
+    nameAddress:
+      "ASS:ENGINEER P.HEALTH         SUB:DIVISION NI.1 DRAINAGE    HAMAYOON                      ",
+    arrear: "56583901",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "225",
+    sdivCd: "38521",
+    refNo: "28385210003123",
+    trf: "66",
+    nameAddress:
+      "TALUKA MUNICIPAL ADMINISTRATORNEAR INCOME TAX OFFICE        JCD-II                        ",
+    arrear: "56465045",
+    age: "109",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "226",
+    sdivCd: "38113",
+    refNo: "28381130706300",
+    trf: "26",
+    nameAddress:
+      "XEN BARRAGE SUKKUR            CHIEF ENGINEER IRRIGATION     SUKKUR BARRAGE SUKKUR         ",
+    arrear: "56434385",
+    age: "136",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "227",
+    sdivCd: "38261",
+    refNo: "28382610014490",
+    trf: "72",
+    nameAddress:
+      "CM TOWN COMMETEE              STREET LIGHT                  NASIR ABAD                    ",
+    arrear: "56351723.5",
+    age: "80",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "228",
+    sdivCd: "38512",
+    refNo: "28385120002512",
+    trf: "12",
+    nameAddress:
+      "ASSISTANT ENGINEER            PUBLIC HEALTH ENGINEER        BHITTAI COLONY                SHIKARPUR                     ",
+    arrear: "56218655",
+    age: "79",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "229",
+    sdivCd: "38216",
+    refNo: "28382160051292",
+    trf: "66",
+    nameAddress: "MS GHAR PUMPING STATION       WARAH                         ",
+    arrear: "55913209",
+    age: "175",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "230",
+    sdivCd: "38533",
+    refNo: "28385330105060",
+    trf: "07",
+    nameAddress:
+      "M/S P.H.E WATER               SUPPLY SCEME                  ARIF JAKHRANI                 UMER DRIGH                    ",
+    arrear: "55656626",
+    age: "86",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "231",
+    sdivCd: "38227",
+    refNo: "28382270014100",
+    trf: "26",
+    nameAddress:
+      "SUPDT                         DISTRICT JAIL                 LARKANA                       ",
+    arrear: "55491066",
+    age: "142",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "232",
+    sdivCd: "38227",
+    refNo: "28382270076398",
+    trf: "72",
+    nameAddress:
+      "M/S T.M.O LARKANAAT SHAIKH ZAID CHOWK NEAR CITY SCHOOL LARKANA",
+    arrear: "54627400.13",
+    age: "26",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "233",
+    sdivCd: "38115",
+    refNo: "28381151014900",
+    trf: "26",
+    nameAddress:
+      "EXECUTIVE ENGINEER SCARP      WAPDA COLONY                  SUKKUR                        ",
+    arrear: "54433087",
+    age: "101",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "234",
+    sdivCd: "38523",
+    refNo: "28385230023890",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  TOWN COMMETTE                 THUL                          ",
+    arrear: "53460438.18",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "235",
+    sdivCd: "38115",
+    refNo: "28381150726205",
+    trf: "29",
+    nameAddress:
+      "M/S PROJECT DIRECTOR          GHULAM MUHAMMAD MAHAR MEDICAL COLLAGE NEAR BY PASS          SUKKUR                        ",
+    arrear: "53397218",
+    age: "73",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "236",
+    sdivCd: "38227",
+    refNo: "28382270042212",
+    trf: "09",
+    nameAddress:
+      "DRAINAGE SCHEEM               P-H-E DIV-II                  DEDHAR VILLAGE                LARKANA                       ",
+    arrear: "53302630",
+    age: "30",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "237",
+    sdivCd: "38521",
+    refNo: "28385210059041",
+    trf: "01",
+    nameAddress:
+      "M/S C.M.O OVER HEADWATER TANK NEARMOCHI BASTI JACOBABADJACOBABAD",
+    arrear: "52846979",
+    age: "53",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "238",
+    sdivCd: "38522",
+    refNo: "28385220035610",
+    trf: "66",
+    nameAddress:
+      "SWEEPER COLONY                QUETTA ROAD                   JACOB ABAD II                 ",
+    arrear: "52335024",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "239",
+    sdivCd: "38311",
+    refNo: "28383110107383",
+    trf: "45",
+    nameAddress:
+      "M/S ASST: ENGINEER IRRIGATION PUMPING STATION NO.1 AT132 MILDADU CANNAL TAIL NEAR HASHIM  BIGHIO BHAN DADU-II           ",
+    arrear: "52259745",
+    age: "102",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "240",
+    sdivCd: "38531",
+    refNo: "28385310007175",
+    trf: "05",
+    nameAddress:
+      "EXECUTIVE ENGINEER BUILDING   DIV  KASHMORE KANDHKOT        NEWSABZI MANDI INDUS HIGH     WAY ROAD KANDH KOT            ",
+    arrear: "52247383",
+    age: "143",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "241",
+    sdivCd: "38511",
+    refNo: "28385110020240",
+    trf: "72",
+    nameAddress:
+      "MUNICIPAL COMMITTEE           WOMEN HOSPITAL                SHIKARPUR                     ",
+    arrear: "52182359.71",
+    age: "71",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "242",
+    sdivCd: "38261",
+    refNo: "28382610014470",
+    trf: "72",
+    nameAddress:
+      "CM TOWN COMMETEE              STREET LIGHT                  BADAH NASEER ABAD             ",
+    arrear: "51957802",
+    age: "80",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "243",
+    sdivCd: "38222",
+    refNo: "28382220088840",
+    trf: "66",
+    nameAddress:
+      "CHAIRMAN UNION COUNCAIL       FATEH PUR VILLAGE             LARKANA                       ",
+    arrear: "51786567",
+    age: "238",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "244",
+    sdivCd: "38311",
+    refNo: "28383110024347",
+    trf: "66",
+    nameAddress:
+      "WATER SUPPLY                  MUNICIPAL COMETEE             DADU                          ",
+    arrear: "51752585",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "245",
+    sdivCd: "38511",
+    refNo: "28385110052200",
+    trf: "12",
+    nameAddress:
+      "WATER PUMP                    EID GAH                       SHIKARPUR                     ",
+    arrear: "51489660.46",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "246",
+    sdivCd: "38531",
+    refNo: "28385310002711",
+    trf: "66",
+    nameAddress: "D S P OFFICE                  KANDHKOT                      ",
+    arrear: "51304982",
+    age: "198",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "247",
+    sdivCd: "38533",
+    refNo: "28385330087031",
+    trf: "72",
+    nameAddress:
+      "M/S TALUKA MUNICIPAL ADMNISTRAKASHMORE DRAINAGE SCHEME      EID GAH MUHALLA KASHMORE      ",
+    arrear: "51281476",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "248",
+    sdivCd: "38521",
+    refNo: "28385210017494",
+    trf: "01",
+    nameAddress:
+      "C.M.O OVER HEAD WATER TANK NEAR NIMAAH GROUNDJACOBABADJACOBABAD",
+    arrear: "51187248.6",
+    age: "22",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "249",
+    sdivCd: "38221",
+    refNo: "28382210040401",
+    trf: "09",
+    nameAddress:
+      "EXECUTIVEW ENGINEER           ALLAH ABAD                    LARKANA                       ",
+    arrear: "51122262.22",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "250",
+    sdivCd: "38227",
+    refNo: "28382270086553",
+    trf: "66",
+    nameAddress:
+      "M/S PROJECT ENGINEER          HUB DRINKING WATER SCHEME     AT VILLAGE MITHODERO          MIROKHAN                      ",
+    arrear: "50941539",
+    age: "96",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "251",
+    sdivCd: "38511",
+    refNo: "28385110020210",
+    trf: "72",
+    nameAddress:
+      "MUNICIPAL COMMITTEE           HAJI KORA KHAN                SHIKARPUR                     ",
+    arrear: "50866050.71",
+    age: "71",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "252",
+    sdivCd: "38431",
+    refNo: "28384310966400",
+    trf: "66",
+    nameAddress: "OLD WATER WORKS               ",
+    arrear: "50548837",
+    age: "124",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "253",
+    sdivCd: "38521",
+    refNo: "28385210007034",
+    trf: "66",
+    nameAddress:
+      "POLICE HEAD QUARTER OFFICE    POLICE HEAD QUATER            JACOBABAD                     JACOBABAD-I                   ",
+    arrear: "50146882.54",
+    age: "167",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "254",
+    sdivCd: "38511",
+    refNo: "28385110020220",
+    trf: "72",
+    nameAddress:
+      "MUNICIPAL COMMITTEE           KIRIATTA MOHD                 SHIKARPUR                     ",
+    arrear: "50143821.71",
+    age: "71",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "255",
+    sdivCd: "38227",
+    refNo: "28382270037504",
+    trf: "66",
+    nameAddress:
+      "M/S PROJECT ENGINEER          HUB DRINKING WATER            AT VILLAGE ROHAL KHAN         MIRO KHAN                     ",
+    arrear: "50140241",
+    age: "93",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "256",
+    sdivCd: "38521",
+    refNo: "28385210019471",
+    trf: "66",
+    nameAddress: "CHAIRMEN LOCAL BOADR BANGLOW  JACOBABAD                     ",
+    arrear: "50051620",
+    age: "238",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "257",
+    sdivCd: "38311",
+    refNo: "28383110107384",
+    trf: "45",
+    nameAddress:
+      "M/S ASST: ENGINEER IRRIGATION PUMPING STATION NO2 AT 132 MILDADU CANAL TAIL NEAR VILL:    HASHIM BIGHIO BHAN DADU-II    ",
+    arrear: "49996387.79",
+    age: "107",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "258",
+    sdivCd: "38523",
+    refNo: "28385230023870",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  TOWN COMMETTE                 THUL                          ",
+    arrear: "49889319.63",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "259",
+    sdivCd: "38521",
+    refNo: "28385210016270",
+    trf: "09",
+    nameAddress:
+      "DRAINGE PUMP                  `MUHAGIR CAMP                 JACOBABAD                     ",
+    arrear: "49808211",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "260",
+    sdivCd: "38212",
+    refNo: "28382120018192",
+    trf: "66",
+    nameAddress:
+      "URBAN WATER SUPPLY SCHEME     PUBLIC HEALTH                 NEAR TAWWARY SHAKH            SHAHDAD KOT                   ",
+    arrear: "49800137",
+    age: "239",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "261",
+    sdivCd: "38521",
+    refNo: "28385210003122",
+    trf: "66",
+    nameAddress:
+      "TALUKA MUNICIPAL ADMINISTRATORKARIMABAD MOHALLA NEAR RAILWAYJCD-I                         ",
+    arrear: "49345078",
+    age: "120",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "262",
+    sdivCd: "38212",
+    refNo: "28382120044621",
+    trf: "12",
+    nameAddress:
+      "MIAN DANAGE                   AT CITY P.H                   SHAHDAD KOT                   SHAHDAD KOT                   ",
+    arrear: "49291245",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "263",
+    sdivCd: "38511",
+    refNo: "28385110020290",
+    trf: "72",
+    nameAddress:
+      "MUNICIPAL COMMITTEE           SUKPUL                        SHIKARPUR                     ",
+    arrear: "49225279.71",
+    age: "71",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "264",
+    sdivCd: "38321",
+    refNo: "28383210013149",
+    trf: "66",
+    nameAddress:
+      "M/S ASSISTANT ENGINEER(PHED)  WATER SUPPLY  SCHEME          @ MEHAR                       ",
+    arrear: "49168439",
+    age: "26",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "265",
+    sdivCd: "38313",
+    refNo: "28383130099564",
+    trf: "50",
+    nameAddress:
+      "EXECUTIVE ENGINEER            PUMPING STATION               AT RD DHAKKA NEAR KAMAL KHAN  VILL DADU DIVN                ",
+    arrear: "48367363",
+    age: "18",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "266",
+    sdivCd: "38135",
+    refNo: "28381351171600",
+    trf: "50",
+    nameAddress: "FAIZ  MINOR RD NO 364 NARA DIS",
+    arrear: "48080036",
+    age: "78",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "267",
+    sdivCd: "38522",
+    refNo: "28385220001050",
+    trf: "66",
+    nameAddress: "MUNICIPAL STADIUM HALL        CHANA VILLAGE JACOABAD        ",
+    arrear: "48001346",
+    age: "120",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "268",
+    sdivCd: "38412",
+    refNo: "28384120222600",
+    trf: "66",
+    nameAddress: "MUNCIPAL COMMITE WATER WARKS  NEAR ANAJ MANDI GHOTKI        ",
+    arrear: "47525667",
+    age: "66",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "269",
+    sdivCd: "38263",
+    refNo: "28382630014340",
+    trf: "72",
+    nameAddress:
+      "C U COUNCIL                   STREET LIGHT                  GERELLO                       ",
+    arrear: "47443025",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "270",
+    sdivCd: "38511",
+    refNo: "28385110020280",
+    trf: "72",
+    nameAddress:
+      "MUNICIPAL COMMITTEE           LT DISPENSARY                 SHIKARPUR                     ",
+    arrear: "47366151.71",
+    age: "71",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "271",
+    sdivCd: "38135",
+    refNo: "28381351229100",
+    trf: "50",
+    nameAddress: "GOVT: KAMRAHU CHANNEL         NARA                          ",
+    arrear: "47345981",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "272",
+    sdivCd: "38511",
+    refNo: "28385110020270",
+    trf: "72",
+    nameAddress:
+      "MUNICIPAL COMMITTEE           HAFIZ ICE FACTORY             SHIKARPUR                     ",
+    arrear: "47326861.71",
+    age: "71",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "273",
+    sdivCd: "38221",
+    refNo: "28382210039752",
+    trf: "66",
+    nameAddress:
+      "EXECUTIVE ENGINEER            PUBLIC HEALTH ENGG ALLAHABAD  LARKANA                       ",
+    arrear: "47277409",
+    age: "101",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "274",
+    sdivCd: "38434",
+    refNo: "28384340075300",
+    trf: "72",
+    nameAddress: "STREET LIGHT TOWN COMMITTEE   PANO AKIL                     ",
+    arrear: "47232037",
+    age: "63",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "275",
+    sdivCd: "38262",
+    refNo: "28382620017700",
+    trf: "25",
+    nameAddress:
+      "XEN TUBE WELL DIVISION        COLONY                        RATODERO                      ",
+    arrear: "47019562",
+    age: "197",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "276",
+    sdivCd: "38212",
+    refNo: "28382120020941",
+    trf: "09",
+    nameAddress:
+      "MUNICIPAL COMMITEE D.S        DRAINAGE SCHEME               SHAHDAD KOT                   ",
+    arrear: "46963622",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "277",
+    sdivCd: "38531",
+    refNo: "28385310000261",
+    trf: "12",
+    nameAddress:
+      "XEN  P.H.E                    DRAINAGE SCHEEM               MOHALLA GHARIB ABAD           KANDHA KOT                    ",
+    arrear: "46900156",
+    age: "86",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "278",
+    sdivCd: "38531",
+    refNo: "28385310002770",
+    trf: "66",
+    nameAddress: "JAIL GHAT                     KANDHKOT                      ",
+    arrear: "46631958",
+    age: "139",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "279",
+    sdivCd: "38531",
+    refNo: "28385310004531",
+    trf: "05",
+    nameAddress:
+      "M/S DEPUTY DISTRICT OFFICER   ROADS                         NEW BUS TERMINAL INDUS HIGHWAYROAD KANDH KOT                ",
+    arrear: "46627220",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "280",
+    sdivCd: "38522",
+    refNo: "29385220049341",
+    trf: "49",
+    nameAddress:
+      "INDUS RIVER SYSTEM AUTHORITY  (IRSA)                        JACOB ABAD-II                 JACOB ABAD-II                 ",
+    arrear: "46280821",
+    age: "175",
+    status: "DISCONNECTED",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "281",
+    sdivCd: "38521",
+    refNo: "28385210019511",
+    trf: "01",
+    nameAddress:
+      "M/S C.M.O OVER HEAD WATER TANKNEAR MUNICIPAL COMMITEEOFFICE JACOBABADJACOBABAD",
+    arrear: "46191138.58",
+    age: "53",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "282",
+    sdivCd: "38141",
+    refNo: "28381410110300",
+    trf: "66",
+    nameAddress:
+      "GOVERNAMENT HIGH SCHOOL       HINGORJA                      RANIPUR                       ",
+    arrear: "46166207",
+    age: "96",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "283",
+    sdivCd: "38432",
+    refNo: "28384321015410",
+    trf: "66",
+    nameAddress:
+      "ADMINISTRATOR                 MUNICIPAL CMMETTEE            SUKKUR                        ",
+    arrear: "46049589",
+    age: "231",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "284",
+    sdivCd: "38132",
+    refNo: "28381320557100",
+    trf: "10",
+    nameAddress: "ASSTT ENGINEER DRAINAGE       JAMALI GOTH KHAIRPUR          ",
+    arrear: "46004282",
+    age: "102",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "285",
+    sdivCd: "38322",
+    refNo: "28383220000073",
+    trf: "66",
+    nameAddress:
+      "EXECUTIVE ENGNEER             SOUTHERN IRRIGATION           DADU   AT SUNHRE PUMPING STATION  KN.  SHAH                 ",
+    arrear: "45909114",
+    age: "77",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "286",
+    sdivCd: "38522",
+    refNo: "28385220032490",
+    trf: "66",
+    nameAddress:
+      "SWEEPER COLONY                SHEEDI MUHALLA                JACOB ABAD II                 ",
+    arrear: "45858523",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "287",
+    sdivCd: "38521",
+    refNo: "28385210008900",
+    trf: "09",
+    nameAddress:
+      "DRAINGE PUMP                  NEAR DR CHANNA CLINIC         JACOB ABAD-I                  ",
+    arrear: "45665763",
+    age: "81",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "288",
+    sdivCd: "38261",
+    refNo: "28382610014450",
+    trf: "72",
+    nameAddress:
+      "CM TOWN COMMETEE              STREET LIGHT                  BADAH NASEER ABAD             ",
+    arrear: "45601865",
+    age: "80",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "289",
+    sdivCd: "38521",
+    refNo: "28385210015750",
+    trf: "66",
+    nameAddress:
+      "POLICE INSPECTOR QUERTER      GHARIBABAD                    JACOBABAD                     ",
+    arrear: "45564976",
+    age: "208",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "290",
+    sdivCd: "38114",
+    refNo: "28381141256700",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  NEW SUBZI MANDI               SUKKUR                        ",
+    arrear: "45534864.13",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "291",
+    sdivCd: "38114",
+    refNo: "28381141256500",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  BASHIR ABAD                   SUKKUR                        ",
+    arrear: "45406308.86",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "292",
+    sdivCd: "38511",
+    refNo: "28385110020260",
+    trf: "72",
+    nameAddress:
+      "MUNICIPAL COMMITTEE           OLD COMPLAINT CENTRE          SHIKARPUR                     ",
+    arrear: "45212909.71",
+    age: "71",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "293",
+    sdivCd: "38434",
+    refNo: "28384340075400",
+    trf: "72",
+    nameAddress: "STREET LIGHT TOWN COMMITTEE   PANO AKIL                     ",
+    arrear: "45018859",
+    age: "67",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "294",
+    sdivCd: "38412",
+    refNo: "28384120917000",
+    trf: "66",
+    nameAddress: "MUNICPUL CAMITYE GHOTKI       STATION ROAD GHOTKI           ",
+    arrear: "44759703",
+    age: "80",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "295",
+    sdivCd: "38524",
+    refNo: "28385240056270",
+    trf: "66",
+    nameAddress:
+      "CHAIRMAN TOWN COMMITTEE       GH. KHAIRO                    G.KH. JCD II                  ",
+    arrear: "44749639",
+    age: "38",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "296",
+    sdivCd: "38227",
+    refNo: "28382270036790",
+    trf: "12",
+    nameAddress:
+      "CHAIR MAN MUNCIPAL COMMETTE   NEW HOUSING COLONY            LARKANA                       ",
+    arrear: "44640440.31",
+    age: "22",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "297",
+    sdivCd: "38511",
+    refNo: "28385110020230",
+    trf: "72",
+    nameAddress:
+      "MUNICIPAL COMMITTEE           HAZARI GATE                   SHIKARPUR                     ",
+    arrear: "44626147.71",
+    age: "71",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "298",
+    sdivCd: "38113",
+    refNo: "28381130706302",
+    trf: "26",
+    nameAddress:
+      "EXECUTIVE ENGINEER            BARRAGE DIVISION              BARRAGE DIVISION              SUKKUR                        ",
+    arrear: "44568784",
+    age: "102",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "299",
+    sdivCd: "38513",
+    refNo: "28385130008790",
+    trf: "72",
+    nameAddress: "NAKA OFFICE                   LAKHI                         ",
+    arrear: "44412238",
+    age: "15",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "300",
+    sdivCd: "38522",
+    refNo: "28385220032367",
+    trf: "01",
+    nameAddress:
+      "M/S CHIEF MUNICIPAL OFFICERJACOBABADHEAD WATER TRADE NEARSPACIAL OFFICE GROUND JCB",
+    arrear: "44387239",
+    age: "54",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "301",
+    sdivCd: "38115",
+    refNo: "28381151039800",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  A.D.C COLONY                  SUKKUR                        ",
+    arrear: "43883749.8",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "302",
+    sdivCd: "38141",
+    refNo: "28381410814100",
+    trf: "72",
+    nameAddress:
+      "CHAIRMAN                      T-C. STREET LIGHT             SOBHODERO                     ",
+    arrear: "43731494.49",
+    age: "91",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "303",
+    sdivCd: "38521",
+    refNo: "28385210055590",
+    trf: "66",
+    nameAddress:
+      "CITY POLICE STATION           POLICE STATION                JACOBABAD                     ",
+    arrear: "43566485",
+    age: "153",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "304",
+    sdivCd: "38227",
+    refNo: "28382270088171",
+    trf: "09",
+    nameAddress:
+      "M/S XEN DRAINAGE DIVISION LRK AT VILLAGE FATEH PULL TAL     LARKANA                       ",
+    arrear: "43529523.96",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "305",
+    sdivCd: "38532",
+    refNo: "28385320070901",
+    trf: "66",
+    nameAddress:
+      "IIND ADDTIONAL PUMPING STATIONSCARP                         KANDH KOT                     KANDH KOT                     ",
+    arrear: "43434985",
+    age: "235",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "306",
+    sdivCd: "38321",
+    refNo: "28383210030711",
+    trf: "45",
+    nameAddress:
+      "M/S EXECUTIVE ENG: RICE CANAL DIVISION LARKANA              PUMPING STATION (SCARP T/WELL)AT QAIM SHAH MINOR NEAR MEHER ",
+    arrear: "43434061.04",
+    age: "78",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "307",
+    sdivCd: "38222",
+    refNo: "28382220063655",
+    trf: "09",
+    nameAddress:
+      "M/S TMO LARKANA               DANIGE SCHAME                 LUHAR COLONY                  LARKANA                       ",
+    arrear: "43344882",
+    age: "107",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "308",
+    sdivCd: "38511",
+    refNo: "28385110020250",
+    trf: "72",
+    nameAddress:
+      "MUNICIPAL COMMITTEE           NATIONAL BANK                 SHIKARPUR                     ",
+    arrear: "43325729.71",
+    age: "71",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "309",
+    sdivCd: "38432",
+    refNo: "28384320634700",
+    trf: "66",
+    nameAddress:
+      "M.G.D. WATER TREATMENT        FILTER PLANT                  NIMAISH ROAD OLD SUKKUR       SUKKUR                        ",
+    arrear: "43101416",
+    age: "210",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "310",
+    sdivCd: "38521",
+    refNo: "28385210024610",
+    trf: "66",
+    nameAddress:
+      "MUNICPIL HOSPITAL             QAID E AZAM ROAD              JACOBABAD                     ",
+    arrear: "43061463",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "311",
+    sdivCd: "38533",
+    refNo: "28385330085160",
+    trf: "41",
+    nameAddress:
+      "M\\S EXECETIVE ENGINEE W.SUPPLYKASHMORE                      K.KOT                         ",
+    arrear: "42960000",
+    age: "101",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "312",
+    sdivCd: "38113",
+    refNo: "28381130715701",
+    trf: "66",
+    nameAddress:
+      "EXECUTIVE ENGINEER            BARRAGE                       B NO 11 BARRAGE COLONY        SUKKUR                        ",
+    arrear: "42931568",
+    age: "105",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "313",
+    sdivCd: "38114",
+    refNo: "28381140482410",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  ASST.ENG.SITE AREA            SUKUR                         ",
+    arrear: "42649889.88",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "314",
+    sdivCd: "38226",
+    refNo: "28382260014045",
+    trf: "26",
+    nameAddress:
+      "MEDICAL SUPERINTENDENT        C.M.C HOSPITAL                TEACHING BLOCK                LARKANA                       ",
+    arrear: "42559253",
+    age: "101",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "315",
+    sdivCd: "38516",
+    refNo: "28385160088030",
+    trf: "66",
+    nameAddress:
+      "X.E.N.PUBLIC HEALTH           MIAN JO GOTH                  HAMAYOON                      ",
+    arrear: "42526996",
+    age: "44",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "316",
+    sdivCd: "38511",
+    refNo: "28385110052220",
+    trf: "09",
+    nameAddress: "EID GAH WATER PUMP            SHIKARPUR                     ",
+    arrear: "42508187.26",
+    age: "23",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "317",
+    sdivCd: "38212",
+    refNo: "28382120014390",
+    trf: "66",
+    nameAddress: "CM MUNICIPUL COMMITTEE        LARKANA                       ",
+    arrear: "42475106",
+    age: "97",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "318",
+    sdivCd: "38221",
+    refNo: "28382210083930",
+    trf: "09",
+    nameAddress: "ASSISTANT ENGINEERT P.H.E     NISHTER ROAD LARKANA          ",
+    arrear: "41828423",
+    age: "76",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "319",
+    sdivCd: "38115",
+    refNo: "28381151026600",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT MUNC.COMMISSIONEROVER HEAD BRIDGE              MILATERY ROAD SUKKUR          ",
+    arrear: "41535366",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "320",
+    sdivCd: "38221",
+    refNo: "28382210017190",
+    trf: "72",
+    nameAddress:
+      "C.M.M.  CORPORATION           STREET LIGHT RAYAL CINE       LARKANA                       ",
+    arrear: "41313952.4",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "321",
+    sdivCd: "38521",
+    refNo: "28385210023190",
+    trf: "26",
+    nameAddress:
+      "MEDICAL SUPERINTENDENT        CIVIL HOSPITAL                JACOBABAD                     ",
+    arrear: "41045996",
+    age: "144",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "322",
+    sdivCd: "38114",
+    refNo: "28381141256600",
+    trf: "72",
+    nameAddress: "STREET LIGHT                  SUKKUR                        ",
+    arrear: "41034297.51",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "323",
+    sdivCd: "38412",
+    refNo: "28384120507900",
+    trf: "07",
+    nameAddress:
+      "TALUKA MUNCIPAL OFFICER       UDL BHITTAI NAGAR             GHOTKI                        ",
+    arrear: "40902838",
+    age: "83",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "324",
+    sdivCd: "38524",
+    refNo: "28385240054360",
+    trf: "12",
+    nameAddress: "CHAIRMAN TOWN COMMITTY        ",
+    arrear: "40901995",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "325",
+    sdivCd: "38531",
+    refNo: "28385310024610",
+    trf: "66",
+    nameAddress:
+      "SDM RESIDENCE                 SHAHI BAZAR                   KANDH KOT                     ",
+    arrear: "40826502",
+    age: "108",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "326",
+    sdivCd: "38142",
+    refNo: "28381421283300",
+    trf: "66",
+    nameAddress:
+      "EXECUTIVE ENGINER SCARP       PUMP STATION                  GAMBAT                        ",
+    arrear: "40428656",
+    age: "21",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "327",
+    sdivCd: "38523",
+    refNo: "28385230023840",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  TOWN COMMETTE                 THULL                         ",
+    arrear: "40389760.63",
+    age: "243",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "328",
+    sdivCd: "38533",
+    refNo: "28385330064912",
+    trf: "72",
+    nameAddress:
+      "M/S TALUKA MUNICIPAL ADMINISTRDRAINAGE SCHEME               NEAR GOVT HOSPITAL BUX PUR    KASHMORE                      ",
+    arrear: "39681908",
+    age: "209",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "329",
+    sdivCd: "38115",
+    refNo: "28381150810400",
+    trf: "26",
+    nameAddress: "DIPUTY DIRECTOR BUREAU OF STATDEVP. OFFICER                 ",
+    arrear: "39471583",
+    age: "81",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "330",
+    sdivCd: "38521",
+    refNo: "28385210003740",
+    trf: "66",
+    nameAddress:
+      "M/S SUPRIDENTENT OF POLICE    CAMP OFFICE                   OFFICE @ SHP. ROAD            JACOBABAD                     ",
+    arrear: "39379179.48",
+    age: "103",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "331",
+    sdivCd: "38521",
+    refNo: "28385210019500",
+    trf: "66",
+    nameAddress:
+      "TOWN HALL                     TOWN HALL ROAD                JACOBABAD                     ",
+    arrear: "39071298",
+    age: "22",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "332",
+    sdivCd: "38116",
+    refNo: "28381161256300",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  KUMHAR PARA NEW PIND          SUKKUR                        ",
+    arrear: "38855828.46",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "333",
+    sdivCd: "38116",
+    refNo: "28381161256800",
+    trf: "72",
+    nameAddress: "STREET LIGHT                  SUKKUR                        ",
+    arrear: "38850622.64",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "334",
+    sdivCd: "38221",
+    refNo: "28382210017110",
+    trf: "73",
+    nameAddress:
+      "C.M.M. CORPORATION            STREET LIGHT TANK CHOAK       LARKANA                       ",
+    arrear: "38773680.5",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "335",
+    sdivCd: "38116",
+    refNo: "28381161256400",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  SHAH KHALID COLONY            RTSUKKUR                      ",
+    arrear: "38368415.95",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "336",
+    sdivCd: "38115",
+    refNo: "28381150261700",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  POLICE LINE NEW PIND          SUKKUR                        ",
+    arrear: "38229079.1",
+    age: "74",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "337",
+    sdivCd: "38532",
+    refNo: "28385320070790",
+    trf: "66",
+    nameAddress: "XEN SCORAP IRRIGATION         K.KOT                         ",
+    arrear: "38061342",
+    age: "130",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "338",
+    sdivCd: "38533",
+    refNo: "28385330023400",
+    trf: "26",
+    nameAddress:
+      "BULK2 EXECUTIVE ENGINEER      GUDDU BARRAGE                 KASHMORE                      ",
+    arrear: "37973954",
+    age: "100",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "339",
+    sdivCd: "38115",
+    refNo: "30381150719800",
+    trf: "28",
+    nameAddress: "(MES) SUB DIVISIONAL(AIR)     SUKKUR                        ",
+    arrear: "37917475",
+    age: "1",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "340",
+    sdivCd: "38522",
+    refNo: "28385220032369",
+    trf: "66",
+    nameAddress:
+      "S.H.O POLICE STATION          AIR PORT POLINE THANA SADAR   NEAR SPECIAL FORCE            JACOBABAD_II                  ",
+    arrear: "37738176",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "341",
+    sdivCd: "38532",
+    refNo: "28385320070810",
+    trf: "66",
+    nameAddress: "XEN SCORPA IRRIGATION         K.KOT                         ",
+    arrear: "37665559",
+    age: "103",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "342",
+    sdivCd: "38531",
+    refNo: "28385310008980",
+    trf: "66",
+    nameAddress: "SDO IRRIGATION OFFICE         KANDH KOT                     ",
+    arrear: "37634473",
+    age: "182",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "343",
+    sdivCd: "38516",
+    refNo: "28385160093671",
+    trf: "09",
+    nameAddress:
+      "ASSISTANT ENGINEER P/H/E S/DI2RURAL WATER SUPPLY SCHEME     VILLAGE FAKHRUDDIN KHOSO SHIK ",
+    arrear: "37558478",
+    age: "42",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "344",
+    sdivCd: "38532",
+    refNo: "28385320070902",
+    trf: "66",
+    nameAddress: "XEN SCARP IRRIGATION          ",
+    arrear: "37523108",
+    age: "145",
+    status: "DISCONNECTED",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "345",
+    sdivCd: "38511",
+    refNo: "28385110020190",
+    trf: "72",
+    nameAddress:
+      "MUNICIPAL COMMITTEE           MASAND PUR MUHALLA            SHIKARPUR                     ",
+    arrear: "37428442.71",
+    age: "16",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "346",
+    sdivCd: "38115",
+    refNo: "28381151256200",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  NEW PIND                      SUKKUR                        ",
+    arrear: "37313047.2",
+    age: "74",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "347",
+    sdivCd: "38221",
+    refNo: "28382210017160",
+    trf: "73",
+    nameAddress:
+      "C.M.M. CORPORATION            STREET LIGHT DARI MUHALA      LARKAN                        ",
+    arrear: "37295869.2",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "348",
+    sdivCd: "38333",
+    refNo: "28383330021533",
+    trf: "66",
+    nameAddress:
+      "EXECUTIVE ENGINEER SCARP      TUBE WELL NOUSHORO FEROZE     L/SIDE MEHRABPUR              ",
+    arrear: "37284513",
+    age: "28",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "349",
+    sdivCd: "38116",
+    refNo: "28381160108800",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  NEW PIND                      SUKKUR                        ",
+    arrear: "37124160.7",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "350",
+    sdivCd: "38524",
+    refNo: "28385240063160",
+    trf: "66",
+    nameAddress:
+      "POLICE STATION DODA           KHAIRO                        JCD II                        ",
+    arrear: "36998885",
+    age: "115",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "351",
+    sdivCd: "38113",
+    refNo: "28381130000600",
+    trf: "26",
+    nameAddress:
+      "XEN BARRAGE SUKKUR            CHIEF ENGINEER IRRIGATION     SUKKUR BARREGE SUKKUR         ",
+    arrear: "36954722",
+    age: "118",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "352",
+    sdivCd: "38531",
+    refNo: "28385310023350",
+    trf: "66",
+    nameAddress:
+      "S.D.O                         PUBLIC HEALTH ENGINEERING     KANDHKOT                      ",
+    arrear: "36948688",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "353",
+    sdivCd: "38214",
+    refNo: "28382140004291",
+    trf: "66",
+    nameAddress:
+      "ASSISTANT ENGINEER            PUBLIC HEALTH DRAINAGE        CHACHA COLONY KAMBAR          ",
+    arrear: "36792305.62",
+    age: "101",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "354",
+    sdivCd: "38431",
+    refNo: "28384310104200",
+    trf: "26",
+    nameAddress: "CENTRAL JAIL                  SUKKUR                        ",
+    arrear: "36709941",
+    age: "98",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "355",
+    sdivCd: "38212",
+    refNo: "28382120018143",
+    trf: "10",
+    nameAddress:
+      "THE EXECUTIVE ENGINEER        PUBLIC HEALTH DIVISION SHAHDADWATER SUPPLY SHEME PHASE-II   SHAHDAD KOT                   ",
+    arrear: "36438599",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "356",
+    sdivCd: "38115",
+    refNo: "28381151026500",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT MUNC.COMMISSIONERMILATERY ROAD                 SUKKUR                        ",
+    arrear: "36209599.2",
+    age: "74",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "357",
+    sdivCd: "38221",
+    refNo: "28382210017250",
+    trf: "72",
+    nameAddress:
+      "C.M.M. CORPORATION            STREET LIGHT GHONSALLA ROAD   LAR                           ",
+    arrear: "36109049.5",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "358",
+    sdivCd: "38115",
+    refNo: "28381150261300",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  NEW PIND                      SUKKUR                        ",
+    arrear: "35838183.96",
+    age: "74",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "359",
+    sdivCd: "38516",
+    refNo: "28385160093420",
+    trf: "09",
+    nameAddress: "ASS:ENGINEER P.HELTH          HAMAYOON                      ",
+    arrear: "35698776",
+    age: "32",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "360",
+    sdivCd: "38321",
+    refNo: "28383210012220",
+    trf: "66",
+    nameAddress:
+      "WATER SUPPLY T.C              KAKOOL CANAL                  MEHAR                         ",
+    arrear: "35661234",
+    age: "77",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "361",
+    sdivCd: "38331",
+    refNo: "28383310000180",
+    trf: "73",
+    nameAddress:
+      "CHAIRMAN                      TOWN COMMITTEE STREET LIGHT B.N.FEROZE                      ",
+    arrear: "35652332.53",
+    age: "74",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "362",
+    sdivCd: "38261",
+    refNo: "28382610006730",
+    trf: "66",
+    nameAddress: "STREET LIGHT                  BADAH                         ",
+    arrear: "35615021",
+    age: "32",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "363",
+    sdivCd: "38115",
+    refNo: "28381150195000",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  CHONA BHATTA                  SUKKUR                        ",
+    arrear: "35418249.3",
+    age: "76",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "364",
+    sdivCd: "38261",
+    refNo: "28382610014460",
+    trf: "72",
+    nameAddress:
+      "CM TOWN COMMETEE              STREET LIGHT                  BADAH NASEER ABAD             ",
+    arrear: "35281452",
+    age: "80",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "365",
+    sdivCd: "38516",
+    refNo: "28385160089580",
+    trf: "09",
+    nameAddress: "WATER SUPPLY SCHEM CHAUDIO    HAMAYOON                      ",
+    arrear: "35154642",
+    age: "35",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "366",
+    sdivCd: "38512",
+    refNo: "28385120030050",
+    trf: "66",
+    nameAddress: "NEW MUNICIPAL COMMITTEE       MIAN BUILDING S.PUR           ",
+    arrear: "35153312",
+    age: "72",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "367",
+    sdivCd: "38531",
+    refNo: "28385310002714",
+    trf: "66",
+    nameAddress:
+      "OFFICE OF THE SUPERINTENDENT  POLICE INVESTIGATION          KASHMORE AT KANDH KOT         KANDH KOT                     ",
+    arrear: "35112170",
+    age: "104",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "368",
+    sdivCd: "38115",
+    refNo: "28381150022900",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  GOLIMAR                        SUKKUR                       ",
+    arrear: "35084433.9",
+    age: "74",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "369",
+    sdivCd: "38221",
+    refNo: "28382210017265",
+    trf: "72",
+    nameAddress:
+      "M/S T.M.O LARKANA             AT RICE CANAL IP SIDE AT      RASOOLABAD LARKANA            ",
+    arrear: "35030075.47",
+    age: "85",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "370",
+    sdivCd: "38412",
+    refNo: "28384120603310",
+    trf: "66",
+    nameAddress:
+      "ADMINISTRATOR M-L             DHONG MOHALLA                 GHOTKI                        ",
+    arrear: "34738756",
+    age: "80",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "371",
+    sdivCd: "38411",
+    refNo: "28384110136201",
+    trf: "73",
+    nameAddress:
+      "STREET LIGHT                  M/S ADMINISTRATOR             TALUKA MUNICIPAL              ADMINISTRATION GHOTKI         ",
+    arrear: "34707837.98",
+    age: "32",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "372",
+    sdivCd: "38523",
+    refNo: "28385230007190",
+    trf: "66",
+    nameAddress:
+      "CHAIRMAN TOWN COMMATI         MAIN STREET                   THUL                          ",
+    arrear: "34613841",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "373",
+    sdivCd: "38333",
+    refNo: "28383330037754",
+    trf: "66",
+    nameAddress:
+      "M/S SCARP ASSTT ENG T.WELL    SURFACE DRAINGE PUMPING       STATION BEHLANI L.S ROHRI     CANAL MEHRAB PUR              ",
+    arrear: "34482090",
+    age: "73",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "374",
+    sdivCd: "38512",
+    refNo: "28385120024502",
+    trf: "66",
+    nameAddress:
+      "POLICE HEAD QUARTER           POLICE DEPARTMENT             QUARTER NO F POLICE LINE      SHIKAR PUR                    ",
+    arrear: "34477135",
+    age: "101",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "375",
+    sdivCd: "38312",
+    refNo: "28383120004841",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT TALUKA MUNCIPAL  ADMINISTRATOR                 N O   DARO ROAD DADU          DADU                          ",
+    arrear: "34408679.54",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "376",
+    sdivCd: "38412",
+    refNo: "28384120832500",
+    trf: "07",
+    nameAddress:
+      "URBAN DRANGE                  SO SCHEME                     GHOTA MARAKET                 GHOTKI                        ",
+    arrear: "34225736",
+    age: "85",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "377",
+    sdivCd: "38222",
+    refNo: "28382220060292",
+    trf: "12",
+    nameAddress:
+      "M/S ASSISTANT ENGINEER P.H.E  LARKANA AKIL ROAD             LARKANA                       LARKANA                       ",
+    arrear: "34225049",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "378",
+    sdivCd: "38522",
+    refNo: "28385220001060",
+    trf: "49",
+    nameAddress: "MUNICIPAL STADIAM             CHANA VILLAGE JACOABAD        ",
+    arrear: "33980944",
+    age: "96",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "379",
+    sdivCd: "38533",
+    refNo: "28385330023390",
+    trf: "72",
+    nameAddress:
+      "CHAIRMAN                      TOWN COMMETTE WATER SUPPLY    KASHMORE                      ",
+    arrear: "33954805",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "380",
+    sdivCd: "38261",
+    refNo: "28382610016050",
+    trf: "66",
+    nameAddress:
+      "STREET LIGHT                  BADAH                         NASIR ABAD                    ",
+    arrear: "33859077",
+    age: "121",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "381",
+    sdivCd: "38331",
+    refNo: "28383310000140",
+    trf: "73",
+    nameAddress:
+      "CHAIRMAN                      TOWN COMMITTEE STREET LIGHT N.NSF                           ",
+    arrear: "33819118.53",
+    age: "74",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "382",
+    sdivCd: "38531",
+    refNo: "28385310013440",
+    trf: "66",
+    nameAddress: "ADMINSTATOR MUNCIPAL COMMETTE KANDH KOT                     ",
+    arrear: "33809176",
+    age: "230",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "383",
+    sdivCd: "38132",
+    refNo: "28381320536800",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  ABARA MOHALLAH                KHAIRPUR                      ",
+    arrear: "33720648.29",
+    age: "74",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "384",
+    sdivCd: "38221",
+    refNo: "28382210017262",
+    trf: "72",
+    nameAddress:
+      "M/S XEN MUNICIPAL CORPORATION LARKANA STREET LIGHT          LARKANA                       LARKANA                       ",
+    arrear: "33676083.23",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "385",
+    sdivCd: "38412",
+    refNo: "28384120712300",
+    trf: "07",
+    nameAddress:
+      "URBAN DRANGE SCHEME           REHMOWALI                     GHOTKI                        GHOTKI                        ",
+    arrear: "33628997",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "386",
+    sdivCd: "38411",
+    refNo: "28384110145400",
+    trf: "72",
+    nameAddress: "STREET LIGHT ADILPUR          CHAIRMAN UNION COUNCIL ADILPUR",
+    arrear: "33606215.25",
+    age: "76",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "387",
+    sdivCd: "38221",
+    refNo: "28382210017210",
+    trf: "72",
+    nameAddress:
+      "C.M.M. CORPORATION            STREET LIGHT PAK CHOAK        LARKANA                       ",
+    arrear: "33585751.44",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "388",
+    sdivCd: "38513",
+    refNo: "28385130019960",
+    trf: "66",
+    nameAddress: "PUMPING STATION               RUK                           ",
+    arrear: "33452609",
+    age: "124",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "389",
+    sdivCd: "38221",
+    refNo: "28382210017263",
+    trf: "72",
+    nameAddress:
+      "M/S XEN MUNICIPAL CORPORATION STREET LIGHT                  LARKANA                       LARKANA                       ",
+    arrear: "33396725.23",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "390",
+    sdivCd: "38516",
+    refNo: "28385160074880",
+    trf: "12",
+    nameAddress:
+      "S.D.O PUBLIC HEALTH           WATER SUPPLY SULTAN KOT       SHIKARPUR                     ",
+    arrear: "33352425",
+    age: "15",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "391",
+    sdivCd: "38212",
+    refNo: "28382120044592",
+    trf: "09",
+    nameAddress:
+      "DRAINAGE SCHEEME              DRIB MUHALLA                  SHAHDAD KOT                   ",
+    arrear: "33342201",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "392",
+    sdivCd: "38263",
+    refNo: "28382630017840",
+    trf: "26",
+    nameAddress:
+      "M/S. DIRECTOR RICE RESEARCH   INSTITUTE                     ADMIN BLOCK SCIENTIFIC        DOKRI                         ",
+    arrear: "33336397",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "393",
+    sdivCd: "38226",
+    refNo: "28382260014020",
+    trf: "26",
+    nameAddress:
+      "MEDICAL COLLEGE               LARKANA                       LARKANA                       ",
+    arrear: "33271537",
+    age: "13",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "394",
+    sdivCd: "38131",
+    refNo: "28381310335000",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                   SHAH IBAZAR                  KHAIRPUR                      ",
+    arrear: "33060692.02",
+    age: "64",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "395",
+    sdivCd: "38532",
+    refNo: "28385320070909",
+    trf: "66",
+    nameAddress:
+      "UNDER PASS PUMPING  STATION   SCARP                         KANDH KOT                     KANDH KOT                     ",
+    arrear: "33021424",
+    age: "232",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "396",
+    sdivCd: "38226",
+    refNo: "28382260017860",
+    trf: "66",
+    nameAddress: "CIRCUT HOUSE                  S.P. CHOWK LARKANA            ",
+    arrear: "32954030",
+    age: "96",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "397",
+    sdivCd: "38221",
+    refNo: "28382210017200",
+    trf: "72",
+    nameAddress:
+      "C.M.M. CORPORATION            STREET LIGHT BAKRANI ROAD     LARKA                         ",
+    arrear: "32906188.66",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "398",
+    sdivCd: "38212",
+    refNo: "28382120018191",
+    trf: "66",
+    nameAddress:
+      "RUBAN WATER SUPPLY SCHEME     NEAR TANWORY                  SHAHDAD KOT                   ",
+    arrear: "32828069",
+    age: "25",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "399",
+    sdivCd: "38113",
+    refNo: "28381130706500",
+    trf: "26",
+    nameAddress:
+      "XEN BARRAGE SUKKUR            CHIEF ENGINEER IRRIGATION     SUKKUR BARRIAGE SUKKUR        ",
+    arrear: "32798986",
+    age: "126",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "400",
+    sdivCd: "38516",
+    refNo: "28385160091272",
+    trf: "09",
+    nameAddress:
+      "EXECUTIVE ENGINEER PUBLIC HEALENGINEER DISPOSAL WORKS SITE  RURAL DRAINAGE SCHEME WAKRO DISTT: SHP. XEN P.H. ENG:66 DIVI",
+    arrear: "32633926",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "401",
+    sdivCd: "38113",
+    refNo: "28381131096700",
+    trf: "26",
+    nameAddress: "POLICE HEAD QUARTER           PETAL PUMP SUKKUR             ",
+    arrear: "32508668",
+    age: "213",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "402",
+    sdivCd: "38227",
+    refNo: "28382270014101",
+    trf: "12",
+    nameAddress:
+      "ASSISTANT ENGINEER SUB DIV.1  LARKANA                       R/O DISPOSAL WORK AT JAIL ROADLARKANA                       ",
+    arrear: "32502462",
+    age: "23",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "403",
+    sdivCd: "38221",
+    refNo: "28382210017261",
+    trf: "72",
+    nameAddress:
+      "M/S XEN MUNICIPAL CORPORATION LARKANA STREET LIGHT          LARKANA                       LARKANA                       ",
+    arrear: "32498262.23",
+    age: "143",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "404",
+    sdivCd: "38261",
+    refNo: "28382610013910",
+    trf: "66",
+    nameAddress:
+      "STREET LIGHT                  BADAH                         NASIR ABAD                    ",
+    arrear: "32404233",
+    age: "96",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "405",
+    sdivCd: "38261",
+    refNo: "28382610014020",
+    trf: "66",
+    nameAddress:
+      "STREET LIGHT                  BADAH                         NASIR ABAD                    ",
+    arrear: "32401595",
+    age: "81",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "406",
+    sdivCd: "38533",
+    refNo: "28385330084685",
+    trf: "09",
+    nameAddress:
+      "ASSISTANT ENGINEER PUBLIC     HEALTH DRANAGE SCHEME         GUDDU                         KASHMORE                      ",
+    arrear: "32280770",
+    age: "12",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "407",
+    sdivCd: "38434",
+    refNo: "28384340385501",
+    trf: "72",
+    nameAddress:
+      "M/S TOWN OFFICER              STREET LIGHT OVERFLY BRIDGE   BHUTTA MUHALLA PANO AKIL      ",
+    arrear: "31975694",
+    age: "119",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "408",
+    sdivCd: "38221",
+    refNo: "28382210017130",
+    trf: "72",
+    nameAddress:
+      "C.M.M. CORPORATION            STREET LIGHT BAKRANI ROAD     LARKA                         ",
+    arrear: "31968353.2",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "409",
+    sdivCd: "38331",
+    refNo: "28383310000150",
+    trf: "73",
+    nameAddress:
+      "CHAIRMAN                      TOWN COMMITTEE STREET LIGHT N.NSF                           ",
+    arrear: "31913808.55",
+    age: "74",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "410",
+    sdivCd: "38531",
+    refNo: "28385310013270",
+    trf: "66",
+    nameAddress:
+      "MUNICIPAL COMMITTE            KANDHKOT                      KANDHKOT                      ",
+    arrear: "31818201",
+    age: "24",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "411",
+    sdivCd: "38221",
+    refNo: "28382210017220",
+    trf: "72",
+    nameAddress:
+      "C.M.M. CORPORATION            STREET LIGHT TANGA STAND      LARKAN                        ",
+    arrear: "31809589.04",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "412",
+    sdivCd: "38335",
+    refNo: "28383350000040",
+    trf: "73",
+    nameAddress:
+      "CHAIRMAN                      TOWN COMMITTEE STREET LIGHT PAPADIDAN                       ",
+    arrear: "31684378.02",
+    age: "37",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "413",
+    sdivCd: "38523",
+    refNo: "28385230000524",
+    trf: "07",
+    nameAddress:
+      "CHAIRMAN TOWN COMMITTEE       A.E/P.H.E PHASE II            MAIN DISPOSAL WORK            THUL                          ",
+    arrear: "31670865",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "414",
+    sdivCd: "38221",
+    refNo: "28382210017230",
+    trf: "72",
+    nameAddress:
+      "C.M.M. CORPORATION            STREET LIGHT NEAR GIRLS COLL  LAR                           ",
+    arrear: "31643575.62",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "415",
+    sdivCd: "38131",
+    refNo: "28381310215100",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                   NEAR FOREST OFFICE           KHAIRPUR                      ",
+    arrear: "31404282.39",
+    age: "64",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "416",
+    sdivCd: "38533",
+    refNo: "28385330024680",
+    trf: "19",
+    nameAddress:
+      "ASSISTANCE ENGNEER            P.H.E SUB DIVISINOL           KANDHKOT                      ",
+    arrear: "31153120",
+    age: "24",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "417",
+    sdivCd: "38221",
+    refNo: "28382210017150",
+    trf: "72",
+    nameAddress:
+      "C.M.M. CORPORATION            STREET LIGHT NOUDERO CHOAK    LARK                          ",
+    arrear: "31152481.66",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "418",
+    sdivCd: "38261",
+    refNo: "28382610019760",
+    trf: "66",
+    nameAddress:
+      "STREET LIGHT                  BADAH                         NASIR ABAD                    ",
+    arrear: "31127117",
+    age: "130",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "419",
+    sdivCd: "38513",
+    refNo: "27385130008860",
+    trf: "72",
+    nameAddress: "CHAIRMAN TOWN COMM.LAKHI      LAKHI                         ",
+    arrear: "31041250",
+    age: "16",
+    status: "ACTIVE",
+    gvtPvt: "PRIVATE",
+  },
+  {
+    key: "420",
+    sdivCd: "38332",
+    refNo: "28383320000060",
+    trf: "73",
+    nameAddress:
+      "CHAIRMAN                      TOWN COMMITTEE STRET LIGHT    KANDIARO                      ",
+    arrear: "31032220.89",
+    age: "82",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "421",
+    sdivCd: "38434",
+    refNo: "28384340193400",
+    trf: "66",
+    nameAddress: "T.C.  OFFICE                  SHAHI BAZAR PANO AKIL         ",
+    arrear: "30900936",
+    age: "23",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "422",
+    sdivCd: "38227",
+    refNo: "28382270081135",
+    trf: "66",
+    nameAddress:
+      "MEDICAL SUPERINTANDANT        NEW SHAIKH ZAID HOSPITAL      LARKANA                       ",
+    arrear: "30852785",
+    age: "103",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "423",
+    sdivCd: "38516",
+    refNo: "28385160092390",
+    trf: "09",
+    nameAddress: "XEN PUBLIC HELTH              HAMAYOON                      ",
+    arrear: "30629039",
+    age: "78",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "424",
+    sdivCd: "38113",
+    refNo: "28381131003700",
+    trf: "07",
+    nameAddress:
+      "PIRARO KHAN                   NEW GOTH ADAM SHAH COLONY     SUKKUR                        ",
+    arrear: "30590956",
+    age: "238",
+    status: "DISCONNECTED",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "425",
+    sdivCd: "38221",
+    refNo: "28382210017140",
+    trf: "73",
+    nameAddress:
+      "C.M.M. CORPORATION            HAMALAMUHALLA STREET LIGHT    LARKA                         ",
+    arrear: "30515656.07",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "426",
+    sdivCd: "38262",
+    refNo: "28382620021743",
+    trf: "66",
+    nameAddress:
+      "M/S AEN PUBLIC HEALTH         ERIGATION SUB DIVISION        MOTAN PUR                     RATO DERO                     ",
+    arrear: "30388019",
+    age: "75",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "427",
+    sdivCd: "38221",
+    refNo: "28382210017090",
+    trf: "72",
+    nameAddress:
+      "C.M.M. CORPORATION            STREET LIGHT BUNDER ROAD      LARKANA                       ",
+    arrear: "30340568.33",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "428",
+    sdivCd: "38221",
+    refNo: "28382210017100",
+    trf: "73",
+    nameAddress:
+      "C.M.M CORPORATION             STREET LIGHT MOHAMMAD PUR     LARKAN                        ",
+    arrear: "30242384.5",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "429",
+    sdivCd: "38212",
+    refNo: "28382120047930",
+    trf: "66",
+    nameAddress:
+      "VILLAGE DEVLELOPMENT ASSOCIATIO                             AITBAR KHAN CHANDIO           S.D. KOT                      ",
+    arrear: "30224422",
+    age: "40",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "430",
+    sdivCd: "38335",
+    refNo: "28383350000060",
+    trf: "73",
+    nameAddress:
+      "CHAIRMAN                      TOWN COMMITTEE STREET LIGHT PAPADIDAN                       ",
+    arrear: "30174182.02",
+    age: "37",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "431",
+    sdivCd: "38513",
+    refNo: "28385130019961",
+    trf: "66",
+    nameAddress: "PUMPING STATION               ",
+    arrear: "30152222",
+    age: "188",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "432",
+    sdivCd: "38221",
+    refNo: "28382210017260",
+    trf: "72",
+    nameAddress:
+      "C.M.M. CORPORATION            STREET LIGHT KENEDY MARKET     LAR                          ",
+    arrear: "29884381.62",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "433",
+    sdivCd: "38522",
+    refNo: "28385220032400",
+    trf: "66",
+    nameAddress:
+      "SPECIAL POLICE FORCE          SHEEDI MUHALLA                JCD                           ",
+    arrear: "29815557",
+    age: "129",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "434",
+    sdivCd: "38132",
+    refNo: "28381320458800",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  BUS STAND                     KHAIRPUR                      ",
+    arrear: "29811854.32",
+    age: "74",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "435",
+    sdivCd: "38521",
+    refNo: "28385210030220",
+    trf: "66",
+    nameAddress: "P.S CIVIL LINE                JCD                           ",
+    arrear: "29742742",
+    age: "99",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "436",
+    sdivCd: "38522",
+    refNo: "28385220032410",
+    trf: "66",
+    nameAddress:
+      "SPECIAL POLICE FORCE          SHEEDI MUHALLA                JCD                           ",
+    arrear: "29696721",
+    age: "75",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "437",
+    sdivCd: "38221",
+    refNo: "28382210017080",
+    trf: "72",
+    nameAddress:
+      "C.M.M. CORPORATION            STREET LIGHT SHAHI BAZAR      LARKANA                       ",
+    arrear: "29641897.74",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "438",
+    sdivCd: "38331",
+    refNo: "28383310000170",
+    trf: "73",
+    nameAddress:
+      "CHAIRMAN                      TOWNN COMMITTEE ST.  LIGHT MITNSF                           ",
+    arrear: "29636241.02",
+    age: "86",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "439",
+    sdivCd: "38113",
+    refNo: "28381130327000",
+    trf: "46",
+    nameAddress: "ADMINISTRATOR MUNICIPAL COMMIT",
+    arrear: "29592592",
+    age: "113",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "440",
+    sdivCd: "38113",
+    refNo: "28381131775200",
+    trf: "26",
+    nameAddress:
+      "M/S EXECUTIVE ENGINEER BARRAGEDIVISION                      SUKKUR AT BARRAGE TOWN SHIP   SUKKUR                        ",
+    arrear: "29490928",
+    age: "140",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "441",
+    sdivCd: "38331",
+    refNo: "28383310005561",
+    trf: "73",
+    nameAddress:
+      "M/S TALUKA MUNICIPAL          ADMINISTRATOR N.FEROZE        EADHI CENTRE TO EID GAH       T.SHAH BUS STOP N.FEROZE      ",
+    arrear: "29471192.04",
+    age: "74",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "442",
+    sdivCd: "38313",
+    refNo: "28383130080033",
+    trf: "73",
+    nameAddress:
+      "TALKA  NAZIM  T.M.A.          STREET  LIGHT  MAIN           JOHI                          JOHI                          ",
+    arrear: "29441671",
+    age: "107",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "443",
+    sdivCd: "38515",
+    refNo: "28385150020560",
+    trf: "72",
+    nameAddress:
+      "TOWN COMMITTEE                GARHI YASIN                   GARHI YASIN                   ",
+    arrear: "29424487",
+    age: "42",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "444",
+    sdivCd: "38331",
+    refNo: "28383310000130",
+    trf: "73",
+    nameAddress:
+      "XEN SCARP                     STRET LIGHT COLONY            NSF                           ",
+    arrear: "29284009.02",
+    age: "81",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "445",
+    sdivCd: "38335",
+    refNo: "28383350000030",
+    trf: "73",
+    nameAddress:
+      "CHAIRMAN                      TOWN COMMITTEE STREET LIGHT PAPADIDA                        ",
+    arrear: "29198737.51",
+    age: "37",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "446",
+    sdivCd: "38212",
+    refNo: "28382120035550",
+    trf: "07",
+    nameAddress:
+      "CHAIRMAN                      MUNICIPAL COMMITTEE           SHAHDADKOT                    ",
+    arrear: "29106923",
+    age: "20",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "447",
+    sdivCd: "38263",
+    refNo: "28382630007911",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  BAKRANI VILLAGE               DOKRI                         ",
+    arrear: "29049882",
+    age: "32",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "448",
+    sdivCd: "38221",
+    refNo: "28382210017180",
+    trf: "72",
+    nameAddress:
+      "C.M.M. CORPORATION            STREET LIGHT NAWATAK          LARKANA                       ",
+    arrear: "28991324.66",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "449",
+    sdivCd: "38212",
+    refNo: "28382120018142",
+    trf: "66",
+    nameAddress: "WATER SUPPLY SCHEME           SHAHDADKOT PHASE 04 SHAHDADKOT",
+    arrear: "28985848",
+    age: "240",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "450",
+    sdivCd: "38324",
+    refNo: "28383240000050",
+    trf: "73",
+    nameAddress:
+      "STREET LIGHT                  WARD NO.2                      SITA ROAD                    ",
+    arrear: "28906018.1",
+    age: "56",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "451",
+    sdivCd: "38515",
+    refNo: "28385150020570",
+    trf: "72",
+    nameAddress:
+      "TOWN COMMITTEE                GARHI YASIN                   GARHI YASIN                   ",
+    arrear: "28878631",
+    age: "75",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "452",
+    sdivCd: "38263",
+    refNo: "28382630017870",
+    trf: "72",
+    nameAddress:
+      "CHAIRMAN                      STREET LIGHT                  ARIJA                         ",
+    arrear: "28785191",
+    age: "71",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "453",
+    sdivCd: "38227",
+    refNo: "28382270014200",
+    trf: "26",
+    nameAddress: "MEDICAL SUPDT SHAIKH ZAID     LARKANA HOSPITAL              ",
+    arrear: "28610325",
+    age: "101",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "454",
+    sdivCd: "38522",
+    refNo: "28385220032380",
+    trf: "66",
+    nameAddress:
+      "SPECIAL POLICE FORCE          SHEEDI MUHALLA                JCD                           ",
+    arrear: "28609012",
+    age: "73",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "455",
+    sdivCd: "38312",
+    refNo: "30383120000090",
+    trf: "25",
+    nameAddress:
+      "PD RBOD WAPDA NEW COLONY      LARKANA ROAD                  DADU                          ",
+    arrear: "28598682",
+    age: "1",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "456",
+    sdivCd: "38212",
+    refNo: "28382120018193",
+    trf: "12",
+    nameAddress:
+      "XEN PUBLIC HEALTH             WORK NO. 02                   SHAHDAD KOT                   ",
+    arrear: "28597635",
+    age: "89",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "457",
+    sdivCd: "38412",
+    refNo: "28384120631700",
+    trf: "66",
+    nameAddress: "PUBLIC HEALTH DARANGE GHOTKI  ",
+    arrear: "28573708",
+    age: "88",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "458",
+    sdivCd: "38216",
+    refNo: "28382160059460",
+    trf: "66",
+    nameAddress:
+      "VILL DEVELOPMENT ASSOCIATION  P.H.E DIV II                  VILLAGE KHANDU                NASIR ABAD                    ",
+    arrear: "28520817",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "459",
+    sdivCd: "38522",
+    refNo: "28385220050680",
+    trf: "66",
+    nameAddress:
+      "POLICE STATION NAWRA          VILLAGE NAWRA                 JACOBABAD                     ",
+    arrear: "28461729",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "460",
+    sdivCd: "38113",
+    refNo: "28381131126400",
+    trf: "72",
+    nameAddress:
+      "MUNCIPAL COMMISSIONER         SUKKUR MUNICPAL CORPORATION   MILATERY ROAD SUKKUR          ",
+    arrear: "28441156.93",
+    age: "81",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "461",
+    sdivCd: "38222",
+    refNo: "28382220017380",
+    trf: "66",
+    nameAddress:
+      "XEN DRAINAGE PUMPING STATION  MAHUTA                         LARKANA                      ",
+    arrear: "28413401",
+    age: "22",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "462",
+    sdivCd: "38221",
+    refNo: "28382210017240",
+    trf: "72",
+    nameAddress:
+      "C.M.M. CORPORATION            STREET LIGHT QAIM SHAH ROAD   LARK                          ",
+    arrear: "28385239.27",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "463",
+    sdivCd: "38516",
+    refNo: "28385160096761",
+    trf: "07",
+    nameAddress:
+      "RURAL WATER SUPPLY SCHEME     VILLAGE FATEH PUR             FATEH PUR                     SHIKARPUR                     ",
+    arrear: "28369562",
+    age: "32",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "464",
+    sdivCd: "38522",
+    refNo: "28385220032390",
+    trf: "66",
+    nameAddress:
+      "SPECIAL POLICE FORCE          SHEEDI MUHALLA                JCD                           ",
+    arrear: "28255863",
+    age: "73",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "465",
+    sdivCd: "38331",
+    refNo: "28383310000160",
+    trf: "73",
+    nameAddress:
+      "CHAIRMAN UNION COUNCIL        STREET LIGHT                  NSF                           ",
+    arrear: "28252817",
+    age: "30",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "466",
+    sdivCd: "38521",
+    refNo: "28385210030300",
+    trf: "66",
+    nameAddress:
+      "RAIFA  NAKA                   OPP GIRLS COLLAGE             J.ABAD                        ",
+    arrear: "28161105",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "467",
+    sdivCd: "38226",
+    refNo: "28382260011430",
+    trf: "66",
+    nameAddress: "CHAIRMAN LOCAL BOARD          LARKANA                       ",
+    arrear: "28035872",
+    age: "76",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "468",
+    sdivCd: "38335",
+    refNo: "28383350000050",
+    trf: "73",
+    nameAddress:
+      "CHAIRMAN                      TOWN COMMITTEE STREET LIGHT PAPADIDAN                       ",
+    arrear: "28024575.53",
+    age: "37",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "469",
+    sdivCd: "38226",
+    refNo: "30382260075409",
+    trf: "26",
+    nameAddress:
+      "COL COMMANDIN OFFICER         765 CONSTRUCTON COMPANY       TEAM ENGINEER F W O           NEAR MIRO KHAN CHOWK LARKANA  ",
+    arrear: "27939501",
+    age: "95",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "470",
+    sdivCd: "38226",
+    refNo: "28382260026395",
+    trf: "09",
+    nameAddress: "MUNICIPAL CORPORATION D.S     ",
+    arrear: "27891371.86",
+    age: "102",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "471",
+    sdivCd: "38113",
+    refNo: "28381130004300",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  BHUTTA ROAD                   SUKKUR                        ",
+    arrear: "27841957.69",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "472",
+    sdivCd: "38412",
+    refNo: "28384121305200",
+    trf: "46",
+    nameAddress: "BAGHO WAH NO.9                SCARP IRRIGATION GHOTKI       ",
+    arrear: "27769828.56",
+    age: "107",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "473",
+    sdivCd: "38111",
+    refNo: "28381110878700",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  SUKHA TALAB                   SUKKUR                        ",
+    arrear: "27758976.81",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "474",
+    sdivCd: "38113",
+    refNo: "28381130239000",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  THERMAL COLONY                SUKKUR                        ",
+    arrear: "27716912.3",
+    age: "81",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "475",
+    sdivCd: "38135",
+    refNo: "28381351196900",
+    trf: "50",
+    nameAddress: "GOVT:LAIWARI-CHANNAL          NARA                          ",
+    arrear: "27692633",
+    age: "30",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "476",
+    sdivCd: "38533",
+    refNo: "28385330024460",
+    trf: "19",
+    nameAddress: "D.H.O                         JACOABABAD BASIC HEALTH UNIT D",
+    arrear: "27685582",
+    age: "24",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "477",
+    sdivCd: "38113",
+    refNo: "28381130311100",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  BUNDER ROAD                   SUKKUR                        ",
+    arrear: "27669550.77",
+    age: "81",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "478",
+    sdivCd: "38331",
+    refNo: "28383310050057",
+    trf: "73",
+    nameAddress:
+      "STREET LIGHT                  VILL ALLAH DITIO BHAMBHRO     N.FEROZE                      ",
+    arrear: "27627100.02",
+    age: "35",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "479",
+    sdivCd: "38113",
+    refNo: "28381130796400",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  WARITAR ROAD                  SUKKUR                        ",
+    arrear: "27506060.91",
+    age: "81",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "480",
+    sdivCd: "38113",
+    refNo: "28381130656500",
+    trf: "72",
+    nameAddress:
+      "STREET LIGTH                  PARADISE  CINEMA              SUKKUR                        ",
+    arrear: "27491640.24",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "481",
+    sdivCd: "38113",
+    refNo: "28381130763400",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  MAKRANI MOHALLA               SUKKUR                        ",
+    arrear: "27468336.73",
+    age: "81",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "482",
+    sdivCd: "38214",
+    refNo: "28382140012344",
+    trf: "66",
+    nameAddress:
+      "ASSISTANT ENGINEER            PUBLIC HEALTH DRAINAGE        WAGAN ROAD KAMBAR             ",
+    arrear: "27466257",
+    age: "103",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "483",
+    sdivCd: "38113",
+    refNo: "28381130706100",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  BAGH KARM ALI SHAH            SUKKUR                        ",
+    arrear: "27378295.26",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "484",
+    sdivCd: "38113",
+    refNo: "28381130776900",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  BUNDER ROAD                   SUKKUR                        ",
+    arrear: "27346130.36",
+    age: "81",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "485",
+    sdivCd: "38113",
+    refNo: "28381130871600",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  SHIKARPUR ROAD                SUKKUR                        ",
+    arrear: "27285295.81",
+    age: "81",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "486",
+    sdivCd: "38336",
+    refNo: "28383360041211",
+    trf: "12",
+    nameAddress:
+      "SCARP SURFACE DRAINAGE PUMP   ASST  ENG T. WELL CIVI        DIVISION N. FEROZE CH. MANOMALBHIRIA ROAD                   ",
+    arrear: "27235955",
+    age: "64",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "487",
+    sdivCd: "38533",
+    refNo: "28385330100940",
+    trf: "66",
+    nameAddress:
+      "SDO IRRIGATION                DREST CAMP MHABOR             KASHMORE                      K.KOT                         ",
+    arrear: "27229505",
+    age: "145",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "488",
+    sdivCd: "38111",
+    refNo: "28381110371200",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  DEPUTY COMMISSIONER COUMPOUND SUKKUR                        ",
+    arrear: "27161066",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "489",
+    sdivCd: "38111",
+    refNo: "28381110710600",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  HUSSANI ROAD                  SUKKUR                        ",
+    arrear: "27003939.97",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "490",
+    sdivCd: "38312",
+    refNo: "28383120021041",
+    trf: "66",
+    nameAddress:
+      "R.B.O.D.OLD COLONY            IRRIGATION INDUS              HIGH WAY DADU                 DADU                          ",
+    arrear: "26941953",
+    age: "94",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "491",
+    sdivCd: "38113",
+    refNo: "28381131006700",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  SHIKARPUR ROAD                SUKKUR                        ",
+    arrear: "26807488.26",
+    age: "81",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "492",
+    sdivCd: "38221",
+    refNo: "28382210017060",
+    trf: "72",
+    nameAddress:
+      "C.M.M. CORPORATION            STREETR LIGHT BUS STAND       LARKANA                       ",
+    arrear: "26803575.66",
+    age: "243",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "493",
+    sdivCd: "38263",
+    refNo: "28382630017890",
+    trf: "72",
+    nameAddress:
+      "CHAIRMAN                      STREET LIGHT                  DOKRI                         ",
+    arrear: "26697189",
+    age: "11",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "494",
+    sdivCd: "38311",
+    refNo: "28383110000070",
+    trf: "72",
+    nameAddress:
+      "STREET LIGHT                  NO IMAM BARGAH SABZI MANDI    DADU                          ",
+    arrear: "26672632.1",
+    age: "83",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "495",
+    sdivCd: "38521",
+    refNo: "28385210030231",
+    trf: "01",
+    nameAddress: "C.M.O OVER HEAD WATERTANK NEAR CIRCUIT HOUSE JCBJACOBABAD",
+    arrear: "26633628",
+    age: "53",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "496",
+    sdivCd: "38516",
+    refNo: "28385160095584",
+    trf: "09",
+    nameAddress:
+      "RURAL DRAINAGE SCHEME         SULTAN KOT                    SHIKAR PUR                    ",
+    arrear: "26608476",
+    age: "16",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "497",
+    sdivCd: "38262",
+    refNo: "28382620020150",
+    trf: "25",
+    nameAddress: "XEN PUBLIC HEALTH DISP.WORK   SHAHDAD KOT ROAD RATODERO     ",
+    arrear: "26607236",
+    age: "75",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+  {
+    key: "498",
+    sdivCd: "38132",
+    refNo: "28381320674200",
+    trf: "72",
+    nameAddress: "STREET LIGHT                  THERHI                        ",
+    arrear: "26473557.8",
+    age: "60",
+    status: "ACTIVE",
+    gvtPvt: "GOVT",
+  },
+];
+
+ // Configuration
+  const itemsPerPage = 20;
+  let currentPage = 1;
+  let data = [...sampleData];
+  let filteredData = [...sampleData];
+  
+  // DOM Elements
+  const tableBody = document.getElementById('tableBody');
+  const tableWrapper = document.getElementById('tableWrapper');
+  const emptyState = document.getElementById('emptyState');
+  const searchInput = document.getElementById('searchInput');
+  const fieldSelect = document.getElementById('fieldSelect');
+  const paginationContainer = document.getElementById('paginationContainer');
+  const itemsPerPageSelect = document.getElementById('itemsPerPageSelect');
+  const pageInfo = document.getElementById('pageInfo');
+
+  // Format currency as PKR
+  const formatPKR = (x) => {
+    if (typeof x === 'string') {
+      x = parseFloat(x.replace(/,/g, ''));
+    }
+    return '₨' + x.toLocaleString('en-PK');
+  };
+
+  // Render table rows
+  const renderTable = (items) => {
+    tableBody.innerHTML = '';
+    
+    if (!items.length) {
+      emptyState.classList.remove('hidden');
+      tableWrapper.classList.add('hidden');
+      paginationContainer.classList.add('hidden');
+      return;
+    }
+    
+    emptyState.classList.add('hidden');
+    tableWrapper.classList.remove('hidden');
+    paginationContainer.classList.remove('hidden');
+
+    // Calculate pagination
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedItems = items.slice(startIndex, endIndex);
+
+    // Render rows
+    paginatedItems.forEach(d => {
+      const tr = document.createElement('tr');
+      if (+d.age > 90) tr.classList.add('high-risk-row');
+
+      tr.innerHTML = `
+        <td>${d.refNo}</td>
+        <td>${d.nameAddress.trim()}</td>
+        <td style="text-align:right">${formatPKR(d.arrear)}</td>
+        <td style="text-align:center" class="${+d.age>90?'high-aged':''}">${d.age}</td>
+        <td><span class="tag tag-status-${d.status.toLowerCase()}">${d.status}</span></td>
+        <td><span class="tag tag-${d.gvtPvt.toLowerCase()}">${d.gvtPvt}</span></td>
+      `;
+      tableBody.appendChild(tr);
+    });
+
+    // Update page info
+    updatePageInfo(items.length);
+    
+    // Render pagination controls
+    renderPagination(items.length);
+  };
+
+  // Update page information
+  const updatePageInfo = (totalItems) => {
+    const start = ((currentPage - 1) * itemsPerPage) + 1;
+    const end = Math.min(currentPage * itemsPerPage, totalItems);
+    pageInfo.textContent = `Showing ${start} to ${end} of ${totalItems} records`;
+  };
+
+  // Render pagination controls
+  const renderPagination = (totalItems) => {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    paginationContainer.innerHTML = '';
+
+    if (totalPages <= 1) return;
+
+    // Previous button
+    const prevButton = document.createElement('button');
+    prevButton.innerHTML = '&laquo;';
+    prevButton.className = 'pagination-btn';
+    prevButton.disabled = currentPage === 1;
+    prevButton.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderTable(filteredData);
+      }
+    });
+    paginationContainer.appendChild(prevButton);
+
+    // Page buttons
+    const maxVisiblePages = 5;
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+    if (endPage - startPage + 1 < maxVisiblePages) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
+    if (startPage > 1) {
+      const firstPageButton = document.createElement('button');
+      firstPageButton.textContent = '1';
+      firstPageButton.className = 'pagination-btn';
+      firstPageButton.addEventListener('click', () => {
+        currentPage = 1;
+        renderTable(filteredData);
+      });
+      paginationContainer.appendChild(firstPageButton);
+
+      if (startPage > 2) {
+        const ellipsis = document.createElement('span');
+        ellipsis.textContent = '...';
+        ellipsis.className = 'pagination-ellipsis';
+        paginationContainer.appendChild(ellipsis);
+      }
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      const pageButton = document.createElement('button');
+      pageButton.textContent = i;
+      pageButton.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
+      pageButton.addEventListener('click', () => {
+        currentPage = i;
+        renderTable(filteredData);
+      });
+      paginationContainer.appendChild(pageButton);
+    }
+
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) {
+        const ellipsis = document.createElement('span');
+        ellipsis.textContent = '...';
+        ellipsis.className = 'pagination-ellipsis';
+        paginationContainer.appendChild(ellipsis);
+      }
+
+      const lastPageButton = document.createElement('button');
+      lastPageButton.textContent = totalPages;
+      lastPageButton.className = 'pagination-btn';
+      lastPageButton.addEventListener('click', () => {
+        currentPage = totalPages;
+        renderTable(filteredData);
+      });
+      paginationContainer.appendChild(lastPageButton);
+    }
+
+    // Next button
+    const nextButton = document.createElement('button');
+    nextButton.innerHTML = '&raquo;';
+    nextButton.className = 'pagination-btn';
+    nextButton.disabled = currentPage === totalPages;
+    nextButton.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderTable(filteredData);
+      }
+    });
+    paginationContainer.appendChild(nextButton);
+  };
+
+  // Filter data based on search input
+  const filter = () => {
+    const text = searchInput.value.trim().toLowerCase();
+    const field = fieldSelect.value;
+    
+    filteredData = data.filter(item => {
+      if (!text) return true;
+      if (field === 'all') {
+        return Object.values(item).some(val => 
+          String(val).toLowerCase().includes(text)
+        );
+      }
+      return String(item[field] || '').toLowerCase().includes(text);
+    });
+    
+    currentPage = 1; // Reset to first page when filtering
+    renderTable(filteredData);
+  };
+
+  // Change items per page
+  const changeItemsPerPage = () => {
+    itemsPerPage = parseInt(itemsPerPageSelect.value);
+    currentPage = 1; // Reset to first page when changing items per page
+    renderTable(filteredData);
+  };
+
+  // Initialize
+  const init = () => {
+    searchInput.addEventListener('input', filter);
+    fieldSelect.addEventListener('change', filter);
+    if (itemsPerPageSelect) {
+      itemsPerPageSelect.addEventListener('change', changeItemsPerPage);
+    }
+    renderTable(data);
+  };
+
+  init();
+
+  // Expose functions if needed
+  return {
+    refreshData: (newData) => {
+      data = [...newData];
+      filteredData = [...newData];
+      currentPage = 1;
+      renderTable(data);
+    },
+    filterTable: filter
+  };
+})();
+</script>
+
+</body>
+</html>
